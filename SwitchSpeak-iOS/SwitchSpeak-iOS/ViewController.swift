@@ -70,7 +70,7 @@ class ButtonNode: Node{
 	}
 	
 	override func unHighlightSubTree(){
-		self.button.backgroundColor = UIColor.gray
+		self.button.backgroundColor = UIColor.lightGray
 	}
 }
 
@@ -99,7 +99,7 @@ func createNxMTree (n: Int ,m: Int) -> Tree{
 			let button = UIButton()
 			//	next we will set the attributes of the button
 			button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
-			button.frame = CGRect(x: 110*i-50, y: 140*j, width: 100, height: 100)	//	some arbitrary values
+			button.frame = CGRect(x: 110*j-50, y: 140*i, width: 100, height: 100)	//	some arbitrary values
 			button.backgroundColor = UIColor.lightGray
 			let leafNode = ButtonNode(button: button)
 			interNode.addChild(child: leafNode)
@@ -110,14 +110,77 @@ func createNxMTree (n: Int ,m: Int) -> Tree{
 
 class ViewController: UIViewController {
 	
-	
+	var curNode = Node()	//	currently the node in the tree we are at while scanning
+	var childNumber: Int = 0 //	this will represent the index of highlighted child of the curNode
+	//	the result of the scanning procedure will be stored
+	//	in curNode and childNumber variables
+	var timeDelay: Double = 1.0	//	time delay during scanning
+	var flag: Bool = false	//	this is set to true whenever curNode is updated
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let T = createNxMTree(n: 3, m: 4)
+		let T = createNxMTree(n: 4, m: 3)
 		addTreeToView(T: T)
+		curNode = T.rootNode!
+		selectSubTree()
 		
+	}
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		//	select a subtree from the current subtree stored in curNode
+		if (curNode.childNodes.count > 0) //	i.e. we have not yet reached a leafnode
+		{
+			curNode = curNode.childNodes[childNumber]
+			childNumber = 0
+			flag = true
+		}
+	}
+	
+	/*
+		Highlight the childNumber'th child node of the curNode
+	*/
+	func selectSubTree(){
+		
+		print ("child number:\(childNumber)")
+		curNode.childNodes[childNumber].highlightSubTree()
+		let previousCurNode: Node = curNode
+		
+		delay(self.timeDelay){
+			
+			//	we will unhighlight the previously highlighted subtree iff the curNode is
+			//	not a leaf node
+			if (self.curNode.childNodes.count != 0){
+				previousCurNode.unHighlightSubTree()
+			}
+			
+			//	check if the cur node has changed
+			if (!self.flag){
+				
+				if (self.childNumber == self.curNode.childNodes.count-1){
+					//	i.e. we had just now highlighted the last child node of curNode
+					self.childNumber = 0
+				}
+				else{
+					self.childNumber += 1
+				}
+			}else{
+				self.flag = false
+			}
+			
+			if (self.curNode.childNodes.count != 0) {
+				//	i.e. we have not yet reached a leaf node while scanning
+				self.selectSubTree()
+			}
+		}
+		
+	}
+	
+	//	ensures a time delay for executing a block of code
+	func delay(_ seconds: Double, completion: @escaping () -> ()) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+			completion()
+		}
 	}
 	
 	/*
