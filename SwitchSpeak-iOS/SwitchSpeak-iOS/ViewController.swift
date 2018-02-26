@@ -82,6 +82,62 @@ class Tree {
 	}
 }
 
+
+class stash {
+    
+    var items: [item]
+    
+    init() {
+        self.items = []
+        
+    }
+    
+    
+    func add( new_item:item ){
+        items.append(new_item)
+        new_item.Set_Loc_Col(index:items.count-1 )
+    }
+    
+    
+    func delete(){
+        items.removeLast()
+    }
+    
+    func add(new_item : String) {
+        let newitem = item(content: new_item)
+        add(new_item: newitem)
+    }
+    
+    
+    
+}
+
+class item {
+    var button : UIButton
+    
+    init(content : String) {
+        button = UIButton(type: UIButtonType.system)
+        button.setTitle(content, for: UIControlState.normal)
+        //  button.backgroundColor = UIColor.darkGray
+        
+    }
+    
+    func Set_Loc_Col(index : Int ){
+        button.frame = CGRect(x:10+(index % 5)*80, y:40*(index/5+1), width:80, height:40)
+        if index % 2 == 0{
+            button.backgroundColor = UIColor.darkGray
+            
+        }
+        else{
+            button.backgroundColor = UIColor.lightGray
+        }
+        
+    }
+    
+}
+
+
+
 /*
 This function returns a tree with an n degree root node, where each of its children nodes have m children each
 This corresponds to the row-column scanning of the nXm 2D grid
@@ -116,16 +172,25 @@ class ViewController: UIViewController {
 	//	in curNode and childNumber variables
 	var timeDelay: Double = 1.0	//	time delay during scanning
 	var flag: Bool = false	//	this is set to true whenever curNode is updated
-	
+    var breadcrum = stash();
+    var T = createNxMTree(n: 4, m: 3)
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		let T = createNxMTree(n: 4, m: 3)
 		addTreeToView(T: T)
 		curNode = T.rootNode!
-		selectSubTree()
-		
-	}
+        selectSubTree()
+        
+    }
+    
+    
+    func addStashToView (){
+            for item in breadcrum.items{
+                view.addSubview(item.button)
+            }
+        
+    }
+        
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		//	select a subtree from the current subtree stored in curNode
@@ -134,6 +199,12 @@ class ViewController: UIViewController {
 			curNode = curNode.childNodes[childNumber]
 			childNumber = 0
 			flag = true
+            if(curNode.childNodes.count == 0){
+                let choice = (curNode as? ButtonNode)?.button.title(for: .normal)
+                breadcrum.add(new_item: choice!)
+                addStashToView()
+                curNode = (T.rootNode)!
+            }
 		}
 	}
 	
