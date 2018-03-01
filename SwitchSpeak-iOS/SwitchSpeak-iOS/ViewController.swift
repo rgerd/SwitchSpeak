@@ -9,207 +9,121 @@
 
 import UIKit
 
-/*
-a Node would always be a non-leaf node in the 'Tree' data structure
-*/
-class Node{
-	var parentNode: Node?			//	the parent node could be nil
-	var childNodes: [Node] = []		//	initialised with an empty child list
-	
-	init()
-	{
-		self.parentNode = nil
-	}
-	
-	/*
-	add a single input node to the childNodes list
-	*/
-	func addChild(child: Node){
-		childNodes.append(child)
-	}
-	
-	/*
-	append a list of nodes to the childNodes list
-	*/
-	func addChildren(children: [Node]){
-		childNodes = childNodes + children
-	}
-	/*
-	Highlight all the buttons present in the subtree rooted at self
-	*/
-	func highlightSubTree(){
-		
-		for childNode in self.childNodes{
-			childNode.highlightSubTree()
-		}
-	}
-	
-	func unHighlightSubTree(){
-		
-		for childNode in self.childNodes{
-			childNode.unHighlightSubTree()
-		}
-	}
-	
-}
-
-/*
-a ButtonNode would always be a leaf node in the 'Tree' data structure
-*/
-class ButtonNode: Node{
-	var button = UIButton(type: UIButtonType.custom)
-	
-	init(button: UIButton) {
-		self.button = button
-		super.init()
-	}
-	
-	override func highlightSubTree(){
-		//	for now a button is highlighted with a change in background color
-		self.button.backgroundColor = UIColor.blue
-	}
-	
-	override func unHighlightSubTree(){
-		self.button.backgroundColor = UIColor.lightGray
-	}
-}
-
-class Tree {
-	var rootNode: Node?
-	
-	init(root: Node){
-		self.rootNode = root
-	}
-}
 
 
 class stash {
-    
-    var items: [item]
-    
-    init() {
-        self.items = []
-        
-    }
-    
-    
-    func add( new_item:item ){
-        items.append(new_item)
-        new_item.Set_Loc_Col(index:items.count-1 )
-    }
-    
-    
-    func delete(){
-        items.removeLast()
-    }
-    
-    func add(new_item : String) {
-        let newitem = item(content: new_item)
-        add(new_item: newitem)
-    }
-    
-    
-    
+	
+	var items: [item]
+	
+	init() {
+		self.items = []
+		
+	}
+	
+	
+	func add( new_item:item ){
+		items.append(new_item)
+		new_item.Set_Loc_Col(index:items.count-1 )
+	}
+	
+	
+	func delete(){
+		items.removeLast()
+	}
+	
+	func add(new_item : String) {
+		let newitem = item(content: new_item)
+		add(new_item: newitem)
+	}
+	
+	
+	
 }
 
 class item {
-    var button : UIButton
-    
-    init(content : String) {
-        button = UIButton(type: UIButtonType.system)
-        button.setTitle(content, for: UIControlState.normal)
-        //  button.backgroundColor = UIColor.darkGray
-        
-    }
-    
-    func Set_Loc_Col(index : Int ){
-        button.frame = CGRect(x:10+(index % 5)*80, y:40*(index/5+1), width:80, height:40)
-        if index % 2 == 0{
-            button.backgroundColor = UIColor.darkGray
-            
-        }
-        else{
-            button.backgroundColor = UIColor.lightGray
-        }
-        
-    }
-    
-}
-
-
-
-/*
-This function returns a tree with an n degree root node, where each of its children nodes have m children each
-This corresponds to the row-column scanning of the nXm 2D grid
-*/
-func createNxMTree (n: Int ,m: Int) -> Tree{
+	var button : UIButton
 	
-	let rnode = Node()
-	let T = Tree(root: rnode)
-	
-	for i in 1...n{
-		let interNode = Node()	//	non-leaf node
-		rnode.addChild(child: interNode)
+	init(content : String) {
+		button = UIButton(type: UIButtonType.system)
+		button.setTitle(content, for: UIControlState.normal)
+		//  button.backgroundColor = UIColor.darkGray
 		
-		for j in 1...m{
-			let button = UIButton()
-			//	next we will set the attributes of the button
-			button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
-			button.frame = CGRect(x: 110*j-50, y: 140*i, width: 100, height: 100)	//	some arbitrary values
-			button.backgroundColor = UIColor.lightGray
-			let leafNode = ButtonNode(button: button)
-			interNode.addChild(child: leafNode)
-		}
 	}
-	return T
+	
+	func Set_Loc_Col(index : Int ){
+		button.frame = CGRect(x:10+(index % 5)*80, y:40*(index/5+1), width:80, height:40)
+		if index % 2 == 0{
+			button.backgroundColor = UIColor.darkGray
+			
+		}
+		else{
+			button.backgroundColor = UIColor.lightGray
+		}
+		
+	}
+	
 }
 
 class ViewController: UIViewController {
+	
+	
+	@IBOutlet weak var TapButton: UIButton!
+	
 	
 	var curNode = Node()	//	currently the node in the tree we are at while scanning
 	var childNumber: Int = 0 //	this will represent the index of highlighted child of the curNode
 	//	the result of the scanning procedure will be stored
 	//	in curNode and childNumber variables
-	var timeDelay: Double = 1.0	//	time delay during scanning
 	var flag: Bool = false	//	this is set to true whenever curNode is updated
-    var breadcrum = stash();
-    var T = createNxMTree(n: 4, m: 3)
-
+	var breadcrum = stash()
+	var factory = TreeFactory()
+	var T = Tree()
+	
+	//	the following attributes can be input from user settings
+	var timeDelay: Double = 1.0	//	time delay during scanning
+	var rows = 3, cols = 4	//	dimension of the 2D grid
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.T = factory.treeForRowColumnScanning(rows: rows, cols: cols)
 		addTreeToView(T: T)
+		view.bringSubview(toFront: TapButton)
 		curNode = T.rootNode!
-        selectSubTree()
-        
-    }
-    
-    
-    func addStashToView (){
-            for item in breadcrum.items{
-                view.addSubview(item.button)
-            }
-        
-    }
-        
+		selectSubTree()
+		
+	}
 	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+	
+	@IBAction func TapButton(_ sender: Any) {
+		
 		//	select a subtree from the current subtree stored in curNode
 		if (curNode.childNodes.count > 0) //	i.e. we have not yet reached a leafnode
 		{
 			curNode = curNode.childNodes[childNumber]
 			childNumber = 0
 			flag = true
-            if(curNode.childNodes.count == 0){
-                let choice = (curNode as? ButtonNode)?.button.title(for: .normal)
-                breadcrum.add(new_item: choice!)
-                addStashToView()
-                curNode = (T.rootNode)!
-            }
+			if(curNode.childNodes.count == 0){
+				let choice = (curNode as? ButtonNode)?.button.title(for: .normal)
+				breadcrum.add(new_item: choice!)
+				addStashToView()
+				curNode = (T.rootNode)!
+			}
 		}
 	}
 	
+	
+	
+	func addStashToView (){
+		for item in breadcrum.items{
+			view.addSubview(item.button)
+		}
+		
+	}
+	
+
+	
 	/*
-		Highlight the childNumber'th child node of the curNode
+	Highlight the childNumber'th child node of the curNode
 	*/
 	func selectSubTree(){
 		
