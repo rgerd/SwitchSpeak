@@ -85,7 +85,7 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.T = factory.treeForRowColumnScanning(rows: rows, cols: cols)
+		self.T = factory.TreeForCellByCellScanning(rows: rows, cols: cols)
 		addTreeToView(T: T)
 		view.bringSubview(toFront: TapButton)
 		curNode = T.rootNode!

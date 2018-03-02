@@ -40,6 +40,29 @@ class TreeFactory{
 		return T
 	}
 	
+	/*
+		This function returns a tree to implement cell by cell scanning
+		Given inputs n and m, the output is a tree
+		with a root node having n*m nodes
+	*/
+	func TreeForCellByCellScanning(rows: Int ,cols: Int) -> Tree{
+		
+		let T = Tree()
+		
+		for i in 1...rows{
+			for j in 1...cols{
+				let button = UIButton()
+				//	next we will set the attributes of the button
+				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
+				button.frame = CGRect(x: 210*j-50, y: 160*i, width: 150, height: 150)	//	some arbitrary values
+				button.backgroundColor = UIColor.lightGray
+				let leafNode = ButtonNode(button: button)
+				T.rootNode!.addChild(child: leafNode)
+			}
+		}
+		return T
+	}
+	
 }
 
 
