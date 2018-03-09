@@ -79,14 +79,14 @@ class ViewController: UIViewController {
 	var T = Tree()
 	
 	//	the following attributes can be input from user settings
-	var timeDelay: Double = 1.0	//	time delay during scanning
+	var timeDelay: Double = 0.5	//	time delay during scanning
 	var rows = 3, cols = 4	//	dimension of the 2D grid
 	
 	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.T = factory.TreeForCellByCellScanning(rows: rows, cols: cols)
+		self.T = factory.treeForRowColumnScanning(rows: rows, cols: cols)
 		
 		//	there are three magic numbers in the below function call
 		//	need to modify these magic numbers to appropriate variables

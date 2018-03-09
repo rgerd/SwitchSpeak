@@ -46,6 +46,27 @@ class Tree {
 				}
 			}
 		}
+		
+		if (self.rootNode!.childNodes.count == row && self.treeType == .ROW_COLUMN )
+		{
+			var checkDimensions = true	//	is set to false if dimensions of the tree are in accordance with a row-col scan tree
+			for childNode in self.rootNode!.childNodes{
+			if (childNode.childNodes.count != col)
+				{
+					checkDimensions = false
+				}
+			}
+			if (checkDimensions == true)
+			{
+				for i in 0...row-1{
+					let curNode = self.rootNode!.childNodes[i]
+					for j in 0...col-1{
+						(curNode.childNodes[j] as? ButtonNode)?.button.frame = CGRect(x: (buttonSize.buttonWidth + buttonSize.colGap) * j + buttonSize.colGap, y:  topBarHeight + (buttonSize.buttonHeight + buttonSize.rowGap) * i + buttonSize.rowGap, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
+					}
+				}
+			}
+			
+		}
 	}
 }
 /*
