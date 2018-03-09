@@ -69,7 +69,6 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var TapButton: UIButton!
 	
-	
 	var curNode = Node()	//	currently the node in the tree we are at while scanning
 	var childNumber: Int = 0 //	this will represent the index of highlighted child of the curNode
 	//	the result of the scanning procedure will be stored
@@ -83,15 +82,25 @@ class ViewController: UIViewController {
 	var timeDelay: Double = 1.0	//	time delay during scanning
 	var rows = 3, cols = 4	//	dimension of the 2D grid
 	
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.T = factory.TreeForCellByCellScanning(rows: rows, cols: cols)
+		
+		//	there are three magic numbers in the below function call
+		//	need to modify these magic numbers to appropriate variables
+		self.T.setFrameSizeForTree (row: rows, col: cols, screenWidth: Int(UIScreen.main.bounds.width)
+			, screenHeight: Int(UIScreen.main.bounds.height), topBarHeight: 140, maxButtonHeight: 200, maxButtonWidth: 200)
+		
 		addTreeToView(T: T)
 		view.bringSubview(toFront: TapButton)
 		curNode = T.rootNode!
 		selectSubTree()
 		
 	}
+	
+
 	
 	
 	@IBAction func TapButton(_ sender: Any) {
@@ -127,7 +136,6 @@ class ViewController: UIViewController {
 	*/
 	func selectSubTree(){
 		
-		print ("child number:\(childNumber)")
 		curNode.childNodes[childNumber].highlightSubTree()
 		let previousCurNode: Node = curNode
 		

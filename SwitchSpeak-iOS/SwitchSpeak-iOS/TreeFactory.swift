@@ -22,6 +22,8 @@ class TreeFactory{
 	func treeForRowColumnScanning (rows: Int ,cols: Int) -> Tree {
 		
 		let T = Tree()
+		T.treeType = .ROW_COLUMN
+		T.size = rows*cols
 		
 		for i in 1...rows{
 			let interNode = Node()	//	non-leaf node
@@ -48,6 +50,8 @@ class TreeFactory{
 	func TreeForCellByCellScanning(rows: Int ,cols: Int) -> Tree{
 		
 		let T = Tree()
+		T.treeType = .LINEAR
+		T.size = rows*cols
 		
 		for i in 1...rows{
 			for j in 1...cols{
