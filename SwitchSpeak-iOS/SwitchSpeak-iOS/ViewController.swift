@@ -9,8 +9,6 @@
 
 import UIKit
 
-
-
 class stash {
 	
 	var items: [item]
@@ -90,8 +88,7 @@ class ViewController: UIViewController {
 		
 		//	there are three magic numbers in the below function call
 		//	need to modify these magic numbers to appropriate variables
-		self.T.setFrameSizeForTree (row: rows, col: cols, screenWidth: Int(UIScreen.main.bounds.width)
-			, screenHeight: Int(UIScreen.main.bounds.height), topBarHeight: 140, maxButtonHeight: 200, maxButtonWidth: 200)
+		self.T.setFrameSizeForTree (row: rows, col: cols, screenWidth: Int(UIScreen.main.bounds.width), screenHeight: Int(UIScreen.main.bounds.height), topBarHeight: 140, maxButtonHeight: 200, maxButtonWidth: 200)
 		
 		addTreeToView(T: T)
 		view.bringSubview(toFront: TapButton)
@@ -185,12 +182,12 @@ class ViewController: UIViewController {
 	func addSubTreeToView(node: Node) {
 		
 		//	if node is of an object of class ButtonNode i.e. it is a leaf node
-		if let curNode = node as? ButtonNode{
+		if let curNode = node as? ButtonNode {
 			view.addSubview(curNode.button)
 			return
 		}
 		
-		for childnode in node.childNodes{
+		for childnode in node.childNodes {
 			addSubTreeToView(node: childnode)
 		}
 	}

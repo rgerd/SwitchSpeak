@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 class Tree {
@@ -29,17 +28,17 @@ class Tree {
 	}
 	
 	/*
-		Intput is the grid dimensions of the view, the width and height of the screen, the height of the top bar, and the max button dimensions
+		Input is the grid dimensions of the view, the width and height of the screen, the height of the top bar, and the max button dimensions
 		In this function we resize each button in the tree so as to fit it entirely in the view
 	*/
 	func setFrameSizeForTree (row: Int, col: Int, screenWidth: Int, screenHeight: Int, topBarHeight: Int, maxButtonHeight: Int, maxButtonWidth: Int) {
 		//	first we compute the size of buttons to be placed in view
-		let buttonSize = computeButtonSize(row: row, col: col, width: screenWidth, height: screenHeight-topBarHeight, maxButtonHeight: maxButtonHeight, maxButtonWidth: maxButtonWidth)
+		let buttonSize = computeButtonSize(row: row, col: col, width: screenWidth, height: screenHeight - topBarHeight, maxButtonHeight: maxButtonHeight, maxButtonWidth: maxButtonWidth)
 		
-		//	check if the tree is having the appropriate dimensions and is linear scan type (a depth 2 tree)
-		if (self.size == row*col && self.treeType == .LINEAR) {
-			for i in 0...(row-1) {
-				for j in 0...(col-1) {
+		//	check if the tree is having the appropriate dimensions and is linear scan type (i.e. a depth 2 tree)
+		if (self.size == row * col && self.treeType == .LINEAR) {
+			for i in 0...(row - 1) {
+				for j in 0...(col - 1) {
 					(self.rootNode?.childNodes[col * i + j] as? ButtonNode)?.button.frame = CGRect(x: (buttonSize.buttonWidth + buttonSize.colGap) * j + buttonSize.colGap, y:  topBarHeight + (buttonSize.buttonHeight + buttonSize.rowGap) * i + buttonSize.rowGap, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
 				}
 			}
@@ -54,9 +53,9 @@ class Tree {
 			}
 			//	if tree is of row-column scan type of dimensions rowXcol
 			if (checkDimensions) {
-				for i in 0...(row-1) {
+				for i in 0...(row - 1) {
 					let curNode = self.rootNode!.childNodes[i]
-					for j in 0...(col-1) {
+					for j in 0...(col - 1) {
 						(curNode.childNodes[j] as? ButtonNode)?.button.frame = CGRect(x: (buttonSize.buttonWidth + buttonSize.colGap) * j + buttonSize.colGap, y:  topBarHeight + (buttonSize.buttonHeight + buttonSize.rowGap) * i + buttonSize.rowGap, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
 					}
 				}
@@ -84,7 +83,7 @@ func computeButtonSize  (row: Int, col: Int, width: Int, height: Int, maxButtonH
 			buttonWidth = maxButtonWidth
 			colGap = (width - (col * buttonWidth)) / (col + 1)
 		}
-		return (buttonHeight, buttonWidth,colGap,rowGap)
+		return (buttonHeight, buttonWidth, colGap, rowGap)
 	}
 
 
