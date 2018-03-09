@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-
-class TreeFactory{
-	
+class TreeFactory {
 	
 	/*
 		this function creates a tree for row-column scanning
@@ -19,17 +17,17 @@ class TreeFactory{
 		the root node having 'rows' chlidnodes, where each of these nodes
 		have 'cols' buttonNodes as children
 	*/
-	func treeForRowColumnScanning (rows: Int ,cols: Int) -> Tree {
+	func treeForRowColumnScanning (rows: Int, cols: Int) -> Tree {
 		
 		let T = Tree()
 		T.treeType = .ROW_COLUMN
-		T.size = rows*cols
+		T.size = rows * cols
 		
-		for i in 1...rows{
+		for i in 1...rows {
 			let interNode = Node()	//	non-leaf node
 			T.rootNode!.addChild(child: interNode)
 			
-			for j in 1...cols{
+			for j in 1...cols {
 				let button = UIButton()
 				//	next we will set the attributes of the button
 				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
@@ -49,14 +47,14 @@ class TreeFactory{
 		Given inputs n and m, the output is a tree
 		with a root node having n*m nodes
 	*/
-	func TreeForCellByCellScanning(rows: Int ,cols: Int) -> Tree{
+	func TreeForCellByCellScanning(rows: Int ,cols: Int) -> Tree {
 		
 		let T = Tree()
 		T.treeType = .LINEAR
-		T.size = rows*cols
+		T.size = rows * cols
 		
-		for i in 1...rows{
-			for j in 1...cols{
+		for i in 1...rows {
+			for j in 1...cols {
 				let button = UIButton()
 				//	next we will set the attributes of the button
 				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now

@@ -79,7 +79,7 @@ class ViewController: UIViewController {
 	var T = Tree()
 	
 	//	the following attributes can be input from user settings
-	var timeDelay: Double = 0.5	//	time delay during scanning
+	var timeDelay: Double = 0.8	//	time delay during scanning
 	var rows = 3, cols = 4	//	dimension of the 2D grid
 	
 	
@@ -99,19 +99,16 @@ class ViewController: UIViewController {
 		selectSubTree()
 		
 	}
-	
 
-	
-	
 	@IBAction func TapButton(_ sender: Any) {
 		
 		//	select a subtree from the current subtree stored in curNode
-		if (curNode.childNodes.count > 0) //	i.e. we have not yet reached a leafnode
-		{
+		if (curNode.childNodes.count > 0) {
+			//	i.e. we have not yet reached a leafnode
 			curNode = curNode.childNodes[childNumber]
 			childNumber = 0
 			flag = true
-			if(curNode.childNodes.count == 0){
+			if(curNode.childNodes.count == 0) {
 				let choice = (curNode as? ButtonNode)?.button.title(for: .normal)
 				breadcrum.add(new_item: choice!)
 				addStashToView()
@@ -119,45 +116,42 @@ class ViewController: UIViewController {
 			}
 		}
 	}
-	
-	
-	
+
 	func addStashToView (){
 		for item in breadcrum.items{
 			view.addSubview(item.button)
 		}
 		
 	}
-	
 
-	
 	/*
 	Highlight the childNumber'th child node of the curNode
 	*/
-	func selectSubTree(){
+	func selectSubTree() {
 		
 		curNode.childNodes[childNumber].highlightSubTree()
 		let previousCurNode: Node = curNode
 		
-		delay(self.timeDelay){
+		delay(self.timeDelay) {
 			
 			//	we will unhighlight the previously highlighted subtree iff the curNode is
 			//	not a leaf node
-			if (self.curNode.childNodes.count != 0){
+			if (self.curNode.childNodes.count != 0) {
 				previousCurNode.unHighlightSubTree()
 			}
 			
 			//	check if the cur node has changed
-			if (!self.flag){
+			if (!self.flag) {
 				
-				if (self.childNumber == self.curNode.childNodes.count-1){
+				if (self.childNumber == self.curNode.childNodes.count - 1) {
 					//	i.e. we had just now highlighted the last child node of curNode
 					self.childNumber = 0
 				}
-				else{
+				else {
 					self.childNumber += 1
 				}
-			}else{
+			}
+			else {
 				self.flag = false
 			}
 			
@@ -180,7 +174,7 @@ class ViewController: UIViewController {
 	add all the buttons present in the leaf nodes of the
 	input tree to the view
 	*/
-	func addTreeToView(T: Tree){
+	func addTreeToView(T: Tree) {
 		addSubTreeToView(node: T.rootNode!)
 	}
 	
@@ -188,7 +182,7 @@ class ViewController: UIViewController {
 	add all the buttons present in the leaf nodes of the
 	tree rooted at node to the view
 	*/
-	func addSubTreeToView(node: Node){
+	func addSubTreeToView(node: Node) {
 		
 		//	if node is of an object of class ButtonNode i.e. it is a leaf node
 		if let curNode = node as? ButtonNode{
@@ -200,8 +194,7 @@ class ViewController: UIViewController {
 			addSubTreeToView(node: childnode)
 		}
 	}
-	
-	
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
