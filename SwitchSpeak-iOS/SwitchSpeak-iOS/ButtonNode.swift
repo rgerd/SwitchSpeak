@@ -22,12 +22,14 @@ class ButtonNode: Node{
 	}
 	
 	override func highlightSubTree(){
-		//	for now a button is highlighted with a change in background color
-		self.button.backgroundColor = UIColor.blue
+		
+		let uhcolor = UIColor(red: 200.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)
+		button.layer.borderColor = uhcolor.cgColor
 	}
 	
 	override func unHighlightSubTree(){
-		self.button.backgroundColor = UIColor.lightGray
+		let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+		button.layer.borderColor = uhcolor.cgColor
 	}
 }
 

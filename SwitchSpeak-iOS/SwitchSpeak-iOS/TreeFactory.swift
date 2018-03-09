@@ -33,8 +33,10 @@ class TreeFactory{
 				let button = UIButton()
 				//	next we will set the attributes of the button
 				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
-				button.frame = CGRect(x: 210*j-50, y: 160*i, width: 150, height: 150)	//	some arbitrary values
 				button.backgroundColor = UIColor.lightGray
+				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+				button.layer.borderColor = uhcolor.cgColor
+				button.layer.borderWidth = 5
 				let leafNode = ButtonNode(button: button)
 				interNode.addChild(child: leafNode)
 			}
@@ -58,8 +60,10 @@ class TreeFactory{
 				let button = UIButton()
 				//	next we will set the attributes of the button
 				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
-				button.frame = CGRect(x: 210*j-50, y: 160*i, width: 150, height: 150)	//	some arbitrary values
 				button.backgroundColor = UIColor.lightGray
+				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+				button.layer.borderColor = uhcolor.cgColor
+				button.layer.borderWidth = 5
 				let leafNode = ButtonNode(button: button)
 				T.rootNode!.addChild(child: leafNode)
 			}
