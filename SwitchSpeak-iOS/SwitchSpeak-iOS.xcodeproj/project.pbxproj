@@ -20,6 +20,8 @@
 		FA2D5DEC2028D01200935413 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D5DEA2028D01200935413 /* LaunchScreen.storyboard */; };
 		FA2D5DF72028D01300935413 /* SwitchSpeak_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D5DF62028D01300935413 /* SwitchSpeak_iOSTests.swift */; };
 		FA2D5E022028D01300935413 /* SwitchSpeak_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D5E012028D01300935413 /* SwitchSpeak_iOSUITests.swift */; };
+		FA5BCEBF2057121700C84071 /* TouchGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BCEBE2057121700C84071 /* TouchGrid.swift */; };
+		FA5BCEC62057882F00C84071 /* CrumbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BCEC52057882F00C84071 /* CrumbManager.swift */; };
 		FADF17142044760C00C7D931 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF17132044760C00C7D931 /* UserSettings.swift */; };
 		FADF171620447D3A00C7D931 /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF171520447D3A00C7D931 /* GlobalSettings.swift */; };
 		FADF17182044809700C7D931 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF17172044809700C7D931 /* Storage.swift */; };
@@ -62,6 +64,8 @@
 		FA2D5DFD2028D01300935413 /* SwitchSpeak-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwitchSpeak-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D5E012028D01300935413 /* SwitchSpeak_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchSpeak_iOSUITests.swift; sourceTree = "<group>"; };
 		FA2D5E032028D01300935413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA5BCEBE2057121700C84071 /* TouchGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchGrid.swift; sourceTree = "<group>"; };
+		FA5BCEC52057882F00C84071 /* CrumbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbManager.swift; sourceTree = "<group>"; };
 		FADF17132044760C00C7D931 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		FADF171520447D3A00C7D931 /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		FADF17172044809700C7D931 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -117,19 +121,15 @@
 			children = (
 				FA2D5DE12028D01200935413 /* AppDelegate.swift */,
 				FA2D5DE32028D01200935413 /* ViewController.swift */,
-				C5F434D82048640300D5D9D5 /* Node.swift */,
-				C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */,
-				C5F434DC2048645E00D5D9D5 /* Tree.swift */,
-				C5F434DE20486C3200D5D9D5 /* TreeFactory.swift */,
+				FA5BCEC12057829000C84071 /* TouchGrid */,
+				FA5BCEC2205782AF00C84071 /* Settings */,
 				FA2D5DE52028D01200935413 /* Main.storyboard */,
 				FA2D5DE82028D01200935413 /* Assets.xcassets */,
 				FA2D5DEA2028D01200935413 /* LaunchScreen.storyboard */,
 				FA2D5DED2028D01300935413 /* Info.plist */,
 				882FF87520447EED00D506A0 /* admin.storyboard */,
 				88318EB720471D15000E72E1 /* user.to.admin.storyboard */,
-				FADF17132044760C00C7D931 /* UserSettings.swift */,
-				FADF171520447D3A00C7D931 /* GlobalSettings.swift */,
-				FADF17172044809700C7D931 /* Storage.swift */,
+				FA5BCEC52057882F00C84071 /* CrumbManager.swift */,
 			);
 			path = "SwitchSpeak-iOS";
 			sourceTree = "<group>";
@@ -150,6 +150,36 @@
 				FA2D5E032028D01300935413 /* Info.plist */,
 			);
 			path = "SwitchSpeak-iOSUITests";
+			sourceTree = "<group>";
+		};
+		FA5BCEC02057827E00C84071 /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				C5F434D82048640300D5D9D5 /* Node.swift */,
+				C5F434DC2048645E00D5D9D5 /* Tree.swift */,
+				C5F434DE20486C3200D5D9D5 /* TreeFactory.swift */,
+			);
+			path = Tree;
+			sourceTree = "<group>";
+		};
+		FA5BCEC12057829000C84071 /* TouchGrid */ = {
+			isa = PBXGroup;
+			children = (
+				FA5BCEC02057827E00C84071 /* Tree */,
+				C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */,
+				FA5BCEBE2057121700C84071 /* TouchGrid.swift */,
+			);
+			path = TouchGrid;
+			sourceTree = "<group>";
+		};
+		FA5BCEC2205782AF00C84071 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FADF17132044760C00C7D931 /* UserSettings.swift */,
+				FADF171520447D3A00C7D931 /* GlobalSettings.swift */,
+				FADF17172044809700C7D931 /* Storage.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +319,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D5DE42028D01200935413 /* ViewController.swift in Sources */,
+				FA5BCEBF2057121700C84071 /* TouchGrid.swift in Sources */,
 				FADF171620447D3A00C7D931 /* GlobalSettings.swift in Sources */,
+				FA5BCEC62057882F00C84071 /* CrumbManager.swift in Sources */,
 				FA2D5DE22028D01200935413 /* AppDelegate.swift in Sources */,
 				C5F434DF20486C3200D5D9D5 /* TreeFactory.swift in Sources */,
 				C5F434D92048640300D5D9D5 /* Node.swift in Sources */,

@@ -33,7 +33,7 @@ class Tree {
 	*/
 	func setFrameSizeForTree (row: Int, col: Int, screenWidth: Int, screenHeight: Int, topBarHeight: Int, maxButtonHeight: Int, maxButtonWidth: Int) {
 		//	first we compute the size of buttons to be placed in view
-		let buttonSize = computeButtonSize(row: row, col: col, width: screenWidth, height: screenHeight - topBarHeight, maxButtonHeight: maxButtonHeight, maxButtonWidth: maxButtonWidth)
+		let buttonSize = Tree.computeButtonSize(row: row, col: col, width: screenWidth, height: screenHeight - topBarHeight, maxButtonHeight: maxButtonHeight, maxButtonWidth: maxButtonWidth)
 		
 		//	check if the tree is having the appropriate dimensions and is linear scan type (i.e. a depth 2 tree)
 		if (self.size == row * col && self.treeType == .LINEAR) {
@@ -63,28 +63,28 @@ class Tree {
 			
 		}
 	}
+    
+    /*
+     Input is the grid dimensions, the width and height of the screen, the max button dimensions
+     It outputs the width, height of the button along with the row gap and column gap that seperates these buttons
+     */
+    class func computeButtonSize  (row: Int, col: Int, width: Int, height: Int, maxButtonHeight: Int, maxButtonWidth: Int) -> (buttonHeight: Int, buttonWidth: Int, colGap: Int, rowGap: Int) {
+        var colGap = 5, rowGap = 5    //    this would be the gap between successive buttons on the view
+        //    5 is  magic number above and it correponds to the minimum gap between buttons
+        var buttonHeight = (height - rowGap * (row + 1)) / row
+        var buttonWidth = (width - colGap * (col + 1)) / col
+        
+        if (buttonHeight > maxButtonHeight) {
+            buttonHeight = maxButtonHeight
+            rowGap = (height - (row * buttonHeight)) / (row + 1)
+        }
+        if (buttonWidth > maxButtonWidth) {
+            buttonWidth = maxButtonWidth
+            colGap = (width - (col * buttonWidth)) / (col + 1)
+        }
+        return (buttonHeight, buttonWidth, colGap, rowGap)
+    }
 }
-
-/*
-	Intput is the grid dimensions, the width and height of the screen, the max button dimensions
-	It outputs the width, height of the button along with the row gap and column gap that seperates these buttons
-*/
-func computeButtonSize  (row: Int, col: Int, width: Int, height: Int, maxButtonHeight: Int, maxButtonWidth: Int) -> (buttonHeight: Int, buttonWidth: Int, colGap: Int, rowGap: Int) {
-		var colGap = 5, rowGap = 5	//	this would be the gap between successive buttons on the view
-		//	5 is  magic number above and it correponds to the minimum gap between buttons
-		var buttonHeight = (height - rowGap * (row + 1)) / row
-		var buttonWidth = (width - colGap * (col + 1)) / col
-		
-		if (buttonHeight > maxButtonHeight) {
-			buttonHeight = maxButtonHeight
-			rowGap = (height - (row * buttonHeight)) / (row + 1)
-		}
-		if (buttonWidth > maxButtonWidth) {
-			buttonWidth = maxButtonWidth
-			colGap = (width - (col * buttonWidth)) / (col + 1)
-		}
-		return (buttonHeight, buttonWidth, colGap, rowGap)
-	}
 
 
 
