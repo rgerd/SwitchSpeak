@@ -24,12 +24,13 @@ class ViewController: UIViewController {
 
 	@IBAction func TapButton(_ sender: Any) {
         let choice:String? = touchGrid!.makeSelection()
-        if(choice == nil) {
+        
+        if(choice == nil) { // If we're still scanning deeper
             return;
         }
         
         breadcrumbs.push(string: choice!)
-        breadcrumbs.updateSubView(insideView: view)
+        breadcrumbs.updateSubViews(insideView: view)
 	}
 
 	override func didReceiveMemoryWarning() {
