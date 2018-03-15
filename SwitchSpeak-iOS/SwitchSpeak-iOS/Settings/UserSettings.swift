@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum ScanSpeed : Int, Codable {
-    case SLOW
-    case MEDIUM
-    case FAST
+enum ScanSpeed : Double, Codable {
+    case SLOW = 0.8
+    case MEDIUM = 0.5
+    case FAST = 0.25
 }
 
 enum ScanType : Int, Codable {
@@ -26,16 +26,21 @@ enum FontSize : Int, Codable {
     case LARGE
 }
 
-enum GridSize : Int, Codable {
-    case SMALL
-    case MEDIUM
-    case LARGE
+enum GridSize : String, Codable {
+    case SMALL = "2,3"
+    case MEDIUM = "3,4"
+    case LARGE = "4,5"
 }
 
 enum VocabLevel : Int, Codable {
     case BASIC
     case SLIGHTLY_MORE
     case SUPERCALIFRAGILISTICEXPIALIDOCIOUS
+}
+
+func parseRowsAndColumns(gridSize:GridSize) -> (Int, Int) {
+    let rows_cols:[String] = gridSize.rawValue.components(separatedBy: ",")
+    return (Int(rows_cols[0])!, Int(rows_cols[1])!)
 }
 
 struct UserSettings : Codable {

@@ -10,15 +10,32 @@ import Foundation
 import UIKit
 
 class TreeFactory {
-	
+    /*
+        returns a tree corresponding to the provided scan type and
+        grid size. this function is especially useful when you just
+        want to build a tree from user settings.
+     */
+    class func buildTree(type:ScanType, size:GridSize) -> Tree {
+        let (numRows, numCols) = parseRowsAndColumns(gridSize: size)
+        
+        switch(type) {
+        case .ROW_COLUMN:
+            return treeForRowColumnScanning(rows: numRows, cols: numCols)
+        case .BINARY_TREE:
+            break
+        case .LINEAR:
+            return treeForCellByCellScanning(rows: numRows, cols: numCols)
+        }
+        return Tree()
+    }
+    
 	/*
 		this function creates a tree for row-column scanning
 		given the input rows,cols the function outputs a tree with
 		the root node having 'rows' chlidnodes, where each of these nodes
 		have 'cols' buttonNodes as children
 	*/
-	func treeForRowColumnScanning (rows: Int, cols: Int) -> Tree {
-		
+	class func treeForRowColumnScanning (rows: Int, cols: Int) -> Tree {
 		let T = Tree()
 		T.treeType = .ROW_COLUMN
 		T.size = rows * cols
@@ -47,8 +64,7 @@ class TreeFactory {
 		Given inputs n and m, the output is a tree
 		with a root node having n*m nodes
 	*/
-	func TreeForCellByCellScanning(rows: Int ,cols: Int) -> Tree {
-		
+	class func treeForCellByCellScanning(rows: Int ,cols: Int) -> Tree {		
 		let T = Tree()
 		T.treeType = .LINEAR
 		T.size = rows * cols

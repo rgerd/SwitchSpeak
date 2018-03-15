@@ -46,8 +46,7 @@ class Node {
 		for childNode in self.childNodes {
 			childNode.unHighlightSubTree()
 		}
-	}
-	
+	}	
 }
 
 
