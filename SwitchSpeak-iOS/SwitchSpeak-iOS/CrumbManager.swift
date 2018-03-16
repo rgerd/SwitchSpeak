@@ -19,9 +19,12 @@ class CrumbStack {
         // i.e. "I", "am", etc.
         var label:UILabel
         
+        var scale:CGFloat
+        
         init(content:String) {
             label = UILabel()
             label.text = content
+            scale = 1
         }
         
         /*
@@ -29,11 +32,16 @@ class CrumbStack {
          * relative to the view containing it. The provided index corresponds
          * to the crumb's index in the stack holding it.
          */
-        func setLocationAndColor(byIndex index:Int) {
-            label.frame = CGRect(x: 10 + (index % 5) * 80, y: 40 * (index / 5 + 1), width: 80, height: 40)
+        
+        func setLocationAndSize(index i:Int, width w:CGFloat) {
+            label.frame = CGRect(x: 10 + CGFloat(i) * w * scale, y: 40, width: w * scale, height: 40)
+        }
+        
+        func setLocationAndColor(index i:Int, width w:CGFloat) {
+            setLocationAndSize(index:i, width: w)
             label.textAlignment = .center
             label.textColor = UIColor.white
-            label.backgroundColor = [UIColor.darkGray, UIColor.lightGray][index % 2]
+            label.backgroundColor = [UIColor.darkGray, UIColor.lightGray][i % 2]
         }
         
         /*
@@ -54,8 +62,13 @@ class CrumbStack {
     // The stack holding the breadcrumbs.
     private var items: [Crumb]
     
+    private var crumbWidth: CGFloat
+    
     init() {
         self.items = []
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        self.crumbWidth = 0.2*screenWidth
     }
     
     /*
@@ -71,7 +84,17 @@ class CrumbStack {
     func push(string:String) {
         let newCrumb = Crumb(content: string)
         items.append(newCrumb)
-        newCrumb.setLocationAndColor(byIndex: items.count - 1)
+        if items.count > 4 {
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
+            self.crumbWidth = screenWidth / CGFloat(items.count + 1)
+            var ind:Int = 0
+            for item in items {
+                item.setLocationAndSize(index: ind, width:self.crumbWidth )
+                ind=ind+1
+            }
+        }
+        newCrumb.setLocationAndColor(index: items.count - 1, width: self.crumbWidth)
     }
     
     /*
