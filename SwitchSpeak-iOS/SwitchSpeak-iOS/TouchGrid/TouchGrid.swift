@@ -27,7 +27,7 @@ class TouchGrid {
         self.settings = GlobalSettings.userSettings[userId]
         self.viewContainer = viewContainer
         
-        self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize())
+        self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize(), dummyNum: 0)
         
         let (rows, cols) = settings.getGridSize()
         //    there are three magic numbers in the below function call
@@ -75,7 +75,7 @@ class TouchGrid {
             if self.curNode.childNodes.count != 0 {
                 previousCurNode.unHighlightSubTree()
             }
-            
+           
             //    check if the cur node has changed
             if !self.curNodeUpdated {
                 if self.childNumber == self.curNode.childNodes.count - 1 {
@@ -89,13 +89,20 @@ class TouchGrid {
             }
             
             if self.curNode.childNodes.count != 0 {
+                if (self.curNode.childNodes[0] as? ButtonNode)?.dummy == true {
+                      self.curNode=self.buttonTree.rootNode!
+                }
                 //    i.e. we have not yet reached a leaf node while scanning
                 self.selectSubTree()
+            }
+            
+            if (self.curNode as? ButtonNode)?.dummy == true {
+                self.curNode=self.buttonTree.rootNode!
             }
         }
     }
     
-    //    ensures a time delay for executing a block of code
+    /* ensures a time delay for executing a block of code */
     func delay(_ seconds: Double, completion: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             completion()

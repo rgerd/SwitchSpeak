@@ -13,7 +13,8 @@ import UIKit
 	a ButtonNode would always be a leaf node in the 'Tree' data structure
 */
 class ButtonNode: Node {
-	var button = UIButton(type: UIButtonType.custom)
+    var button:UIButton = UIButton(type: UIButtonType.custom)
+    var dummy:Bool = false
 	
 	init(button: UIButton) {
 		self.button = button
@@ -21,14 +22,22 @@ class ButtonNode: Node {
 	}
 	
 	override func highlightSubTree() {
+        if dummy {
+            return
+        }
 		let uhcolor = UIColor(red: 200.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
 	
 	override func unHighlightSubTree() {
+        if dummy {
+            return
+        }
 		let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
+   
+   
 }
 
 

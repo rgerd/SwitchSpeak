@@ -66,17 +66,17 @@ class TreeFactory {
         returns a tree corresponding to the provided scan type and
         grid size. this function is especially useful when you just
         want to build a tree from user settings.
+        dummyNum is the number of dummy buttons in this tree
      */
-    class func buildTree(type:ScanType, size:(Int, Int)) -> Tree {
+    class func buildTree(type:ScanType, size:(Int, Int), dummyNum:Int) -> Tree {
         let (numRows, numCols) = size
-        
         switch(type) {
         case .ROW_COLUMN:
-            return treeForRowColumnScanning(rows: numRows, cols: numCols)
+            return treeForRowColumnScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
         case .BINARY_TREE:
             break
         case .LINEAR:
-            return treeForCellByCellScanning(rows: numRows, cols: numCols)
+            return treeForCellByCellScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
         }
         return Tree()
     }
@@ -86,11 +86,18 @@ class TreeFactory {
 		given the input rows,cols the function outputs a tree with
 		the root node having 'rows' chlidnodes, where each of these nodes
 		have 'cols' buttonNodes as children
+     
+        dummyNum is the number of dummy buttons in this tree
 	*/
-	class func treeForRowColumnScanning (rows: Int, cols: Int) -> Tree {
+    class func treeForRowColumnScanning (rows: Int, cols: Int, dummyNum: Int) -> Tree {
 		let T = Tree()
 		T.treeType = .ROW_COLUMN
 		T.size = rows * cols
+        // compute the positions of dummy buttons according to the number of dummy buttons
+        // buttons
+
+        let dummyCol = cols - dummyNum % cols
+        let dummyRow = rows - dummyNum / cols
 		
 		for i in 1...rows {
 			let interNode = Node()	//	non-leaf node
@@ -100,11 +107,14 @@ class TreeFactory {
 				let button = UIButton()
 				//	next we will set the attributes of the button
 				button.setTitle(nouns[i + j * cols], for: .normal)	//	arbitrary title for now
-				button.backgroundColor = UIColor.lightGray
+				button.backgroundColor = UIColor.darkGray
 				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 				button.layer.borderColor = uhcolor.cgColor
 				button.layer.borderWidth = 5
 				let leafNode = ButtonNode(button: button)
+                if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
+                   leafNode.dummy = true
+                }
 				interNode.addChild(child: leafNode)
 			}
 		}
@@ -116,10 +126,12 @@ class TreeFactory {
 		Given inputs n and m, the output is a tree
 		with a root node having n*m nodes
 	*/
-	class func treeForCellByCellScanning(rows: Int ,cols: Int) -> Tree {		
+	class func treeForCellByCellScanning(rows: Int, cols: Int, dummyNum: Int) -> Tree {
 		let T = Tree()
 		T.treeType = .LINEAR
 		T.size = rows * cols
+        let dummyCol = cols - dummyNum % cols
+        let dummyRow = rows - dummyNum / cols
 		
 		for i in 1...rows {
 			for j in 1...cols {
@@ -131,6 +143,9 @@ class TreeFactory {
 				button.layer.borderColor = uhcolor.cgColor
 				button.layer.borderWidth = 5
 				let leafNode = ButtonNode(button: button)
+                if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
+                    leafNode.dummy = true
+                }
 				T.rootNode!.addChild(child: leafNode)
 			}
 		}
