@@ -18,7 +18,7 @@ class CrumbStack {
         // The UI element holding the string describing the breadcrumb.
         // i.e. "I", "am", etc.
         var label:UILabel
-        
+        // scale is used to decide the size of crumb according to the number of crumbs
         var scale:CGFloat
         
         init(content:String) {
@@ -33,15 +33,15 @@ class CrumbStack {
          * to the crumb's index in the stack holding it.
          */
         
-        func setLocationAndSize(index i:Int, width w:CGFloat) {
-            label.frame = CGRect(x: 10 + CGFloat(i) * w * scale, y: 40, width: w * scale, height: 40)
+        func setLocationAndSize(byIndex index:Int, withWidth width:CGFloat) {
+            label.frame = CGRect(x: 10 + CGFloat(index) * width  * scale, y: 40, width: width * scale, height: 40)
         }
         
-        func setLocationAndColor(index i:Int, width w:CGFloat) {
-            setLocationAndSize(index:i, width: w)
+        func setLocationAndColor(byIndex ind:Int, withWidth width:CGFloat) {
+            setLocationAndSize(byIndex:ind, withWidth: width)
             label.textAlignment = .center
             label.textColor = UIColor.white
-            label.backgroundColor = [UIColor.darkGray, UIColor.lightGray][i % 2]
+            label.backgroundColor = [UIColor.darkGray, UIColor.lightGray][ind % 2]
         }
         
         /*
@@ -63,12 +63,19 @@ class CrumbStack {
     private var items: [Crumb]
     
     private var crumbWidth: CGFloat
+  
+    /* setting a threshold for overflowaing, once the number of crumbs exceeds the threshold, the size of crumb will depend on the the number of crumbs and behives like shrinking*/
+    private var threshold : Int
+    
+    private var size_rate : CGFloat  // size_rate = crumbwidth/ screenwidth
     
     init() {
         self.items = []
+        self.size_rate = 0.2 // the initial crumwidth size is set to be one fifth of the width of screen
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        self.crumbWidth = 0.2*screenWidth
+        self.crumbWidth = size_rate * screenWidth
+        self.threshold = Int(screenWidth / self.crumbWidth) - 1
     }
     
     /*
@@ -84,17 +91,18 @@ class CrumbStack {
     func push(string:String) {
         let newCrumb = Crumb(content: string)
         items.append(newCrumb)
-        if items.count > 4 {
-            let screenSize = UIScreen.main.bounds
-            let screenWidth = screenSize.width
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        
+        if items.count > threshold {
             self.crumbWidth = screenWidth / CGFloat(items.count + 1)
             var ind:Int = 0
             for item in items {
-                item.setLocationAndSize(index: ind, width:self.crumbWidth )
-                ind=ind+1
+                item.setLocationAndSize(byIndex: ind, withWidth:self.crumbWidth )
+                ind = ind + 1
             }
         }
-        newCrumb.setLocationAndColor(index: items.count - 1, width: self.crumbWidth)
+        newCrumb.setLocationAndColor(byIndex: items.count - 1, withWidth: self.crumbWidth)
     }
     
     /*
