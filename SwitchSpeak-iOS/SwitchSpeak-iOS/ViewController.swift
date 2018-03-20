@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
         
         // Eventually '0' here would be replaced by the id of the 'signed-in' user
-        self.touchGrid = TouchGrid(userId: 0, viewContainer: view)
+        self.touchGrid = TouchGrid(userId: GlobalSettings.currentUserId, viewContainer: view)
 		touchGrid!.selectSubTree()
         
         view.bringSubview(toFront: TapButton)
@@ -37,5 +37,13 @@ class ViewController: UIViewController {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+    
+    // Control + Command + z = Shake on the device simulator.
+    // For now we can use this to make the iPad speak. Later we will need a button.
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            SpeechManager.say(phrase: breadcrumbs.getString(), withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
+        }
+    }
 }
 

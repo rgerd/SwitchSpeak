@@ -27,9 +27,9 @@ class TouchGrid {
         self.settings = GlobalSettings.userSettings[userId]
         self.viewContainer = viewContainer
         
-        self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.gridSize)
+        self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize())
         
-        let (rows, cols) = parseRowsAndColumns(gridSize: settings.gridSize)
+        let (rows, cols) = settings.getGridSize()
         //    there are three magic numbers in the below function call
         //    need to modify these magic numbers to appropriate variables
         self.buttonTree.setFrameSizeForTree (row: rows, col: cols, screenWidth: Int(UIScreen.main.bounds.width), screenHeight: Int(UIScreen.main.bounds.height), topBarHeight: 140, maxButtonHeight: 200, maxButtonWidth: 200)

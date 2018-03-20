@@ -9,14 +9,66 @@
 import Foundation
 import UIKit
 
+let nouns:[String] = [
+    "area",
+    "book",
+    "business",
+    "case",
+    "child",
+    "company",
+    "country",
+    "day",
+    "eye",
+    "fact",
+    "family",
+    "government",
+    "group",
+    "hand",
+    "home",
+    "job",
+    "life",
+    "lot",
+    "man",
+    "money",
+    "month",
+    "mother",
+    "night",
+    "number",
+    "part",
+    "people",
+    "place",
+    "point",
+    "problem",
+    "program",
+    "question",
+    "right",
+    "room",
+    "school",
+    "state",
+    "story",
+    "student",
+    "study",
+    "system",
+    "thing",
+    "time",
+    "water",
+    "way",
+    "week",
+    "woman",
+    "word",
+    "work",
+    "world",
+    "year"
+]
+
 class TreeFactory {
     /*
         returns a tree corresponding to the provided scan type and
         grid size. this function is especially useful when you just
         want to build a tree from user settings.
      */
-    class func buildTree(type:ScanType, size:GridSize) -> Tree {
-        let (numRows, numCols) = parseRowsAndColumns(gridSize: size)
+    class func buildTree(type:ScanType, size:(Int, Int)) -> Tree {
+        let (numRows, numCols) = size
         
         switch(type) {
         case .ROW_COLUMN:
@@ -47,7 +99,7 @@ class TreeFactory {
 			for j in 1...cols {
 				let button = UIButton()
 				//	next we will set the attributes of the button
-				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
+				button.setTitle(nouns[i + j * cols], for: .normal)	//	arbitrary title for now
 				button.backgroundColor = UIColor.lightGray
 				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 				button.layer.borderColor = uhcolor.cgColor
@@ -73,7 +125,7 @@ class TreeFactory {
 			for j in 1...cols {
 				let button = UIButton()
 				//	next we will set the attributes of the button
-				button.setTitle("(\(i),\(j))", for: .normal)	//	arbitrary title for now
+                button.setTitle(nouns[i + j * cols], for: .normal)	//	arbitrary title for now
 				button.backgroundColor = UIColor.lightGray
 				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 				button.layer.borderColor = uhcolor.cgColor

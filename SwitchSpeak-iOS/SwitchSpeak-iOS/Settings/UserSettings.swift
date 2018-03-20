@@ -38,9 +38,17 @@ enum VocabLevel : Int, Codable {
     case SUPERCALIFRAGILISTICEXPIALIDOCIOUS
 }
 
-func parseRowsAndColumns(gridSize:GridSize) -> (Int, Int) {
-    let rows_cols:[String] = gridSize.rawValue.components(separatedBy: ",")
-    return (Int(rows_cols[0])!, Int(rows_cols[1])!)
+/*
+ Available English voice names and locales:
+ Karen, AU
+ Daniel, GB
+ Moira, IE
+ Samantha, US
+ Tessa, ZA
+*/
+enum VoiceType : String, Codable {
+    case MALE_VOICE = "Daniel"
+    case FEMALE_VOICE = "Samantha"
 }
 
 struct UserSettings : Codable {
@@ -50,6 +58,7 @@ struct UserSettings : Codable {
     var gridSize:GridSize
     var shouldAlert:Bool
     var vocabLevel:VocabLevel
+    var voiceType:VoiceType
     
     init() {
         scanSpeed = .MEDIUM
@@ -58,5 +67,19 @@ struct UserSettings : Codable {
         gridSize = .MEDIUM
         shouldAlert = true
         vocabLevel = .SLIGHTLY_MORE
+        voiceType = .MALE_VOICE
+    }
+    
+    func getVoiceName() -> String {
+        return voiceType.rawValue
+    }
+    
+    private func parseRowsAndColumns(gridSize:GridSize) -> (Int, Int) {
+        let rows_cols:[String] = gridSize.rawValue.components(separatedBy: ",")
+        return (Int(rows_cols[0])!, Int(rows_cols[1])!)
+    }
+    
+    func getGridSize() -> (Int, Int) {
+        return parseRowsAndColumns(gridSize: gridSize)
     }
 }

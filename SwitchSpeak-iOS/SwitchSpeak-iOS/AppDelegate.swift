@@ -15,8 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let _ = GlobalSettings.createUser() // Create user 0 for testing
+        // Load all user settings when the application launches.
         GlobalSettings.populateUserSettings()
         return true
     }
@@ -41,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // Save all of the user settings when the app closes.
+        GlobalSettings.saveUserSettings()
     }
 
 
