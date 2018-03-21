@@ -1,0 +1,1236 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0025FF9AFA8CA17911E325FB1B02AA93 /* FTS5WrapperTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5114F1E3D00F23249C54542996ACC3 /* FTS5WrapperTokenizer.swift */; };
+		029CBB121308FCEA9556D12DA11F2DD2 /* SQLOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B58DD3559E546BBDC49BCA5471476 /* SQLOperators.swift */; };
+		0596464C10797BC9CB6ABCE2B6637FB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		077D096608722EDE53CD7362924D66D1 /* StandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845929485653FA8EA3BE1D66D3DF01C /* StandardLibrary.swift */; };
+		1383F23C8534B1A59FBE7431501D7B88 /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A66F95EF246D32935E2DE8FBFA4876 /* Cursor.swift */; };
+		13B6673B88FEA9459DE6C53BEED8631F /* RecordBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B97F394CFBD883DE73CAFE12D22AF7 /* RecordBox.swift */; };
+		1F94F2F5435F5D85E8D0B6B9185B9A06 /* DatabaseRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F89EBB444955F48541B70CBDB4D4F1 /* DatabaseRegion.swift */; };
+		24DC7287381DE3CAF71C716C3B4F6631 /* DatabaseValueConvertible+ReferenceConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD26D03194C82D30CCC0F4722AE115F /* DatabaseValueConvertible+ReferenceConvertible.swift */; };
+		26F1B117FB0D7732E6C0AE14B461E2C5 /* DatabaseDateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD008292239F6653E543F08EB365C785 /* DatabaseDateComponents.swift */; };
+		271952D4E056F0EC4866EE28EC99B7D5 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C1D4E1BBD977A50CDCCD9A0C5FD188 /* Date.swift */; };
+		284AC782F6D3ABAC5ABE1FA80F002A06 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F4763DD90354360EFDC27F74E3796A /* Persistable.swift */; };
+		286CEFF02C401A053A1E95CAD7EA045C /* SchedulingWatchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D781F01088DEFAB1011AA246F6BD0A64 /* SchedulingWatchdog.swift */; };
+		2AD5BFF1E772CB6D6D618E8F935C52E6 /* SQLExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7923099707DCD5A91EC4C4ECF2DC255 /* SQLExpressible.swift */; };
+		2CF47E95F924DB05F0C192AC99DC7253 /* Fixits-0.109.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA77ED1C9ECA3E6005B29D1634DF682 /* Fixits-0.109.0.swift */; };
+		2FD7692B3E49D2F907988FBE17094000 /* FTS3+QueryInterfaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAFE9FDC60EE25D68294F1510BA409B /* FTS3+QueryInterfaceRequest.swift */; };
+		3A7719550DECCE84781A7663D54369CF /* DatabaseSchemaCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B33CC7B7538A2644F4CE8FD323588 /* DatabaseSchemaCache.swift */; };
+		3BEFD7F9223607860A44D6BBA8057147 /* GRDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7066B89346F08FADEE0AC7D8DD7C88 /* GRDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D6B1C01251B3E51197756755525ED59 /* ReadWriteBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3583DEF76040394202057E6FC2E1C6 /* ReadWriteBox.swift */; };
+		3F2533E56FCC7D1EA539CF2DA5C91E61 /* RowAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCB250B75E9976C74322DD681BFE3D /* RowAdapter.swift */; };
+		3F2C45D4CD0495942062F90E728AAA48 /* TableDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B53004AAD314CF4FF333B2D2F1287A /* TableDefinition.swift */; };
+		418652BEB34246C11404171D17809BE3 /* SQLFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF05DE707AD89F408638D74FE0CC633 /* SQLFunctions.swift */; };
+		431D3974E87C5115A8B9B40DA5D2D5E8 /* DatabaseFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7CADC85BC657911FC25E98AE17A8A5 /* DatabaseFunction.swift */; };
+		4433BF72E36767156E5B92A354A2D5D5 /* StatementColumnConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17C3CFFBFE7D7192DCC2D9E8A69D64F /* StatementColumnConvertible.swift */; };
+		448E656F9A49ED0C89BF5A6AD356EBE9 /* Persistable+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A18FEFB08338D1B7FFC4FF0A48EF75 /* Persistable+Encodable.swift */; };
+		450369BB455300E5671826E399656D84 /* SQLCollatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648F5A8F80CC6A297FA7043E620E702F /* SQLCollatedExpression.swift */; };
+		48CE46A880FD267EF65712902DB21D9D /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F4AA849A23712D36D8590E305C0BA /* URL.swift */; };
+		4915A1C22C90CE46107D637A2BF81BF6 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85239FAFED692D7F79B881AA5FB809BB /* DatabaseError.swift */; };
+		4C7E1A7D7ADBE60155A8EB60EB8ECABA /* Database+Statements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908FEED48C4541AB651EE12EB50667F /* Database+Statements.swift */; };
+		520117A52BB98D756AE383BB9BB6396C /* FTS3TokenizerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9B01E6FE29E789C43CF229A15B0FF3 /* FTS3TokenizerDescriptor.swift */; };
+		53FABB022891337E83D671645E7632ED /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE473D314B3C4A1E0EABA63DF1572D0 /* Utils.swift */; };
+		56E53896A16FA13FC14D38748C267309 /* Pods-SwitchSpeak-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DBE89CDE79E0B6BE76103F31EAC7D8 /* Pods-SwitchSpeak-iOS-dummy.m */; };
+		5721BF5195FC371BF818958EDF485E07 /* DatabaseValueConvertible+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708781F4C21A0CE4355C10C617A6D2F3 /* DatabaseValueConvertible+Encodable.swift */; };
+		585A3D5B409982A53B84C847171DB895 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BD144BD18036E3DBDB655E120745 /* Migration.swift */; };
+		5C56462AB24B94317BD0899B1C271020 /* DatabaseWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ADF4CA438C72465693DF321AD81232 /* DatabaseWriter.swift */; };
+		5DD7BE7CD17410370A416A6CEF4236BE /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E44C16E62F45AC316F76B78FFCE677F /* Pool.swift */; };
+		61E0D93F5CD0450432F079A8D1AAE7FA /* DatabaseQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884527C78B1F24AEAD8D8A04DA62F149 /* DatabaseQueue.swift */; };
+		624A0DAF876E79DE5129F4D7881C7F53 /* RowConvertible+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB9C28E2C3BFD56FCBD5EE7834D2A2 /* RowConvertible+Decodable.swift */; };
+		6282B796E18426C08E76F6F786E71D1F /* Pods-SwitchSpeak-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7570BF5D26E13730AF98C59C2F9774BC /* Pods-SwitchSpeak-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68E33498201325DF15F82F8BF5A4942A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0922926CBBB281F03AFC931F98823DF /* Request.swift */; };
+		6B811948F8EC3CE72EC6B4321AA8788F /* FTS5CustomTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69596DED0DA39B5BBB5D4ACDF032026D /* FTS5CustomTokenizer.swift */; };
+		6CA64EA46F6AA97FD1552005C7C93AC6 /* DatabaseValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F2CED2AC5BB6C4AA122308AE27C201 /* DatabaseValue.swift */; };
+		6D557ADDCB88241BDC81D1B1387A8CB8 /* Fixits-0-84-0.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4285BB846877D84CC72417EA2B816 /* Fixits-0-84-0.swift */; };
+		70CAF4365BD48BDAE4296B0B321046B2 /* FTS5+QueryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1F82F018CF94FC9588F19F784E31F8 /* FTS5+QueryInterface.swift */; };
+		733AD2A52F751BC44524EE1E18491F4A /* Fixits-0.102.0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304733CD00756E6F77711BA27BA9051D /* Fixits-0.102.0.swift */; };
+		750BA69AD6B77B0E50F547348C71DD6D /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D76F43AC4BA3E5A83E95F74B5FCD22 /* UUID.swift */; };
+		773D191A64F47AB4AED611D8F83903F0 /* TransactionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6FBBF69F7CAC22CCAB96A433113DB8 /* TransactionObserver.swift */; };
+		7BCDEC7D992641A786F71EB2F99A7D13 /* Pods-SwitchSpeak-iOSUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C53B500344E40B64FD82363EAF14AB1 /* Pods-SwitchSpeak-iOSUITests-dummy.m */; };
+		7C76AA940DF5CEF7DCB7364C0E6952DE /* Pods-SwitchSpeak-iOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 772E989993FAAE9A687D55C6383EB3F1 /* Pods-SwitchSpeak-iOSTests-dummy.m */; };
+		7DC5C31288D942BB001C3AAC11F58CFA /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117F3A8030DBC43FDB42DAA462EC69D2 /* NSData.swift */; };
+		7F76FD9F26E35EAAE8DD159D3A311814 /* DatabaseCollation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BB701C72BFB606537BC57A6017FDD9 /* DatabaseCollation.swift */; };
+		815D459331582DFFBBB809102BB92373 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		81F3A24C33889C32CCC2DA776882C73F /* Fixits-0-90-1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D002B5216850C79CFDFADEFA0635 /* Fixits-0-90-1.swift */; };
+		878EDFCDCFB5A31D77FA8805B186E6EC /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21A525508816BB90E67E24AFD8B3DA4 /* Column.swift */; };
+		87CC74042A95B8714E98E8AD1B82F962 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E73514A5BB4F3DE452BF6F56AD2AD4 /* Result.swift */; };
+		90CAEA4F693212F4A04671D50689B39E /* grdb_config.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DE35CA850FF376B22B4BCBEA2B1BA9 /* grdb_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90E423099910E3CD62B098021BC0458D /* NSNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4554890F5B1E1E324B11ED4AB8D32 /* NSNull.swift */; };
+		9326EE59A47925C2A5CCEF6A2AE71F73 /* SQLSpecificExpressible+QueryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A97A1F85FB972D210E57B96142BCBFD /* SQLSpecificExpressible+QueryInterface.swift */; };
+		962103F5ED0587D23857B5A4B1A81AC1 /* DatabaseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424A0A007A82E6340BE8CF326023FB0F /* DatabaseReader.swift */; };
+		96AA9A6BAAB4A712D7072F882DDD9961 /* Fixits-1.2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998184813C3FC6A734432240A88E950B /* Fixits-1.2.swift */; };
+		989B3CD64D15B19BD2B23AB10BBB7DC5 /* DatabaseValueConvertible+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2084EEE1BA96534C4EFEB520886FCBD /* DatabaseValueConvertible+RawRepresentable.swift */; };
+		99A248278B904A5103B16CE112DFE088 /* DatabasePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83339939D4F59B678AD834424592C94 /* DatabasePool.swift */; };
+		9C49D36413A3B9C8CA4507C0FB6FA865 /* SQLOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53C9AF420FBD282A94A8AB3C6E65C5A /* SQLOrdering.swift */; };
+		9CFDA16C8FEAEA8EDA824201869BF471 /* FTS5Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42FE432E14E5BD988E1D31EB2131C7 /* FTS5Tokenizer.swift */; };
+		9E438EC4805FCEF6A18F4EC752284152 /* StatementAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CEC2DF4573D38A8FC54FF790E48FA4 /* StatementAuthorizer.swift */; };
+		A01F8F30345DEF421102A4563EFF3DB4 /* SQLCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA39454107165E5AA44C347AF5B4DDC /* SQLCollection.swift */; };
+		A0813E25F7EB7291D95C38F3B3581A7F /* SerializedDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0E57D8EC84D2A70D91E0B9462D520 /* SerializedDatabase.swift */; };
+		A08E9D40FEA9051A2D53F36FCBF880C5 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957928C5A46D71B193A592AD8A9F566E /* Statement.swift */; };
+		A8A23BE2DB2E7CE3189A83631A103917 /* FTS5Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = D390BB3EADF1C59D0E9C854C50061E4F /* FTS5Pattern.swift */; };
+		ADE270F248490E8729DA5C0B5BF7A048 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DA7CEB857555B049A47374561D634 /* Configuration.swift */; };
+		B6D604C0643955E3625BE96BCE44A163 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B7DDAAF45F606028E60ECD69DF167 /* Data.swift */; };
+		BBCC29C63D9F61E465E457CDB200D83C /* Fixits-0.101.1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80FD86E1F3351E9810213EDD1BD60E8 /* Fixits-0.101.1.swift */; };
+		BBE6F9EFF744A1ECAD9803A46AD50D06 /* FTS4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317118583B129FE2FC3500D6CC4B07C3 /* FTS4.swift */; };
+		BE2B11FEA20ADA56F8B194CE9E077EED /* DatabaseValueConvertible+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDE87C74D92D0E76DC488A4A631EEA /* DatabaseValueConvertible+Decodable.swift */; };
+		BFB6F23AE0B64816C2F75D2B53A7B5E4 /* GRDB-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 6560D339A7C66808591B02E762082434 /* GRDB-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C2681E67319F38FBE58FBCBEE6E9784D /* SQLExpression+QueryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14953747AFB94862FF995ADBCF4CB9C6 /* SQLExpression+QueryInterface.swift */; };
+		C4CCC4E83DEE62F6BBDCB5697FEE723F /* QueryInterfaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BE15D118D5AC51DCB1E583FD191A5 /* QueryInterfaceRequest.swift */; };
+		C4DA8C00D4712B822EA837DD02C6FBBD /* DatabaseValueConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36915FCDD1D3272A95FA026097ACD866 /* DatabaseValueConvertible.swift */; };
+		C729927C8AD386E2B1B42205655763A4 /* RowConvertible+TableMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47C46F8B6CEA39FF73EAA2BF602F05 /* RowConvertible+TableMapping.swift */; };
+		C846B4886AF45B8E6D552D2814EAB63C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		C8B8EFC0575D674D0BDE7ED8BB94CDDD /* DatabaseMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6C01C4BB9A8F63D393E1747CD0C612 /* DatabaseMigrator.swift */; };
+		C909B08AE43274701E997575A33099FD /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F66D430B4F03E3DF5332B9EB48AC16 /* NSString.swift */; };
+		CF948A3B47DC76A71E00BD097398E4D7 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEEDDC930CE5A4215B97C363FC1C511 /* Database.swift */; };
+		D3EBA030C3F0F869A33571DBFC6D037E /* SQLExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB9510546AA3A26DB45B1CE24871D0 /* SQLExpression.swift */; };
+		D7239677668FD563B387B86239D41814 /* TableMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B442C06AA6CE3A5E7A565DD5FBFCD8 /* TableMapping.swift */; };
+		D74520F2613A8C5E66302837A2509AEE /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA5468C510C648E2BE4331416EEA559 /* Record.swift */; };
+		D81FEB86447BE06E5446E27748DAB52E /* FTS3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5494D8FA9CA63B79734E44861848CE /* FTS3.swift */; };
+		DD2375CC0FAC30FAF3942D27CBD80D0F /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A545BB8FF544ACED26F0302C4F2598 /* CGFloat.swift */; };
+		DD9A675C6701306B2A2A4C07CAF75620 /* FTS3Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = A430C8D09A8B92FFF6221FEFA83B92EE /* FTS3Pattern.swift */; };
+		E2A22AC32E2A777BFF894B388B1D5753 /* Database+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E556F542EB844F8FCF0E6781DFCE2C0 /* Database+Schema.swift */; };
+		E4E8B7E387F04CA7BDA77C6A59F42469 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607B688CBB647671D61F5C718E7C4B42 /* Row.swift */; };
+		E536F11975149FC81E9C75B29E5EEEF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		E57510A65455CD1885AD146ADAAABA90 /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E6D8A53DFF741EDE50797FD443B483 /* NSNumber.swift */; };
+		E594F3754D9D3F864F38B74B8B2F41D4 /* Pods-SwitchSpeak-iOSTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4993C08514D87675C815FD0BB25C0ACB /* Pods-SwitchSpeak-iOSTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6C8806EAD1595ECC7C600A5E414EEE1 /* Pods-SwitchSpeak-iOSUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DF75FED3253E23FCA1FB471EB060D25C /* Pods-SwitchSpeak-iOSUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA2E7869842F0DC252D6F00B5C7F5E12 /* Fixits-Swift2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21616A719072490C7E5B0F08EDC8F623 /* Fixits-Swift2.swift */; };
+		EAAFB5C88AA40E0EE69CACEA71ED1916 /* FTS5.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36141AF2D7351F9C16621D62FC17ECC /* FTS5.swift */; };
+		EB007C27553DE1CFD822F7E3B6E77BB9 /* SQLSelectable+QueryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814BA322AA04C7BEC4FD951203EB082C /* SQLSelectable+QueryInterface.swift */; };
+		EF0C99EB1902109D9450490767B62E7A /* VirtualTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CBE9B3560560472386D0F0827B68A7 /* VirtualTableModule.swift */; };
+		F63DB25C10CC74108F40DBEE3A9EAF97 /* RowConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDA787C98751E9ECAC4CC1043E3A685 /* RowConvertible.swift */; };
+		F6DBAF962620371D076491B4A16B5EF6 /* FTS5TokenizerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97060F7DB78E048B78E8ABC420C33425 /* FTS5TokenizerDescriptor.swift */; };
+		F8988BCE4B79C898A1AC19BD5FFA4F5D /* FetchedRecordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A68A7C8ACEF84F982A6F3AFD48F5A /* FetchedRecordsController.swift */; };
+		FE268D3355C75EE5E5C6373B222F1FC7 /* GRDB.swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFF36FA735BFA2C9D7506A1DB5D321 /* GRDB.swift-dummy.m */; };
+		FF745E66651B0E641995CC60F1CB8C8F /* QueryInterfaceSelectQueryDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE734ACB57A471CB05D4C96346D4B227 /* QueryInterfaceSelectQueryDefinition.swift */; };
+		FF87F67A55591FA4957B2A3A62EF6571 /* SQLSelectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BB5A081C9ECD41CA887B3ED8A37639 /* SQLSelectable.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		346B288DC7D472A123AC98A689EDAB42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B68717EC153617354EC5BE476AAB925;
+			remoteInfo = GRDB.swift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02DDE87C74D92D0E76DC488A4A631EEA /* DatabaseValueConvertible+Decodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DatabaseValueConvertible+Decodable.swift"; path = "GRDB/Core/Support/StandardLibrary/DatabaseValueConvertible+Decodable.swift"; sourceTree = "<group>"; };
+		0470F7F51699B72C054431E3EDCC3805 /* Pods-SwitchSpeak-iOSUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwitchSpeak-iOSUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		06B97F394CFBD883DE73CAFE12D22AF7 /* RecordBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordBox.swift; path = GRDB/Record/RecordBox.swift; sourceTree = "<group>"; };
+		0B0714B97E61D930ECB795662A54EE91 /* Pods-SwitchSpeak-iOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwitchSpeak-iOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		0B4B7DDAAF45F606028E60ECD69DF167 /* Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Data.swift; path = GRDB/Core/Support/Foundation/Data.swift; sourceTree = "<group>"; };
+		0C7B58DD3559E546BBDC49BCA5471476 /* SQLOperators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLOperators.swift; path = GRDB/QueryInterface/Support/SQLOperators.swift; sourceTree = "<group>"; };
+		0E6FBBF69F7CAC22CCAB96A433113DB8 /* TransactionObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransactionObserver.swift; path = GRDB/Core/TransactionObserver.swift; sourceTree = "<group>"; };
+		10CEC2DF4573D38A8FC54FF790E48FA4 /* StatementAuthorizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatementAuthorizer.swift; path = GRDB/Core/StatementAuthorizer.swift; sourceTree = "<group>"; };
+		117F3A8030DBC43FDB42DAA462EC69D2 /* NSData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSData.swift; path = GRDB/Core/Support/Foundation/NSData.swift; sourceTree = "<group>"; };
+		12DFA36809099B51A0DB4C6A4ECAEB24 /* Pods-SwitchSpeak-iOSUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOSUITests-frameworks.sh"; sourceTree = "<group>"; };
+		12E6D8A53DFF741EDE50797FD443B483 /* NSNumber.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSNumber.swift; path = GRDB/Core/Support/Foundation/NSNumber.swift; sourceTree = "<group>"; };
+		14953747AFB94862FF995ADBCF4CB9C6 /* SQLExpression+QueryInterface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SQLExpression+QueryInterface.swift"; path = "GRDB/QueryInterface/SQLExpression+QueryInterface.swift"; sourceTree = "<group>"; };
+		1845929485653FA8EA3BE1D66D3DF01C /* StandardLibrary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StandardLibrary.swift; path = GRDB/Core/Support/StandardLibrary/StandardLibrary.swift; sourceTree = "<group>"; };
+		197AB00DD4383AA49BA186D69E180B77 /* Pods-SwitchSpeak-iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwitchSpeak-iOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		1A73BD144BD18036E3DBDB655E120745 /* Migration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Migration.swift; path = GRDB/Migration/Migration.swift; sourceTree = "<group>"; };
+		1E9F8BDDC030AEA4928136DC26B2B5A5 /* Pods-SwitchSpeak-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		1EEEDDC930CE5A4215B97C363FC1C511 /* Database.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Database.swift; path = GRDB/Core/Database.swift; sourceTree = "<group>"; };
+		21616A719072490C7E5B0F08EDC8F623 /* Fixits-Swift2.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-Swift2.swift"; path = "GRDB/Legacy/Fixits-Swift2.swift"; sourceTree = "<group>"; };
+		22982592CAF424140A1BBE57A84D14D4 /* Pods-SwitchSpeak-iOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOSTests-resources.sh"; sourceTree = "<group>"; };
+		23A66F95EF246D32935E2DE8FBFA4876 /* Cursor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cursor.swift; path = GRDB/Core/Cursor.swift; sourceTree = "<group>"; };
+		24763CCB898E2B41ED8B33D61BF7A40F /* GRDB.swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GRDB.swift.xcconfig; sourceTree = "<group>"; };
+		26F4763DD90354360EFDC27F74E3796A /* Persistable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Persistable.swift; path = GRDB/Record/Persistable.swift; sourceTree = "<group>"; };
+		2A5494D8FA9CA63B79734E44861848CE /* FTS3.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS3.swift; path = GRDB/FTS/FTS3.swift; sourceTree = "<group>"; };
+		2ECFF36FA735BFA2C9D7506A1DB5D321 /* GRDB.swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GRDB.swift-dummy.m"; sourceTree = "<group>"; };
+		304733CD00756E6F77711BA27BA9051D /* Fixits-0.102.0.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-0.102.0.swift"; path = "GRDB/Legacy/Fixits-0.102.0.swift"; sourceTree = "<group>"; };
+		30CB9510546AA3A26DB45B1CE24871D0 /* SQLExpression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLExpression.swift; path = GRDB/QueryInterface/SQLExpression.swift; sourceTree = "<group>"; };
+		317118583B129FE2FC3500D6CC4B07C3 /* FTS4.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS4.swift; path = GRDB/FTS/FTS4.swift; sourceTree = "<group>"; };
+		34B1FB312EB95C9A56106AFBA366E53E /* Pods-SwitchSpeak-iOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwitchSpeak-iOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		36915FCDD1D3272A95FA026097ACD866 /* DatabaseValueConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseValueConvertible.swift; path = GRDB/Core/DatabaseValueConvertible.swift; sourceTree = "<group>"; };
+		3BF7DD20F316B2F9AD29C021CCCA1752 /* Pods_SwitchSpeak_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwitchSpeak_iOSUITests.framework; path = "Pods-SwitchSpeak-iOSUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C53B500344E40B64FD82363EAF14AB1 /* Pods-SwitchSpeak-iOSUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwitchSpeak-iOSUITests-dummy.m"; sourceTree = "<group>"; };
+		3D1F82F018CF94FC9588F19F784E31F8 /* FTS5+QueryInterface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FTS5+QueryInterface.swift"; path = "GRDB/QueryInterface/FTS5+QueryInterface.swift"; sourceTree = "<group>"; };
+		3D7CADC85BC657911FC25E98AE17A8A5 /* DatabaseFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseFunction.swift; path = GRDB/Core/DatabaseFunction.swift; sourceTree = "<group>"; };
+		3DDA787C98751E9ECAC4CC1043E3A685 /* RowConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowConvertible.swift; path = GRDB/Record/RowConvertible.swift; sourceTree = "<group>"; };
+		3DEA6A5122C0F9F85BBE57136CFC2AD7 /* Pods-SwitchSpeak-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3FD26D03194C82D30CCC0F4722AE115F /* DatabaseValueConvertible+ReferenceConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DatabaseValueConvertible+ReferenceConvertible.swift"; path = "GRDB/Core/Support/Foundation/DatabaseValueConvertible+ReferenceConvertible.swift"; sourceTree = "<group>"; };
+		40F89EBB444955F48541B70CBDB4D4F1 /* DatabaseRegion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseRegion.swift; path = GRDB/Core/DatabaseRegion.swift; sourceTree = "<group>"; };
+		424A0A007A82E6340BE8CF326023FB0F /* DatabaseReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseReader.swift; path = GRDB/Core/DatabaseReader.swift; sourceTree = "<group>"; };
+		46F66D430B4F03E3DF5332B9EB48AC16 /* NSString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSString.swift; path = GRDB/Core/Support/Foundation/NSString.swift; sourceTree = "<group>"; };
+		4744D3E8E004E7D7AF085456ACE181A6 /* Pods-SwitchSpeak-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		47E73514A5BB4F3DE452BF6F56AD2AD4 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = GRDB/Utils/Result.swift; sourceTree = "<group>"; };
+		4993C08514D87675C815FD0BB25C0ACB /* Pods-SwitchSpeak-iOSTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwitchSpeak-iOSTests-umbrella.h"; sourceTree = "<group>"; };
+		4B2D791921B6E85AABF29DFF4078BC9F /* Pods-SwitchSpeak-iOSUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwitchSpeak-iOSUITests.modulemap"; sourceTree = "<group>"; };
+		4D7A37267E94435950058BE52A0888AF /* Pods-SwitchSpeak-iOSUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwitchSpeak-iOSUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		56C420FB0866673EDCC506067971BF38 /* Pods-SwitchSpeak-iOSUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOSUITests-resources.sh"; sourceTree = "<group>"; };
+		5970564B1EB142559A21CAD36DA4019A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F3583DEF76040394202057E6FC2E1C6 /* ReadWriteBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReadWriteBox.swift; path = GRDB/Utils/ReadWriteBox.swift; sourceTree = "<group>"; };
+		607B688CBB647671D61F5C718E7C4B42 /* Row.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Row.swift; path = GRDB/Core/Row.swift; sourceTree = "<group>"; };
+		61A545BB8FF544ACED26F0302C4F2598 /* CGFloat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CGFloat.swift; path = GRDB/Core/Support/CoreGraphics/CGFloat.swift; sourceTree = "<group>"; };
+		648F5A8F80CC6A297FA7043E620E702F /* SQLCollatedExpression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLCollatedExpression.swift; path = GRDB/QueryInterface/SQLCollatedExpression.swift; sourceTree = "<group>"; };
+		6560D339A7C66808591B02E762082434 /* GRDB-Bridging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GRDB-Bridging.h"; path = "Support/GRDB-Bridging.h"; sourceTree = "<group>"; };
+		65C1D4E1BBD977A50CDCCD9A0C5FD188 /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Date.swift; path = GRDB/Core/Support/Foundation/Date.swift; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		69596DED0DA39B5BBB5D4ACDF032026D /* FTS5CustomTokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5CustomTokenizer.swift; path = GRDB/FTS/FTS5CustomTokenizer.swift; sourceTree = "<group>"; };
+		6A97A1F85FB972D210E57B96142BCBFD /* SQLSpecificExpressible+QueryInterface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SQLSpecificExpressible+QueryInterface.swift"; path = "GRDB/QueryInterface/SQLSpecificExpressible+QueryInterface.swift"; sourceTree = "<group>"; };
+		6D47C46F8B6CEA39FF73EAA2BF602F05 /* RowConvertible+TableMapping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "RowConvertible+TableMapping.swift"; path = "GRDB/Record/RowConvertible+TableMapping.swift"; sourceTree = "<group>"; };
+		708781F4C21A0CE4355C10C617A6D2F3 /* DatabaseValueConvertible+Encodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DatabaseValueConvertible+Encodable.swift"; path = "GRDB/Core/Support/StandardLibrary/DatabaseValueConvertible+Encodable.swift"; sourceTree = "<group>"; };
+		71ADF4CA438C72465693DF321AD81232 /* DatabaseWriter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseWriter.swift; path = GRDB/Core/DatabaseWriter.swift; sourceTree = "<group>"; };
+		7570BF5D26E13730AF98C59C2F9774BC /* Pods-SwitchSpeak-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwitchSpeak-iOS-umbrella.h"; sourceTree = "<group>"; };
+		772E989993FAAE9A687D55C6383EB3F1 /* Pods-SwitchSpeak-iOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwitchSpeak-iOSTests-dummy.m"; sourceTree = "<group>"; };
+		79E9B832DA74F10D3A9FD2552686174F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BEA5E6E519FD0DEAB24AA7753C81E6E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E556F542EB844F8FCF0E6781DFCE2C0 /* Database+Schema.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Database+Schema.swift"; path = "GRDB/Core/Database+Schema.swift"; sourceTree = "<group>"; };
+		80B53004AAD314CF4FF333B2D2F1287A /* TableDefinition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TableDefinition.swift; path = GRDB/QueryInterface/TableDefinition.swift; sourceTree = "<group>"; };
+		814BA322AA04C7BEC4FD951203EB082C /* SQLSelectable+QueryInterface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SQLSelectable+QueryInterface.swift"; path = "GRDB/QueryInterface/SQLSelectable+QueryInterface.swift"; sourceTree = "<group>"; };
+		81E3C6BE31FE58B55D84FCB994CA2B84 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84CBE9B3560560472386D0F0827B68A7 /* VirtualTableModule.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VirtualTableModule.swift; path = GRDB/QueryInterface/VirtualTableModule.swift; sourceTree = "<group>"; };
+		85239FAFED692D7F79B881AA5FB809BB /* DatabaseError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseError.swift; path = GRDB/Core/DatabaseError.swift; sourceTree = "<group>"; };
+		86F2CED2AC5BB6C4AA122308AE27C201 /* DatabaseValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseValue.swift; path = GRDB/Core/DatabaseValue.swift; sourceTree = "<group>"; };
+		884527C78B1F24AEAD8D8A04DA62F149 /* DatabaseQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseQueue.swift; path = GRDB/Core/DatabaseQueue.swift; sourceTree = "<group>"; };
+		8C7066B89346F08FADEE0AC7D8DD7C88 /* GRDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRDB.h; path = Support/GRDB.h; sourceTree = "<group>"; };
+		8E44C16E62F45AC316F76B78FFCE677F /* Pool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pool.swift; path = GRDB/Utils/Pool.swift; sourceTree = "<group>"; };
+		8F6C01C4BB9A8F63D393E1747CD0C612 /* DatabaseMigrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseMigrator.swift; path = GRDB/Migration/DatabaseMigrator.swift; sourceTree = "<group>"; };
+		92D76F43AC4BA3E5A83E95F74B5FCD22 /* UUID.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UUID.swift; path = GRDB/Core/Support/Foundation/UUID.swift; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		957928C5A46D71B193A592AD8A9F566E /* Statement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Statement.swift; path = GRDB/Core/Statement.swift; sourceTree = "<group>"; };
+		9631F92A7DBA35354B7187C6FF19FE9C /* Pods-SwitchSpeak-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		97060F7DB78E048B78E8ABC420C33425 /* FTS5TokenizerDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5TokenizerDescriptor.swift; path = GRDB/FTS/FTS5TokenizerDescriptor.swift; sourceTree = "<group>"; };
+		9764D002B5216850C79CFDFADEFA0635 /* Fixits-0-90-1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-0-90-1.swift"; path = "GRDB/Legacy/Fixits-0-90-1.swift"; sourceTree = "<group>"; };
+		97C4554890F5B1E1E324B11ED4AB8D32 /* NSNull.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSNull.swift; path = GRDB/Core/Support/Foundation/NSNull.swift; sourceTree = "<group>"; };
+		9908FEED48C4541AB651EE12EB50667F /* Database+Statements.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Database+Statements.swift"; path = "GRDB/Core/Database+Statements.swift"; sourceTree = "<group>"; };
+		998184813C3FC6A734432240A88E950B /* Fixits-1.2.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-1.2.swift"; path = "GRDB/Legacy/Fixits-1.2.swift"; sourceTree = "<group>"; };
+		9AAFE9FDC60EE25D68294F1510BA409B /* FTS3+QueryInterfaceRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FTS3+QueryInterfaceRequest.swift"; path = "GRDB/QueryInterface/FTS3+QueryInterfaceRequest.swift"; sourceTree = "<group>"; };
+		9C75FCF6FD96CB7E27A4D98BB5234C3C /* Pods-SwitchSpeak-iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwitchSpeak-iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9D42FE432E14E5BD988E1D31EB2131C7 /* FTS5Tokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5Tokenizer.swift; path = GRDB/FTS/FTS5Tokenizer.swift; sourceTree = "<group>"; };
+		9E6A68A7C8ACEF84F982A6F3AFD48F5A /* FetchedRecordsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FetchedRecordsController.swift; path = GRDB/Record/FetchedRecordsController.swift; sourceTree = "<group>"; };
+		A0922926CBBB281F03AFC931F98823DF /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = GRDB/Core/Request.swift; sourceTree = "<group>"; };
+		A430C8D09A8B92FFF6221FEFA83B92EE /* FTS3Pattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS3Pattern.swift; path = GRDB/FTS/FTS3Pattern.swift; sourceTree = "<group>"; };
+		A77CEDD025351A4CB324F2D765FA7885 /* Pods-SwitchSpeak-iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOS-resources.sh"; sourceTree = "<group>"; };
+		A83339939D4F59B678AD834424592C94 /* DatabasePool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabasePool.swift; path = GRDB/Core/DatabasePool.swift; sourceTree = "<group>"; };
+		A9D1AB3C993CCCB29EDC9211722D7116 /* Pods-SwitchSpeak-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AAE4285BB846877D84CC72417EA2B816 /* Fixits-0-84-0.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-0-84-0.swift"; path = "GRDB/Legacy/Fixits-0-84-0.swift"; sourceTree = "<group>"; };
+		AFF05DE707AD89F408638D74FE0CC633 /* SQLFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLFunctions.swift; path = GRDB/QueryInterface/Support/SQLFunctions.swift; sourceTree = "<group>"; };
+		B141DAD8632ADCDC0FF31B3D9EC39296 /* Pods-SwitchSpeak-iOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOSTests-frameworks.sh"; sourceTree = "<group>"; };
+		B2766D16956E147B714FB4914A42B27C /* GRDB.swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GRDB.swift-prefix.pch"; sourceTree = "<group>"; };
+		B2DE35CA850FF376B22B4BCBEA2B1BA9 /* grdb_config.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = grdb_config.h; path = Support/grdb_config.h; sourceTree = "<group>"; };
+		B80FD86E1F3351E9810213EDD1BD60E8 /* Fixits-0.101.1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-0.101.1.swift"; path = "GRDB/Legacy/Fixits-0.101.1.swift"; sourceTree = "<group>"; };
+		BB5009B7B56390CF78F2B5544F954528 /* GRDB.swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GRDB.swift.modulemap; sourceTree = "<group>"; };
+		BBA77ED1C9ECA3E6005B29D1634DF682 /* Fixits-0.109.0.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Fixits-0.109.0.swift"; path = "GRDB/Legacy/Fixits-0.109.0.swift"; sourceTree = "<group>"; };
+		BD259E069F31364FA2E9251C463800CB /* Pods-SwitchSpeak-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwitchSpeak-iOS.modulemap"; sourceTree = "<group>"; };
+		BEA5468C510C648E2BE4331416EEA559 /* Record.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Record.swift; path = GRDB/Record/Record.swift; sourceTree = "<group>"; };
+		C21BFA07E148BC9ADFA70FC7421E45D3 /* Pods-SwitchSpeak-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwitchSpeak-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		C2A18FEFB08338D1B7FFC4FF0A48EF75 /* Persistable+Encodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Persistable+Encodable.swift"; path = "GRDB/Record/Persistable+Encodable.swift"; sourceTree = "<group>"; };
+		C2BB5A081C9ECD41CA887B3ED8A37639 /* SQLSelectable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLSelectable.swift; path = GRDB/QueryInterface/SQLSelectable.swift; sourceTree = "<group>"; };
+		C9DBE89CDE79E0B6BE76103F31EAC7D8 /* Pods-SwitchSpeak-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwitchSpeak-iOS-dummy.m"; sourceTree = "<group>"; };
+		CADB9C28E2C3BFD56FCBD5EE7834D2A2 /* RowConvertible+Decodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "RowConvertible+Decodable.swift"; path = "GRDB/Record/RowConvertible+Decodable.swift"; sourceTree = "<group>"; };
+		CCE473D314B3C4A1E0EABA63DF1572D0 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = GRDB/Utils/Utils.swift; sourceTree = "<group>"; };
+		CE6329CFC298949424C56B86F1D8DDFA /* Pods_SwitchSpeak_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwitchSpeak_iOSTests.framework; path = "Pods-SwitchSpeak-iOSTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D17C3CFFBFE7D7192DCC2D9E8A69D64F /* StatementColumnConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatementColumnConvertible.swift; path = GRDB/Core/StatementColumnConvertible.swift; sourceTree = "<group>"; };
+		D29F4AA849A23712D36D8590E305C0BA /* URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URL.swift; path = GRDB/Core/Support/Foundation/URL.swift; sourceTree = "<group>"; };
+		D390BB3EADF1C59D0E9C854C50061E4F /* FTS5Pattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5Pattern.swift; path = GRDB/FTS/FTS5Pattern.swift; sourceTree = "<group>"; };
+		D53C9AF420FBD282A94A8AB3C6E65C5A /* SQLOrdering.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLOrdering.swift; path = GRDB/QueryInterface/SQLOrdering.swift; sourceTree = "<group>"; };
+		D781F01088DEFAB1011AA246F6BD0A64 /* SchedulingWatchdog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SchedulingWatchdog.swift; path = GRDB/Core/SchedulingWatchdog.swift; sourceTree = "<group>"; };
+		DC200007AB18F3C8C026DB3410E70BD5 /* Pods-SwitchSpeak-iOSTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwitchSpeak-iOSTests.modulemap"; sourceTree = "<group>"; };
+		DD008292239F6653E543F08EB365C785 /* DatabaseDateComponents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseDateComponents.swift; path = GRDB/Core/Support/Foundation/DatabaseDateComponents.swift; sourceTree = "<group>"; };
+		DD5114F1E3D00F23249C54542996ACC3 /* FTS5WrapperTokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5WrapperTokenizer.swift; path = GRDB/FTS/FTS5WrapperTokenizer.swift; sourceTree = "<group>"; };
+		DE734ACB57A471CB05D4C96346D4B227 /* QueryInterfaceSelectQueryDefinition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QueryInterfaceSelectQueryDefinition.swift; path = GRDB/QueryInterface/QueryInterfaceSelectQueryDefinition.swift; sourceTree = "<group>"; };
+		DF75FED3253E23FCA1FB471EB060D25C /* Pods-SwitchSpeak-iOSUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwitchSpeak-iOSUITests-umbrella.h"; sourceTree = "<group>"; };
+		E0FCB250B75E9976C74322DD681BFE3D /* RowAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RowAdapter.swift; path = GRDB/Core/RowAdapter.swift; sourceTree = "<group>"; };
+		E2084EEE1BA96534C4EFEB520886FCBD /* DatabaseValueConvertible+RawRepresentable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DatabaseValueConvertible+RawRepresentable.swift"; path = "GRDB/Core/Support/StandardLibrary/DatabaseValueConvertible+RawRepresentable.swift"; sourceTree = "<group>"; };
+		E21A525508816BB90E67E24AFD8B3DA4 /* Column.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Column.swift; path = GRDB/QueryInterface/Column.swift; sourceTree = "<group>"; };
+		E36141AF2D7351F9C16621D62FC17ECC /* FTS5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS5.swift; path = GRDB/FTS/FTS5.swift; sourceTree = "<group>"; };
+		E42A2BEC53814CEC1FEA0F2B020B848C /* Pods-SwitchSpeak-iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwitchSpeak-iOS-frameworks.sh"; sourceTree = "<group>"; };
+		E45DA7CEB857555B049A47374561D634 /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = GRDB/Core/Configuration.swift; sourceTree = "<group>"; };
+		E7923099707DCD5A91EC4C4ECF2DC255 /* SQLExpressible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLExpressible.swift; path = GRDB/QueryInterface/SQLExpressible.swift; sourceTree = "<group>"; };
+		EB8B33CC7B7538A2644F4CE8FD323588 /* DatabaseSchemaCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseSchemaCache.swift; path = GRDB/Core/DatabaseSchemaCache.swift; sourceTree = "<group>"; };
+		EF4EEDE2EDF43B345E74AF799FBB998B /* GRDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GRDB.framework; path = GRDB.swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF9B01E6FE29E789C43CF229A15B0FF3 /* FTS3TokenizerDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FTS3TokenizerDescriptor.swift; path = GRDB/FTS/FTS3TokenizerDescriptor.swift; sourceTree = "<group>"; };
+		F1B442C06AA6CE3A5E7A565DD5FBFCD8 /* TableMapping.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TableMapping.swift; path = GRDB/Record/TableMapping.swift; sourceTree = "<group>"; };
+		F3D5E2A7C65FF43961E30FBBBE2FE819 /* Pods_SwitchSpeak_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwitchSpeak_iOS.framework; path = "Pods-SwitchSpeak-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7BB701C72BFB606537BC57A6017FDD9 /* DatabaseCollation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatabaseCollation.swift; path = GRDB/Core/DatabaseCollation.swift; sourceTree = "<group>"; };
+		FAA39454107165E5AA44C347AF5B4DDC /* SQLCollection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLCollection.swift; path = GRDB/QueryInterface/SQLCollection.swift; sourceTree = "<group>"; };
+		FC4BE15D118D5AC51DCB1E583FD191A5 /* QueryInterfaceRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QueryInterfaceRequest.swift; path = GRDB/QueryInterface/QueryInterfaceRequest.swift; sourceTree = "<group>"; };
+		FCD0E57D8EC84D2A70D91E0B9462D520 /* SerializedDatabase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerializedDatabase.swift; path = GRDB/Core/SerializedDatabase.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		599D3F7AA2D1B9E76CA08A8E478D819D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				815D459331582DFFBBB809102BB92373 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		889F77CCACDE21E75EA2DD9B48C85855 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E536F11975149FC81E9C75B29E5EEEF8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BB34ACC6E9920C465AE9560C4E6437C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0596464C10797BC9CB6ABCE2B6637FB3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA1D4551D5133E72E378786BE35259 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C846B4886AF45B8E6D552D2814EAB63C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		260807887516FBD8029B831041C21CAE /* GRDB.swift */ = {
+			isa = PBXGroup;
+			children = (
+				61A545BB8FF544ACED26F0302C4F2598 /* CGFloat.swift */,
+				E21A525508816BB90E67E24AFD8B3DA4 /* Column.swift */,
+				E45DA7CEB857555B049A47374561D634 /* Configuration.swift */,
+				23A66F95EF246D32935E2DE8FBFA4876 /* Cursor.swift */,
+				0B4B7DDAAF45F606028E60ECD69DF167 /* Data.swift */,
+				1EEEDDC930CE5A4215B97C363FC1C511 /* Database.swift */,
+				7E556F542EB844F8FCF0E6781DFCE2C0 /* Database+Schema.swift */,
+				9908FEED48C4541AB651EE12EB50667F /* Database+Statements.swift */,
+				F7BB701C72BFB606537BC57A6017FDD9 /* DatabaseCollation.swift */,
+				DD008292239F6653E543F08EB365C785 /* DatabaseDateComponents.swift */,
+				85239FAFED692D7F79B881AA5FB809BB /* DatabaseError.swift */,
+				3D7CADC85BC657911FC25E98AE17A8A5 /* DatabaseFunction.swift */,
+				8F6C01C4BB9A8F63D393E1747CD0C612 /* DatabaseMigrator.swift */,
+				A83339939D4F59B678AD834424592C94 /* DatabasePool.swift */,
+				884527C78B1F24AEAD8D8A04DA62F149 /* DatabaseQueue.swift */,
+				424A0A007A82E6340BE8CF326023FB0F /* DatabaseReader.swift */,
+				40F89EBB444955F48541B70CBDB4D4F1 /* DatabaseRegion.swift */,
+				EB8B33CC7B7538A2644F4CE8FD323588 /* DatabaseSchemaCache.swift */,
+				86F2CED2AC5BB6C4AA122308AE27C201 /* DatabaseValue.swift */,
+				36915FCDD1D3272A95FA026097ACD866 /* DatabaseValueConvertible.swift */,
+				02DDE87C74D92D0E76DC488A4A631EEA /* DatabaseValueConvertible+Decodable.swift */,
+				708781F4C21A0CE4355C10C617A6D2F3 /* DatabaseValueConvertible+Encodable.swift */,
+				E2084EEE1BA96534C4EFEB520886FCBD /* DatabaseValueConvertible+RawRepresentable.swift */,
+				3FD26D03194C82D30CCC0F4722AE115F /* DatabaseValueConvertible+ReferenceConvertible.swift */,
+				71ADF4CA438C72465693DF321AD81232 /* DatabaseWriter.swift */,
+				65C1D4E1BBD977A50CDCCD9A0C5FD188 /* Date.swift */,
+				9E6A68A7C8ACEF84F982A6F3AFD48F5A /* FetchedRecordsController.swift */,
+				AAE4285BB846877D84CC72417EA2B816 /* Fixits-0-84-0.swift */,
+				9764D002B5216850C79CFDFADEFA0635 /* Fixits-0-90-1.swift */,
+				B80FD86E1F3351E9810213EDD1BD60E8 /* Fixits-0.101.1.swift */,
+				304733CD00756E6F77711BA27BA9051D /* Fixits-0.102.0.swift */,
+				BBA77ED1C9ECA3E6005B29D1634DF682 /* Fixits-0.109.0.swift */,
+				998184813C3FC6A734432240A88E950B /* Fixits-1.2.swift */,
+				21616A719072490C7E5B0F08EDC8F623 /* Fixits-Swift2.swift */,
+				2A5494D8FA9CA63B79734E44861848CE /* FTS3.swift */,
+				9AAFE9FDC60EE25D68294F1510BA409B /* FTS3+QueryInterfaceRequest.swift */,
+				A430C8D09A8B92FFF6221FEFA83B92EE /* FTS3Pattern.swift */,
+				EF9B01E6FE29E789C43CF229A15B0FF3 /* FTS3TokenizerDescriptor.swift */,
+				317118583B129FE2FC3500D6CC4B07C3 /* FTS4.swift */,
+				E36141AF2D7351F9C16621D62FC17ECC /* FTS5.swift */,
+				3D1F82F018CF94FC9588F19F784E31F8 /* FTS5+QueryInterface.swift */,
+				69596DED0DA39B5BBB5D4ACDF032026D /* FTS5CustomTokenizer.swift */,
+				D390BB3EADF1C59D0E9C854C50061E4F /* FTS5Pattern.swift */,
+				9D42FE432E14E5BD988E1D31EB2131C7 /* FTS5Tokenizer.swift */,
+				97060F7DB78E048B78E8ABC420C33425 /* FTS5TokenizerDescriptor.swift */,
+				DD5114F1E3D00F23249C54542996ACC3 /* FTS5WrapperTokenizer.swift */,
+				8C7066B89346F08FADEE0AC7D8DD7C88 /* GRDB.h */,
+				6560D339A7C66808591B02E762082434 /* GRDB-Bridging.h */,
+				B2DE35CA850FF376B22B4BCBEA2B1BA9 /* grdb_config.h */,
+				1A73BD144BD18036E3DBDB655E120745 /* Migration.swift */,
+				117F3A8030DBC43FDB42DAA462EC69D2 /* NSData.swift */,
+				97C4554890F5B1E1E324B11ED4AB8D32 /* NSNull.swift */,
+				12E6D8A53DFF741EDE50797FD443B483 /* NSNumber.swift */,
+				46F66D430B4F03E3DF5332B9EB48AC16 /* NSString.swift */,
+				26F4763DD90354360EFDC27F74E3796A /* Persistable.swift */,
+				C2A18FEFB08338D1B7FFC4FF0A48EF75 /* Persistable+Encodable.swift */,
+				8E44C16E62F45AC316F76B78FFCE677F /* Pool.swift */,
+				FC4BE15D118D5AC51DCB1E583FD191A5 /* QueryInterfaceRequest.swift */,
+				DE734ACB57A471CB05D4C96346D4B227 /* QueryInterfaceSelectQueryDefinition.swift */,
+				5F3583DEF76040394202057E6FC2E1C6 /* ReadWriteBox.swift */,
+				BEA5468C510C648E2BE4331416EEA559 /* Record.swift */,
+				06B97F394CFBD883DE73CAFE12D22AF7 /* RecordBox.swift */,
+				A0922926CBBB281F03AFC931F98823DF /* Request.swift */,
+				47E73514A5BB4F3DE452BF6F56AD2AD4 /* Result.swift */,
+				607B688CBB647671D61F5C718E7C4B42 /* Row.swift */,
+				E0FCB250B75E9976C74322DD681BFE3D /* RowAdapter.swift */,
+				3DDA787C98751E9ECAC4CC1043E3A685 /* RowConvertible.swift */,
+				CADB9C28E2C3BFD56FCBD5EE7834D2A2 /* RowConvertible+Decodable.swift */,
+				6D47C46F8B6CEA39FF73EAA2BF602F05 /* RowConvertible+TableMapping.swift */,
+				D781F01088DEFAB1011AA246F6BD0A64 /* SchedulingWatchdog.swift */,
+				FCD0E57D8EC84D2A70D91E0B9462D520 /* SerializedDatabase.swift */,
+				648F5A8F80CC6A297FA7043E620E702F /* SQLCollatedExpression.swift */,
+				FAA39454107165E5AA44C347AF5B4DDC /* SQLCollection.swift */,
+				E7923099707DCD5A91EC4C4ECF2DC255 /* SQLExpressible.swift */,
+				30CB9510546AA3A26DB45B1CE24871D0 /* SQLExpression.swift */,
+				14953747AFB94862FF995ADBCF4CB9C6 /* SQLExpression+QueryInterface.swift */,
+				AFF05DE707AD89F408638D74FE0CC633 /* SQLFunctions.swift */,
+				0C7B58DD3559E546BBDC49BCA5471476 /* SQLOperators.swift */,
+				D53C9AF420FBD282A94A8AB3C6E65C5A /* SQLOrdering.swift */,
+				C2BB5A081C9ECD41CA887B3ED8A37639 /* SQLSelectable.swift */,
+				814BA322AA04C7BEC4FD951203EB082C /* SQLSelectable+QueryInterface.swift */,
+				6A97A1F85FB972D210E57B96142BCBFD /* SQLSpecificExpressible+QueryInterface.swift */,
+				1845929485653FA8EA3BE1D66D3DF01C /* StandardLibrary.swift */,
+				957928C5A46D71B193A592AD8A9F566E /* Statement.swift */,
+				10CEC2DF4573D38A8FC54FF790E48FA4 /* StatementAuthorizer.swift */,
+				D17C3CFFBFE7D7192DCC2D9E8A69D64F /* StatementColumnConvertible.swift */,
+				80B53004AAD314CF4FF333B2D2F1287A /* TableDefinition.swift */,
+				F1B442C06AA6CE3A5E7A565DD5FBFCD8 /* TableMapping.swift */,
+				0E6FBBF69F7CAC22CCAB96A433113DB8 /* TransactionObserver.swift */,
+				D29F4AA849A23712D36D8590E305C0BA /* URL.swift */,
+				CCE473D314B3C4A1E0EABA63DF1572D0 /* Utils.swift */,
+				92D76F43AC4BA3E5A83E95F74B5FCD22 /* UUID.swift */,
+				84CBE9B3560560472386D0F0827B68A7 /* VirtualTableModule.swift */,
+				DA14BBC5BE79B46BAD05C53281A5D102 /* Support Files */,
+			);
+			name = GRDB.swift;
+			path = GRDB.swift;
+			sourceTree = "<group>";
+		};
+		616B0071A2959759E187AB376591AF09 /* Pods-SwitchSpeak-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				81E3C6BE31FE58B55D84FCB994CA2B84 /* Info.plist */,
+				4B2D791921B6E85AABF29DFF4078BC9F /* Pods-SwitchSpeak-iOSUITests.modulemap */,
+				0470F7F51699B72C054431E3EDCC3805 /* Pods-SwitchSpeak-iOSUITests-acknowledgements.markdown */,
+				4D7A37267E94435950058BE52A0888AF /* Pods-SwitchSpeak-iOSUITests-acknowledgements.plist */,
+				3C53B500344E40B64FD82363EAF14AB1 /* Pods-SwitchSpeak-iOSUITests-dummy.m */,
+				12DFA36809099B51A0DB4C6A4ECAEB24 /* Pods-SwitchSpeak-iOSUITests-frameworks.sh */,
+				56C420FB0866673EDCC506067971BF38 /* Pods-SwitchSpeak-iOSUITests-resources.sh */,
+				DF75FED3253E23FCA1FB471EB060D25C /* Pods-SwitchSpeak-iOSUITests-umbrella.h */,
+				A9D1AB3C993CCCB29EDC9211722D7116 /* Pods-SwitchSpeak-iOSUITests.debug.xcconfig */,
+				3DEA6A5122C0F9F85BBE57136CFC2AD7 /* Pods-SwitchSpeak-iOSUITests.release.xcconfig */,
+			);
+			name = "Pods-SwitchSpeak-iOSUITests";
+			path = "Target Support Files/Pods-SwitchSpeak-iOSUITests";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				CF90639E23C8792478A7D5561F81B27A /* Pods */,
+				F30810BC2ABBEC813A6BAE9CE6F1D46F /* Products */,
+				E496108BB8C2AB936B5C843873F9DC40 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		866CD75F15B6568302825F4E411A402E /* Pods-SwitchSpeak-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				79E9B832DA74F10D3A9FD2552686174F /* Info.plist */,
+				BD259E069F31364FA2E9251C463800CB /* Pods-SwitchSpeak-iOS.modulemap */,
+				9C75FCF6FD96CB7E27A4D98BB5234C3C /* Pods-SwitchSpeak-iOS-acknowledgements.markdown */,
+				197AB00DD4383AA49BA186D69E180B77 /* Pods-SwitchSpeak-iOS-acknowledgements.plist */,
+				C9DBE89CDE79E0B6BE76103F31EAC7D8 /* Pods-SwitchSpeak-iOS-dummy.m */,
+				E42A2BEC53814CEC1FEA0F2B020B848C /* Pods-SwitchSpeak-iOS-frameworks.sh */,
+				A77CEDD025351A4CB324F2D765FA7885 /* Pods-SwitchSpeak-iOS-resources.sh */,
+				7570BF5D26E13730AF98C59C2F9774BC /* Pods-SwitchSpeak-iOS-umbrella.h */,
+				1E9F8BDDC030AEA4928136DC26B2B5A5 /* Pods-SwitchSpeak-iOS.debug.xcconfig */,
+				C21BFA07E148BC9ADFA70FC7421E45D3 /* Pods-SwitchSpeak-iOS.release.xcconfig */,
+			);
+			name = "Pods-SwitchSpeak-iOS";
+			path = "Target Support Files/Pods-SwitchSpeak-iOS";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF90639E23C8792478A7D5561F81B27A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				260807887516FBD8029B831041C21CAE /* GRDB.swift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		DA14BBC5BE79B46BAD05C53281A5D102 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB5009B7B56390CF78F2B5544F954528 /* GRDB.swift.modulemap */,
+				24763CCB898E2B41ED8B33D61BF7A40F /* GRDB.swift.xcconfig */,
+				2ECFF36FA735BFA2C9D7506A1DB5D321 /* GRDB.swift-dummy.m */,
+				B2766D16956E147B714FB4914A42B27C /* GRDB.swift-prefix.pch */,
+				5970564B1EB142559A21CAD36DA4019A /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GRDB.swift";
+			sourceTree = "<group>";
+		};
+		E496108BB8C2AB936B5C843873F9DC40 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				866CD75F15B6568302825F4E411A402E /* Pods-SwitchSpeak-iOS */,
+				EA950888958C548593663A84D1144412 /* Pods-SwitchSpeak-iOSTests */,
+				616B0071A2959759E187AB376591AF09 /* Pods-SwitchSpeak-iOSUITests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		EA950888958C548593663A84D1144412 /* Pods-SwitchSpeak-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				7BEA5E6E519FD0DEAB24AA7753C81E6E /* Info.plist */,
+				DC200007AB18F3C8C026DB3410E70BD5 /* Pods-SwitchSpeak-iOSTests.modulemap */,
+				34B1FB312EB95C9A56106AFBA366E53E /* Pods-SwitchSpeak-iOSTests-acknowledgements.markdown */,
+				0B0714B97E61D930ECB795662A54EE91 /* Pods-SwitchSpeak-iOSTests-acknowledgements.plist */,
+				772E989993FAAE9A687D55C6383EB3F1 /* Pods-SwitchSpeak-iOSTests-dummy.m */,
+				B141DAD8632ADCDC0FF31B3D9EC39296 /* Pods-SwitchSpeak-iOSTests-frameworks.sh */,
+				22982592CAF424140A1BBE57A84D14D4 /* Pods-SwitchSpeak-iOSTests-resources.sh */,
+				4993C08514D87675C815FD0BB25C0ACB /* Pods-SwitchSpeak-iOSTests-umbrella.h */,
+				9631F92A7DBA35354B7187C6FF19FE9C /* Pods-SwitchSpeak-iOSTests.debug.xcconfig */,
+				4744D3E8E004E7D7AF085456ACE181A6 /* Pods-SwitchSpeak-iOSTests.release.xcconfig */,
+			);
+			name = "Pods-SwitchSpeak-iOSTests";
+			path = "Target Support Files/Pods-SwitchSpeak-iOSTests";
+			sourceTree = "<group>";
+		};
+		F30810BC2ABBEC813A6BAE9CE6F1D46F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF4EEDE2EDF43B345E74AF799FBB998B /* GRDB.framework */,
+				F3D5E2A7C65FF43961E30FBBBE2FE819 /* Pods_SwitchSpeak_iOS.framework */,
+				CE6329CFC298949424C56B86F1D8DDFA /* Pods_SwitchSpeak_iOSTests.framework */,
+				3BF7DD20F316B2F9AD29C021CCCA1752 /* Pods_SwitchSpeak_iOSUITests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		30F11EE339A9CBE134D95BC468377117 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E594F3754D9D3F864F38B74B8B2F41D4 /* Pods-SwitchSpeak-iOSTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFE7FAA36CDF0C483FB750D4BCB635AC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB6F23AE0B64816C2F75D2B53A7B5E4 /* GRDB-Bridging.h in Headers */,
+				3BEFD7F9223607860A44D6BBA8057147 /* GRDB.h in Headers */,
+				90CAEA4F693212F4A04671D50689B39E /* grdb_config.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCAAB59C903445811C4A7B34232D788F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6282B796E18426C08E76F6F786E71D1F /* Pods-SwitchSpeak-iOS-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C175E2E5DD8613DC1182F6AFF004C5BB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6C8806EAD1595ECC7C600A5E414EEE1 /* Pods-SwitchSpeak-iOSUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0A33FA722569770541242C4573DCFD30 /* Pods-SwitchSpeak-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E9AADB85B331E85E27DD6CB80526D70 /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOSUITests" */;
+			buildPhases = (
+				314F7089B3E3B454A1BD7470A8332662 /* Sources */,
+				8BB34ACC6E9920C465AE9560C4E6437C /* Frameworks */,
+				C175E2E5DD8613DC1182F6AFF004C5BB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SwitchSpeak-iOSUITests";
+			productName = "Pods-SwitchSpeak-iOSUITests";
+			productReference = 3BF7DD20F316B2F9AD29C021CCCA1752 /* Pods_SwitchSpeak_iOSUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		106D6667FB34D09110925907CAB766E9 /* Pods-SwitchSpeak-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6ED5B7B78E517E24AC0A18CF92EC1615 /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOSTests" */;
+			buildPhases = (
+				457D41F60F0B696B091104B5ED8EF2A0 /* Sources */,
+				8BDA1D4551D5133E72E378786BE35259 /* Frameworks */,
+				30F11EE339A9CBE134D95BC468377117 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SwitchSpeak-iOSTests";
+			productName = "Pods-SwitchSpeak-iOSTests";
+			productReference = CE6329CFC298949424C56B86F1D8DDFA /* Pods_SwitchSpeak_iOSTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4057781817642690C048D380E3BDAB96 /* Pods-SwitchSpeak-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A03B78863D89583F4870F1ABBAC57ED /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOS" */;
+			buildPhases = (
+				A4D9E9927339841C2D86BF10FE38E908 /* Sources */,
+				599D3F7AA2D1B9E76CA08A8E478D819D /* Frameworks */,
+				BCAAB59C903445811C4A7B34232D788F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67003B63277DE80A9ACFDDBBDEA17716 /* PBXTargetDependency */,
+			);
+			name = "Pods-SwitchSpeak-iOS";
+			productName = "Pods-SwitchSpeak-iOS";
+			productReference = F3D5E2A7C65FF43961E30FBBBE2FE819 /* Pods_SwitchSpeak_iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5B68717EC153617354EC5BE476AAB925 /* GRDB.swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB667493C73AE3CAB77C4721C7B949CE /* Build configuration list for PBXNativeTarget "GRDB.swift" */;
+			buildPhases = (
+				EF15A2A9B4DC45923A5F42E6FA8B573C /* Sources */,
+				889F77CCACDE21E75EA2DD9B48C85855 /* Frameworks */,
+				AFE7FAA36CDF0C483FB750D4BCB635AC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GRDB.swift;
+			productName = GRDB.swift;
+			productReference = EF4EEDE2EDF43B345E74AF799FBB998B /* GRDB.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = F30810BC2ABBEC813A6BAE9CE6F1D46F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5B68717EC153617354EC5BE476AAB925 /* GRDB.swift */,
+				4057781817642690C048D380E3BDAB96 /* Pods-SwitchSpeak-iOS */,
+				106D6667FB34D09110925907CAB766E9 /* Pods-SwitchSpeak-iOSTests */,
+				0A33FA722569770541242C4573DCFD30 /* Pods-SwitchSpeak-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		314F7089B3E3B454A1BD7470A8332662 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BCDEC7D992641A786F71EB2F99A7D13 /* Pods-SwitchSpeak-iOSUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		457D41F60F0B696B091104B5ED8EF2A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C76AA940DF5CEF7DCB7364C0E6952DE /* Pods-SwitchSpeak-iOSTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4D9E9927339841C2D86BF10FE38E908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56E53896A16FA13FC14D38748C267309 /* Pods-SwitchSpeak-iOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF15A2A9B4DC45923A5F42E6FA8B573C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD2375CC0FAC30FAF3942D27CBD80D0F /* CGFloat.swift in Sources */,
+				878EDFCDCFB5A31D77FA8805B186E6EC /* Column.swift in Sources */,
+				ADE270F248490E8729DA5C0B5BF7A048 /* Configuration.swift in Sources */,
+				1383F23C8534B1A59FBE7431501D7B88 /* Cursor.swift in Sources */,
+				B6D604C0643955E3625BE96BCE44A163 /* Data.swift in Sources */,
+				E2A22AC32E2A777BFF894B388B1D5753 /* Database+Schema.swift in Sources */,
+				4C7E1A7D7ADBE60155A8EB60EB8ECABA /* Database+Statements.swift in Sources */,
+				CF948A3B47DC76A71E00BD097398E4D7 /* Database.swift in Sources */,
+				7F76FD9F26E35EAAE8DD159D3A311814 /* DatabaseCollation.swift in Sources */,
+				26F1B117FB0D7732E6C0AE14B461E2C5 /* DatabaseDateComponents.swift in Sources */,
+				4915A1C22C90CE46107D637A2BF81BF6 /* DatabaseError.swift in Sources */,
+				431D3974E87C5115A8B9B40DA5D2D5E8 /* DatabaseFunction.swift in Sources */,
+				C8B8EFC0575D674D0BDE7ED8BB94CDDD /* DatabaseMigrator.swift in Sources */,
+				99A248278B904A5103B16CE112DFE088 /* DatabasePool.swift in Sources */,
+				61E0D93F5CD0450432F079A8D1AAE7FA /* DatabaseQueue.swift in Sources */,
+				962103F5ED0587D23857B5A4B1A81AC1 /* DatabaseReader.swift in Sources */,
+				1F94F2F5435F5D85E8D0B6B9185B9A06 /* DatabaseRegion.swift in Sources */,
+				3A7719550DECCE84781A7663D54369CF /* DatabaseSchemaCache.swift in Sources */,
+				6CA64EA46F6AA97FD1552005C7C93AC6 /* DatabaseValue.swift in Sources */,
+				BE2B11FEA20ADA56F8B194CE9E077EED /* DatabaseValueConvertible+Decodable.swift in Sources */,
+				5721BF5195FC371BF818958EDF485E07 /* DatabaseValueConvertible+Encodable.swift in Sources */,
+				989B3CD64D15B19BD2B23AB10BBB7DC5 /* DatabaseValueConvertible+RawRepresentable.swift in Sources */,
+				24DC7287381DE3CAF71C716C3B4F6631 /* DatabaseValueConvertible+ReferenceConvertible.swift in Sources */,
+				C4DA8C00D4712B822EA837DD02C6FBBD /* DatabaseValueConvertible.swift in Sources */,
+				5C56462AB24B94317BD0899B1C271020 /* DatabaseWriter.swift in Sources */,
+				271952D4E056F0EC4866EE28EC99B7D5 /* Date.swift in Sources */,
+				F8988BCE4B79C898A1AC19BD5FFA4F5D /* FetchedRecordsController.swift in Sources */,
+				6D557ADDCB88241BDC81D1B1387A8CB8 /* Fixits-0-84-0.swift in Sources */,
+				81F3A24C33889C32CCC2DA776882C73F /* Fixits-0-90-1.swift in Sources */,
+				BBCC29C63D9F61E465E457CDB200D83C /* Fixits-0.101.1.swift in Sources */,
+				733AD2A52F751BC44524EE1E18491F4A /* Fixits-0.102.0.swift in Sources */,
+				2CF47E95F924DB05F0C192AC99DC7253 /* Fixits-0.109.0.swift in Sources */,
+				96AA9A6BAAB4A712D7072F882DDD9961 /* Fixits-1.2.swift in Sources */,
+				EA2E7869842F0DC252D6F00B5C7F5E12 /* Fixits-Swift2.swift in Sources */,
+				2FD7692B3E49D2F907988FBE17094000 /* FTS3+QueryInterfaceRequest.swift in Sources */,
+				D81FEB86447BE06E5446E27748DAB52E /* FTS3.swift in Sources */,
+				DD9A675C6701306B2A2A4C07CAF75620 /* FTS3Pattern.swift in Sources */,
+				520117A52BB98D756AE383BB9BB6396C /* FTS3TokenizerDescriptor.swift in Sources */,
+				BBE6F9EFF744A1ECAD9803A46AD50D06 /* FTS4.swift in Sources */,
+				70CAF4365BD48BDAE4296B0B321046B2 /* FTS5+QueryInterface.swift in Sources */,
+				EAAFB5C88AA40E0EE69CACEA71ED1916 /* FTS5.swift in Sources */,
+				6B811948F8EC3CE72EC6B4321AA8788F /* FTS5CustomTokenizer.swift in Sources */,
+				A8A23BE2DB2E7CE3189A83631A103917 /* FTS5Pattern.swift in Sources */,
+				9CFDA16C8FEAEA8EDA824201869BF471 /* FTS5Tokenizer.swift in Sources */,
+				F6DBAF962620371D076491B4A16B5EF6 /* FTS5TokenizerDescriptor.swift in Sources */,
+				0025FF9AFA8CA17911E325FB1B02AA93 /* FTS5WrapperTokenizer.swift in Sources */,
+				FE268D3355C75EE5E5C6373B222F1FC7 /* GRDB.swift-dummy.m in Sources */,
+				585A3D5B409982A53B84C847171DB895 /* Migration.swift in Sources */,
+				7DC5C31288D942BB001C3AAC11F58CFA /* NSData.swift in Sources */,
+				90E423099910E3CD62B098021BC0458D /* NSNull.swift in Sources */,
+				E57510A65455CD1885AD146ADAAABA90 /* NSNumber.swift in Sources */,
+				C909B08AE43274701E997575A33099FD /* NSString.swift in Sources */,
+				448E656F9A49ED0C89BF5A6AD356EBE9 /* Persistable+Encodable.swift in Sources */,
+				284AC782F6D3ABAC5ABE1FA80F002A06 /* Persistable.swift in Sources */,
+				5DD7BE7CD17410370A416A6CEF4236BE /* Pool.swift in Sources */,
+				C4CCC4E83DEE62F6BBDCB5697FEE723F /* QueryInterfaceRequest.swift in Sources */,
+				FF745E66651B0E641995CC60F1CB8C8F /* QueryInterfaceSelectQueryDefinition.swift in Sources */,
+				3D6B1C01251B3E51197756755525ED59 /* ReadWriteBox.swift in Sources */,
+				D74520F2613A8C5E66302837A2509AEE /* Record.swift in Sources */,
+				13B6673B88FEA9459DE6C53BEED8631F /* RecordBox.swift in Sources */,
+				68E33498201325DF15F82F8BF5A4942A /* Request.swift in Sources */,
+				87CC74042A95B8714E98E8AD1B82F962 /* Result.swift in Sources */,
+				E4E8B7E387F04CA7BDA77C6A59F42469 /* Row.swift in Sources */,
+				3F2533E56FCC7D1EA539CF2DA5C91E61 /* RowAdapter.swift in Sources */,
+				624A0DAF876E79DE5129F4D7881C7F53 /* RowConvertible+Decodable.swift in Sources */,
+				C729927C8AD386E2B1B42205655763A4 /* RowConvertible+TableMapping.swift in Sources */,
+				F63DB25C10CC74108F40DBEE3A9EAF97 /* RowConvertible.swift in Sources */,
+				286CEFF02C401A053A1E95CAD7EA045C /* SchedulingWatchdog.swift in Sources */,
+				A0813E25F7EB7291D95C38F3B3581A7F /* SerializedDatabase.swift in Sources */,
+				450369BB455300E5671826E399656D84 /* SQLCollatedExpression.swift in Sources */,
+				A01F8F30345DEF421102A4563EFF3DB4 /* SQLCollection.swift in Sources */,
+				2AD5BFF1E772CB6D6D618E8F935C52E6 /* SQLExpressible.swift in Sources */,
+				C2681E67319F38FBE58FBCBEE6E9784D /* SQLExpression+QueryInterface.swift in Sources */,
+				D3EBA030C3F0F869A33571DBFC6D037E /* SQLExpression.swift in Sources */,
+				418652BEB34246C11404171D17809BE3 /* SQLFunctions.swift in Sources */,
+				029CBB121308FCEA9556D12DA11F2DD2 /* SQLOperators.swift in Sources */,
+				9C49D36413A3B9C8CA4507C0FB6FA865 /* SQLOrdering.swift in Sources */,
+				EB007C27553DE1CFD822F7E3B6E77BB9 /* SQLSelectable+QueryInterface.swift in Sources */,
+				FF87F67A55591FA4957B2A3A62EF6571 /* SQLSelectable.swift in Sources */,
+				9326EE59A47925C2A5CCEF6A2AE71F73 /* SQLSpecificExpressible+QueryInterface.swift in Sources */,
+				077D096608722EDE53CD7362924D66D1 /* StandardLibrary.swift in Sources */,
+				A08E9D40FEA9051A2D53F36FCBF880C5 /* Statement.swift in Sources */,
+				9E438EC4805FCEF6A18F4EC752284152 /* StatementAuthorizer.swift in Sources */,
+				4433BF72E36767156E5B92A354A2D5D5 /* StatementColumnConvertible.swift in Sources */,
+				3F2C45D4CD0495942062F90E728AAA48 /* TableDefinition.swift in Sources */,
+				D7239677668FD563B387B86239D41814 /* TableMapping.swift in Sources */,
+				773D191A64F47AB4AED611D8F83903F0 /* TransactionObserver.swift in Sources */,
+				48CE46A880FD267EF65712902DB21D9D /* URL.swift in Sources */,
+				53FABB022891337E83D671645E7632ED /* Utils.swift in Sources */,
+				750BA69AD6B77B0E50F547348C71DD6D /* UUID.swift in Sources */,
+				EF0C99EB1902109D9450490767B62E7A /* VirtualTableModule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67003B63277DE80A9ACFDDBBDEA17716 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GRDB.swift;
+			target = 5B68717EC153617354EC5BE476AAB925 /* GRDB.swift */;
+			targetProxy = 346B288DC7D472A123AC98A689EDAB42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		082B023A4B96643FE8DB4F8BA3695960 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9631F92A7DBA35354B7187C6FF19FE9C /* Pods-SwitchSpeak-iOSTests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOSTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOSTests/Pods-SwitchSpeak-iOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOSTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		323A24856F1A4871A780301AF5C02A2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		3FA3DC86434FC74F697BCFCEF2989674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E9F8BDDC030AEA4928136DC26B2B5A5 /* Pods-SwitchSpeak-iOS.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOS/Pods-SwitchSpeak-iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4CC1D258FD16CD2AA79E4D4C5EF29242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C21BFA07E148BC9ADFA70FC7421E45D3 /* Pods-SwitchSpeak-iOS.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOS/Pods-SwitchSpeak-iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		895AA154FC3FE5737EC396B684B61DBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DEA6A5122C0F9F85BBE57136CFC2AD7 /* Pods-SwitchSpeak-iOSUITests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOSUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOSUITests/Pods-SwitchSpeak-iOSUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOSUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		925B22196927F917AB0D0363F92D927D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24763CCB898E2B41ED8B33D61BF7A40F /* GRDB.swift.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GRDB.swift/GRDB.swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GRDB.swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GRDB.swift/GRDB.swift.modulemap";
+				PRODUCT_NAME = GRDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CA33F186435244FD0FD5B7325332656C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		EE4BB8F151165E549C6BB914B5108D5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24763CCB898E2B41ED8B33D61BF7A40F /* GRDB.swift.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GRDB.swift/GRDB.swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GRDB.swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GRDB.swift/GRDB.swift.modulemap";
+				PRODUCT_NAME = GRDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F5CA0E4A6AA34BAEA8DAB54CE6B1AED7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D1AB3C993CCCB29EDC9211722D7116 /* Pods-SwitchSpeak-iOSUITests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOSUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOSUITests/Pods-SwitchSpeak-iOSUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOSUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F8E093A0589ACECC8C176A0DFC3780B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4744D3E8E004E7D7AF085456ACE181A6 /* Pods-SwitchSpeak-iOSTests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SwitchSpeak-iOSTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SwitchSpeak-iOSTests/Pods-SwitchSpeak-iOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SwitchSpeak_iOSTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E9AADB85B331E85E27DD6CB80526D70 /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5CA0E4A6AA34BAEA8DAB54CE6B1AED7 /* Debug */,
+				895AA154FC3FE5737EC396B684B61DBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				323A24856F1A4871A780301AF5C02A2A /* Debug */,
+				CA33F186435244FD0FD5B7325332656C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6ED5B7B78E517E24AC0A18CF92EC1615 /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				082B023A4B96643FE8DB4F8BA3695960 /* Debug */,
+				F8E093A0589ACECC8C176A0DFC3780B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A03B78863D89583F4870F1ABBAC57ED /* Build configuration list for PBXNativeTarget "Pods-SwitchSpeak-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FA3DC86434FC74F697BCFCEF2989674 /* Debug */,
+				4CC1D258FD16CD2AA79E4D4C5EF29242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB667493C73AE3CAB77C4721C7B949CE /* Build configuration list for PBXNativeTarget "GRDB.swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				925B22196927F917AB0D0363F92D927D /* Debug */,
+				EE4BB8F151165E549C6BB914B5108D5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
