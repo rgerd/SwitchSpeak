@@ -9,9 +9,9 @@
 import Foundation
 
 enum ScanSpeed : Double, Codable {
-    case SLOW = 0.8
+    case SLOWER = 0.8
     case MEDIUM = 0.5
-    case FAST = 0.25
+    case FASTER = 0.25
 }
 
 enum ScanType : Int, Codable {
@@ -51,7 +51,40 @@ enum VoiceType : String, Codable {
     case FEMALE_VOICE = "Samantha"
 }
 
+let USER_SETTINGS_PICKER_OPTIONS = [
+    [
+        "Scan Slower",
+        "Scan Medium",
+        "Scan Faster"
+    ],
+    [
+        "Scan Half & Half",
+        "Scan Row / Column",
+        "Scan Cell by Cell"
+    ],
+    [
+        "Small Font",
+        "Medium Font",
+        "Large Font"
+    ],
+    [
+        "Smaller Grid",
+        "Medium Grid",
+        "Larger Grid"
+    ],
+    [
+        "Basic Vocab",
+        "More Vocab",
+        "Super Vocab"
+    ],
+    [
+        "Male Voice",
+        "Female Voice"
+    ]
+]
+
 struct UserSettings : Codable {
+    var name:String
     var scanSpeed:ScanSpeed
     var scanType:ScanType
     var fontSize:FontSize
@@ -60,7 +93,8 @@ struct UserSettings : Codable {
     var vocabLevel:VocabLevel
     var voiceType:VoiceType
     
-    init() {
+    init(_ name:String) {
+        self.name = name
         scanSpeed = .MEDIUM
         scanType = .ROW_COLUMN
         fontSize = .MEDIUM
@@ -81,5 +115,155 @@ struct UserSettings : Codable {
     
     func getGridSize() -> (Int, Int) {
         return parseRowsAndColumns(gridSize: gridSize)
+    }
+    
+    func _getScanSpeed() -> Int {
+        switch scanSpeed {
+        case .SLOWER:
+            return 0
+        case .MEDIUM:
+            return 1
+        case .FASTER:
+            return 2
+        }
+    }
+    
+    func _getScanType() -> Int {
+        switch scanType {
+        case .BINARY_TREE:
+            return 0
+        case .ROW_COLUMN:
+            return 1
+        case .LINEAR:
+            return 2
+        }
+    }
+    
+    func _getFontSize() -> Int {
+        switch fontSize {
+        case .SMALL:
+            return 0
+        case .MEDIUM:
+            return 1
+        case .LARGE:
+            return 2
+        }
+    }
+    
+    func _getGridSize() -> Int {
+        switch gridSize {
+        case .SMALL:
+            return 0
+        case .MEDIUM:
+            return 1
+        case .LARGE:
+            return 2
+        }
+    }
+    
+    func _getVocabLevel() -> Int {
+        switch vocabLevel {
+        case .BASIC:
+            return 0
+        case .SLIGHTLY_MORE:
+            return 1
+        case .SUPERCALIFRAGILISTICEXPIALIDOCIOUS:
+            return 2
+        }
+    }
+    
+    func _getVoiceType() -> Int {
+        switch voiceType {
+        case .MALE_VOICE:
+            return 0
+        case .FEMALE_VOICE:
+            return 1
+        }
+    }
+    
+    func updateSetting(withIndex ind:Int, toValue val:Int) -> UserSettings {
+        var newSettings:UserSettings = self
+        switch ind {
+        case 0:
+            switch val {
+            case 0:
+                newSettings.scanSpeed = .SLOWER
+            case 1:
+                newSettings.scanSpeed = .MEDIUM
+            case 2:
+                newSettings.scanSpeed = .FASTER
+            default:
+                fatalError("Invalid value provided for scan speed setting!")
+                break
+            }
+            break
+        case 1:
+            switch val {
+            case 0:
+                newSettings.scanType = .BINARY_TREE
+            case 1:
+                newSettings.scanType = .ROW_COLUMN
+            case 2:
+                newSettings.scanType = .LINEAR
+            default:
+                fatalError("Invalid value provided for scan type setting!")
+                break
+            }
+            break
+        case 2:
+            switch val {
+            case 0:
+                newSettings.fontSize = .SMALL
+            case 1:
+                newSettings.fontSize = .MEDIUM
+            case 2:
+                newSettings.fontSize = .LARGE
+            default:
+                fatalError("Invalid value provided for font size setting!")
+                break
+            }
+            break
+        case 3:
+            switch val {
+            case 0:
+                newSettings.gridSize = .SMALL
+            case 1:
+                newSettings.gridSize = .MEDIUM
+            case 2:
+                newSettings.gridSize = .LARGE
+            default:
+                fatalError("Invalid value provided for grid size setting!")
+                break
+            }
+            break
+        case 4:
+            switch val {
+            case 0:
+                newSettings.vocabLevel = .BASIC
+            case 1:
+                newSettings.vocabLevel = .SLIGHTLY_MORE
+            case 2:
+                newSettings.vocabLevel = .SUPERCALIFRAGILISTICEXPIALIDOCIOUS
+            default:
+                fatalError("Invalid value provided for vocab level setting!")
+                break
+            }
+            break
+        case 5:
+            switch val {
+            case 0:
+                newSettings.voiceType = .MALE_VOICE
+            case 1:
+                newSettings.voiceType = .FEMALE_VOICE
+            default:
+                fatalError("Invalid value provided for voice type setting!")
+                break
+            }
+            break
+        default:
+            fatalError("Invalid index provided to updateSetting!")
+            break
+        }
+        return newSettings
     }
 }
