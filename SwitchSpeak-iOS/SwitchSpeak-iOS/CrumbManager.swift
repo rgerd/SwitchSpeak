@@ -60,10 +60,23 @@ class CrumbStack {
     
     /*
      * Removes a breadcrumb.
+	 * add remove the breadcrum from the view as well
      */
     func pop() {
-        items.removeLast()
+		if (self.getString() != "") {	//	i.e. the stack is not empty
+			items.removeLast().label.removeFromSuperview()
+		}
+		
     }
+	
+	/*
+	*	remove all the breadcrumbs
+	*/
+	func emptyCrumbStack() {
+		while (self.getString() != "") {		//	pop all the elements in the breadcrums stack
+			self.pop()
+		}
+	}
     
     /*
      * Pushes a breadcrumb containing [string] to the stack.

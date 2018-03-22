@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		882FF87620447EED00D506A0 /* admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882FF87520447EED00D506A0 /* admin.storyboard */; };
 		88318EB820471D15000E72E1 /* user.to.admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88318EB720471D15000E72E1 /* user.to.admin.storyboard */; };
+		C5228D0A20628C37002F9EB1 /* TouchSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5228D0920628C37002F9EB1 /* TouchSelection.swift */; };
+		C5948AB52063E670005F945B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5948AB42063E670005F945B /* ActionButton.swift */; };
 		C5F434D92048640300D5D9D5 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F434D82048640300D5D9D5 /* Node.swift */; };
 		C5F434DB2048642E00D5D9D5 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */; };
 		C5F434DD2048645E00D5D9D5 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F434DC2048645E00D5D9D5 /* Tree.swift */; };
@@ -48,6 +50,8 @@
 /* Begin PBXFileReference section */
 		882FF87520447EED00D506A0 /* admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = admin.storyboard; sourceTree = "<group>"; };
 		88318EB720471D15000E72E1 /* user.to.admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = user.to.admin.storyboard; sourceTree = "<group>"; };
+		C5228D0920628C37002F9EB1 /* TouchSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchSelection.swift; sourceTree = "<group>"; };
+		C5948AB42063E670005F945B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		C5F434D82048640300D5D9D5 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		C5F434DC2048645E00D5D9D5 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 				FA5BCEC02057827E00C84071 /* Tree */,
 				C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */,
 				FA5BCEBE2057121700C84071 /* TouchGrid.swift */,
+				C5228D0920628C37002F9EB1 /* TouchSelection.swift */,
+				C5948AB42063E670005F945B /* ActionButton.swift */,
 			);
 			path = TouchGrid;
 			sourceTree = "<group>";
@@ -329,6 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5948AB52063E670005F945B /* ActionButton.swift in Sources */,
+				C5228D0A20628C37002F9EB1 /* TouchSelection.swift in Sources */,
 				FA2D5DE42028D01200935413 /* ViewController.swift in Sources */,
 				FAD7FE742060BC9200D92816 /* SpeechManager.swift in Sources */,
 				FA5BCEBF2057121700C84071 /* TouchGrid.swift in Sources */,

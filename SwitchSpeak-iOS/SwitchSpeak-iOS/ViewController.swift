@@ -9,28 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
 	@IBOutlet weak var TapButton: UIButton!
-	var breadcrumbs = CrumbStack()
-    var touchGrid:TouchGrid?
+    var touchSelection:TouchSelection?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
+		//	dummy array of phrases for the first grid selection
+		let dummyPhrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]
+		
         // Eventually '0' here would be replaced by the id of the 'signed-in' user
-        self.touchGrid = TouchGrid(userId: GlobalSettings.currentUserId, viewContainer: view)
-		touchGrid!.selectSubTree()
-        
+		self.touchSelection = TouchSelection(userId: GlobalSettings.currentUserId, viewContainer: view, phrases: dummyPhrases)
+        touchSelection!.touchGrid!.selectSubTree()
         view.bringSubview(toFront: TapButton)
 	}
 
 	@IBAction func TapButton(_ sender: Any) {
-        let choice:String? = touchGrid!.makeSelection()
-        
-        if(choice == nil) { // If we're still scanning deeper
-            return;
-        }
-        
-        breadcrumbs.push(string: choice!)
-        breadcrumbs.updateSubViews(insideView: view)
+        touchSelection!.makeSelection()
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -42,7 +35,7 @@ class ViewController: UIViewController {
     // For now we can use this to make the iPad speak. Later we will need a button.
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            SpeechManager.say(phrase: breadcrumbs.getString(), withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
+            SpeechManager.say(phrase: touchSelection!.breadcrumbs.getString(), withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
         }
     }
 }

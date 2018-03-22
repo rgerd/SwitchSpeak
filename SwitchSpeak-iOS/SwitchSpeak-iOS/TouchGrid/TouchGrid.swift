@@ -121,4 +121,39 @@ class TouchGrid {
         }
         return nil
     }
+	
+	/*
+	*	takes as input an array of phrases which needs to be filled into the grid structure
+	*	the assumption is that the input array size exactly matches the grid size
+	*/
+	func fillTouchGrid(phrases: [String]) {
+		let (rows, cols) = settings.getGridSize()
+		let type = settings.scanType
+		switch(type) {
+		case .ROW_COLUMN:
+			for i in 0...(rows - 1) {
+				for j in 0...(cols - 1) {
+					(self.getRootNode()?.childNodes[i].childNodes[j] as? ButtonNode)?.button.setTitle(phrases[i * cols + j], for: .normal)
+				}
+			}
+			break
+		case .BINARY_TREE:
+			break
+		case .LINEAR:
+			for i in 0...(rows * cols - 1) {
+				(self.getRootNode()?.childNodes[i] as? ButtonNode)?.button.setTitle(phrases[i], for: .normal)
+			}
+		}
+	}
+	
+	/*
+	*	scanning restarts from the beginning where no cell is selected yet
+	*	update the curNode and childNumber to root and 0 respectively
+	*	function also unhighlights the entire grid structure
+	*/
+	func resetTouchGrid() {
+		curNode = self.getRootNode()!
+		childNumber = 0
+		curNode.unHighlightSubTree()
+	}
 }
