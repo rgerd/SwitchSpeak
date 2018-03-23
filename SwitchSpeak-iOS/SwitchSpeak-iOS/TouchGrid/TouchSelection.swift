@@ -42,12 +42,13 @@ class TouchSelection {
 	func refillGrid() {
 		let lastIndex = min(phrases.count - 1, index + gridSize - 5)
 		//	functional grid cells are recognized by the four phrases mentioned below
-		var gridPhrases = Array(phrases[index...lastIndex]) + ["Oops","Next","Home","Done"]
-		if (gridPhrases.count < gridSize) {	//	add dummy elements
+		var gridPhrases = Array(phrases[index...lastIndex])
+		if (gridPhrases.count < gridSize - 4) {	//	add dummy elements
 			//	the string '---' represents a dummy cell in the grid
 			//	need to change this depending on how dummy cells are identified
-			gridPhrases += [String](repeating: "---", count: gridSize - gridPhrases.count)
+			gridPhrases += [String](repeating: "---", count: gridSize - gridPhrases.count - 4)
 		}
+		gridPhrases += ["Oops","Next","Home","Done"]
 		
 		touchGrid!.resetTouchGrid()
 		touchGrid!.fillTouchGrid(phrases: gridPhrases)

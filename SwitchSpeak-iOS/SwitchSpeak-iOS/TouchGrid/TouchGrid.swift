@@ -68,10 +68,13 @@ class TouchGrid {
     func selectSubTree() {
         curNode.childNodes[childNumber].highlightSubTree()
         let previousCurNode: Node = curNode
-        
-        delay(self.settings.scanSpeed.rawValue) {
+		var timeDelay = 0.0
+		if (!curNode.childNodes[(childNumber) % curNode.childNodes.count].dummy) {
+			timeDelay = self.settings.scanSpeed.rawValue
+		}
+        delay(timeDelay) {
             //    we will unhighlight the previously highlighted subtree iff the curNode is
-            //    not a leaf node
+            //    not a leaf node and is not a dummy node
             if self.curNode.childNodes.count != 0 {
                 previousCurNode.unHighlightSubTree()
             }
@@ -140,15 +143,45 @@ class TouchGrid {
 		case .ROW_COLUMN:
 			for i in 0...(rows - 1) {
 				for j in 0...(cols - 1) {
-					(self.getRootNode()?.childNodes[i].childNodes[j] as? ButtonNode)?.button.setTitle(phrases[i * cols + j], for: .normal)
+					let buttonNode = self.getRootNode()?.childNodes[i].childNodes[j]
+					(buttonNode as? ButtonNode)?.button.setTitle(phrases[i * cols + j], for: .normal)
+					self.setDummy(node: buttonNode!)
 				}
+				self.setDummy(node: (self.getRootNode()?.childNodes[i])!)
 			}
 			break
 		case .BINARY_TREE:
 			break
 		case .LINEAR:
 			for i in 0...(rows * cols - 1) {
-				(self.getRootNode()?.childNodes[i] as? ButtonNode)?.button.setTitle(phrases[i], for: .normal)
+				let buttonNode = self.getRootNode()?.childNodes[i]
+				(buttonNode as? ButtonNode)?.button.setTitle(phrases[i], for: .normal)
+				self.setDummy(node: buttonNode!)
+			}
+		}
+	}
+	
+	/*
+	* 	sets the dummy variable for input node
+	*	if input node is a leaf node (i.e. a button node), check if title is "---"
+	*	if input node is a non-leaf node check if all its chidren are dummy nodes
+	*/
+	func setDummy(node: Node) {
+		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
+			if ((node as? ButtonNode)?.button.title(for: .normal) == "---") {
+				(node as? ButtonNode)?.dummy = true
+			}
+			else {
+			(node as? ButtonNode)?.dummy = false
+			}
+		}
+		else {	//	i.e. input node is an intermediary node (non-leaf)
+			node.dummy = true
+			for index in 0...(node.childNodes.count - 1) {
+				if (node.childNodes[index].dummy == false) {
+					node.dummy = false
+					break
+				}
 			}
 		}
 	}

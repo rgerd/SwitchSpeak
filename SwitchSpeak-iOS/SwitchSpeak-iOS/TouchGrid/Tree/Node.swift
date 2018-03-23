@@ -15,6 +15,7 @@ a Node would always be a non-leaf node in the 'Tree' data structure
 class Node {
 	var parentNode: Node?			//	the parent node could be nil
 	var childNodes: [Node] = []		//	initialised with an empty child list
+	var dummy:Bool = false
 	
 	init() {
 		self.parentNode = nil

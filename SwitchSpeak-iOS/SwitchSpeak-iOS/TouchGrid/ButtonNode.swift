@@ -14,7 +14,6 @@ import UIKit
 */
 class ButtonNode: Node {
     var button:UIButton = UIButton(type: UIButtonType.custom)
-    var dummy:Bool = false
 	
 	init(button: UIButton) {
 		self.button = button
