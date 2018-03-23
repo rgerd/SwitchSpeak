@@ -1,0 +1,6 @@
+framework module Pods_SwitchSpeak_iOSTests {
+  umbrella header "Pods-SwitchSpeak-iOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
