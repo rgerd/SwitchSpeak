@@ -69,7 +69,7 @@ class TouchGrid {
         curNode.childNodes[childNumber].highlightSubTree()
         let previousCurNode: Node = curNode
 		var timeDelay = 0.0
-		if (!curNode.childNodes[(childNumber) % curNode.childNodes.count].dummy) {
+		if (!curNode.childNodes[childNumber].dummy) {
 			timeDelay = self.settings.scanSpeed.rawValue
 		}
         delay(timeDelay) {
@@ -81,12 +81,7 @@ class TouchGrid {
            
             //    check if the cur node has changed
             if !self.curNodeUpdated {
-                if self.childNumber == self.curNode.childNodes.count - 1 {
-                    //    i.e. we had just now highlighted the last child node of curNode
-                    self.childNumber = 0
-                } else {
-                    self.childNumber += 1
-                }
+                self.childNumber = (self.childNumber + 1) % self.curNode.childNodes.count
             } else {
                 self.curNodeUpdated = false
             }
@@ -145,9 +140,9 @@ class TouchGrid {
 				for j in 0...(cols - 1) {
 					let buttonNode = self.getRootNode()?.childNodes[i].childNodes[j]
 					(buttonNode as? ButtonNode)?.button.setTitle(phrases[i * cols + j], for: .normal)
-					self.setDummy(node: buttonNode!)
+					self.determineDummy(node: buttonNode!)
 				}
-				self.setDummy(node: (self.getRootNode()?.childNodes[i])!)
+				self.determineDummy(node: (self.getRootNode()?.childNodes[i])!)
 			}
 			break
 		case .BINARY_TREE:
@@ -156,7 +151,7 @@ class TouchGrid {
 			for i in 0...(rows * cols - 1) {
 				let buttonNode = self.getRootNode()?.childNodes[i]
 				(buttonNode as? ButtonNode)?.button.setTitle(phrases[i], for: .normal)
-				self.setDummy(node: buttonNode!)
+				self.determineDummy(node: buttonNode!)
 			}
 		}
 	}
@@ -166,7 +161,7 @@ class TouchGrid {
 	*	if input node is a leaf node (i.e. a button node), check if title is "---"
 	*	if input node is a non-leaf node check if all its chidren are dummy nodes
 	*/
-	func setDummy(node: Node) {
+	func determineDummy(node: Node) {
 		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
 			if ((node as? ButtonNode)?.button.title(for: .normal) == "---") {
 				(node as? ButtonNode)?.dummy = true

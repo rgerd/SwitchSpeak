@@ -41,13 +41,15 @@ class TouchSelection {
 	*/
 	func refillGrid() {
 		let lastIndex = min(phrases.count - 1, index + gridSize - 5)
-		//	functional grid cells are recognized by the four phrases mentioned below
 		var gridPhrases = Array(phrases[index...lastIndex])
-		if (gridPhrases.count < gridSize - 4) {	//	add dummy elements
+		//	next we add dummy elements for the remaining grid cells excluding the last 4 cells,
+		//	which correspond to the 4 action buttons (home,done,oops,next)
+		if (gridPhrases.count < gridSize - 4) {
 			//	the string '---' represents a dummy cell in the grid
 			//	need to change this depending on how dummy cells are identified
 			gridPhrases += [String](repeating: "---", count: gridSize - gridPhrases.count - 4)
 		}
+		//	functional grid cells or action buttons are recognized by the four phrases mentioned below
 		gridPhrases += ["Oops","Next","Home","Done"]
 		
 		touchGrid!.resetTouchGrid()
