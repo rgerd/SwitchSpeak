@@ -9,15 +9,17 @@ import UIKit
 
 class ViewController: UIViewController {
 	@IBOutlet weak var TapButton: UIButton!
+    @IBOutlet weak var breadcrumbContainer: UIView!
     var touchSelection:TouchSelection?
-	
+    
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		//	dummy array of phrases for the first grid selection
 		let dummyPhrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]
 		
         // Eventually '0' here would be replaced by the id of the 'signed-in' user
-		self.touchSelection = TouchSelection(userId: GlobalSettings.currentUserId, viewContainer: view, phrases: dummyPhrases)
+		self.touchSelection = TouchSelection(userId: GlobalSettings.currentUserId, viewContainer: view, breadcrumbContainer: breadcrumbContainer, phrases: dummyPhrases)
         touchSelection!.touchGrid!.selectSubTree()
         view.bringSubview(toFront: TapButton)
 	}
