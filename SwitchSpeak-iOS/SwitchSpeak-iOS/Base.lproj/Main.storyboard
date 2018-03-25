@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8G2-Ak-9wP">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Speak!-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SwitchSpeak_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,11 +20,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5X-in-Rrl">
-                                <rect key="frame" x="0.0" y="140" width="1024" height="628"/>
+                                <rect key="frame" x="0.0" y="184" width="1024" height="584"/>
                                 <connections>
                                     <action selector="TapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bRH-oQ-Ega"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFd-4o-E3K" userLabel="BreadcrumbArea">
+                                <rect key="frame" x="20" y="64" width="984" height="112"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -34,13 +40,118 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Speak!" id="0Tr-1N-cKA">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="EUo-4S-wE4"/>
+                        <barButtonItem key="rightBarButtonItem" id="F5A-JA-fS3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="O5u-vI-v42">
+                                <rect key="frame" x="958" y="0.5" width="46" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="⚙️">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="mGl-B9-NmW" kind="show" id="1CH-dw-jAl"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="TapButton" destination="R5X-in-Rrl" id="RUS-ue-IbE"/>
+                        <outlet property="breadcrumbContainer" destination="aFd-4o-E3K" id="lmD-ds-La0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33.984375" y="35.9375"/>
+            <point key="canvasLocation" x="-79" y="-74"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MDo-Ni-9EE">
+            <objects>
+                <navigationController id="8G2-Ak-9wP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7b9-48-chM">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ucU-v7-v9O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="md2-1Y-7t5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1208" y="-74"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="6ja-NY-xBN">
+            <objects>
+                <tableViewController id="mGl-B9-NmW" customClass="UserSettingsTableViewController" customModule="SwitchSpeak_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NzA-Vb-DNM">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserSettingsTableViewCell" rowHeight="90" id="Xw8-V3-f50" customClass="UserSettingsTableViewCell" customModule="SwitchSpeak_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="1024" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xw8-V3-f50" id="vpl-9g-59a">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kuJ-L9-M9o" userLabel="Name Label">
+                                            <rect key="frame" x="20" y="29" width="46" height="30"/>
+                                            <gestureRecognizers/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="touchNameLabel:" destination="Xw8-V3-f50" eventType="touchUpInside" id="mxh-6e-UqA"/>
+                                            </connections>
+                                        </button>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxr-9b-dN4" userLabel="Settings Input">
+                                            <rect key="frame" x="108" y="20" width="896" height="49"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="896" id="5L6-9O-n44"/>
+                                            </constraints>
+                                            <connections>
+                                                <outlet property="dataSource" destination="Xw8-V3-f50" id="MQl-xd-adz"/>
+                                                <outlet property="delegate" destination="Xw8-V3-f50" id="Gne-lw-wDS"/>
+                                            </connections>
+                                        </pickerView>
+                                    </subviews>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstItem="kuJ-L9-M9o" firstAttribute="leading" secondItem="vpl-9g-59a" secondAttribute="leading" constant="20" id="A8Q-pX-b2i"/>
+                                        <constraint firstItem="Fxr-9b-dN4" firstAttribute="leading" secondItem="kuJ-L9-M9o" secondAttribute="trailing" constant="42" id="WKn-rI-Ht8"/>
+                                        <constraint firstItem="kuJ-L9-M9o" firstAttribute="centerY" secondItem="vpl-9g-59a" secondAttribute="centerY" id="gB5-iV-Dt1"/>
+                                        <constraint firstItem="kuJ-L9-M9o" firstAttribute="centerY" secondItem="Fxr-9b-dN4" secondAttribute="centerY" id="qDd-og-NsH"/>
+                                        <constraint firstItem="Fxr-9b-dN4" firstAttribute="top" secondItem="vpl-9g-59a" secondAttribute="topMargin" constant="9" id="xRW-wn-7hK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="kuJ-L9-M9o" id="Oro-dr-wqv"/>
+                                    <outlet property="settingsInput" destination="Fxr-9b-dN4" id="p6f-ZK-xIM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mGl-B9-NmW" id="1cg-mw-X1i"/>
+                            <outlet property="delegate" destination="mGl-B9-NmW" id="gL9-lw-Tti"/>
+                            <outletCollection property="gestureRecognizers" destination="7IP-IC-TeE" appends="YES" id="bKj-uD-M0i"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="0EH-2N-j5v"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4FX-kw-ALS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="7IP-IC-TeE" userLabel="Settings Table LPGR">
+                    <connections>
+                        <action selector="editName:" destination="mGl-B9-NmW" id="3PX-1x-nLx"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1101.5625" y="-74.21875"/>
         </scene>
     </scenes>
 </document>

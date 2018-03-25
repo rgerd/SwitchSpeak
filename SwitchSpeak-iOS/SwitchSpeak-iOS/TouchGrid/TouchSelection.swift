@@ -15,6 +15,7 @@ class TouchSelection {
 	var settings:UserSettings!
 	var touchGrid:TouchGrid?
 	var breadcrumbs = CrumbStack()
+    var breadcrumbContainer:UIView?
 	var phrases:[String]
 	var gridSize:Int
 	var index:Int		//	keeps track of which set of phrases from the array 'phrases' we are currently printing on the gird
@@ -22,7 +23,7 @@ class TouchSelection {
 	private var viewContainer:UIView!
 	
 	
-	init(userId:Int, viewContainer:UIView, phrases: [String]) {
+    init(userId:Int, viewContainer:UIView, breadcrumbContainer:UIView, phrases: [String]) {
 		self.userId = userId
 		self.settings = GlobalSettings.userSettings[userId]
 		self.viewContainer = viewContainer
@@ -30,7 +31,8 @@ class TouchSelection {
 		self.phrases = phrases
 		let (rows, cols) = settings.getGridSize()
 		self.gridSize = rows * cols
-		
+        self.breadcrumbContainer = breadcrumbContainer
+        
 		self.index = 0
 		self.refillGrid()
 	}
@@ -81,7 +83,7 @@ class TouchSelection {
 				// i.e. a phrase is selected
 				//	we may update the arry of phrases and update the grid content
 				breadcrumbs.push(string: choice!)
-				breadcrumbs.updateSubViews(insideView: viewContainer)
+				breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
 				let nextSetOfPhrases = ["juice","sun","sleep","awake","friend","teacher"]
 				self.updatePhrases(phrases: nextSetOfPhrases)
 			}

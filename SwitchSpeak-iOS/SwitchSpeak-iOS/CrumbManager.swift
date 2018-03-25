@@ -34,7 +34,7 @@ class CrumbStack {
          */
         
         func setLocationAndSize(byIndex index:Int, withWidth width:CGFloat) {
-            label.frame = CGRect(x: 10 + CGFloat(index) * width  * scale, y: 40, width: width * scale, height: 40)
+            label.frame = CGRect(x: 10 + CGFloat(index) * width  * scale, y: 10, width: width * scale, height: 40)
         }
         
         func setLocationAndColor(byIndex index:Int, withWidth width:CGFloat) {
