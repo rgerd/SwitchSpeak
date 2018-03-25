@@ -11,75 +11,97 @@ import Foundation
 import UIKit
 
 class TouchGrid {
-    var curNode = Node()    //    currently the node in the tree we are at while scanning
-    var childNumber: Int = 0 //    this will represent the index of highlighted child of the curNode
-    //    the result of the scanning procedure will be stored
-    //    in curNode and childNumber variables
-    var curNodeUpdated: Bool = false    //    this is set to true whenever curNode is updated
+    // The result of the scanning procedure will be stored in curNode and childNumber variables
+    var curNode = Node()                // The node in the tree we are currently scanning
+    var childNumber: Int = 0            // The index of the highlighted child of curNode
+    var curNodeUpdated: Bool = false    // This is set to true whenever curNode is updated
     
-    var userId:Int!
-    var settings:UserSettings!
-    private var viewContainer:UIView!
-    private var buttonTree:Tree!
+    private var gridContainer:UIView!   // The UIView that contains the grid container
+    private var buttonTree:Tree!        // The touch grid's underlying button tree
     
-    init(userId:Int, viewContainer:UIView) {
-        self.userId = userId
-        self.settings = GlobalSettings.userSettings[userId]
-        self.viewContainer = viewContainer
-        
+    init(gridContainer:UIView) {
+        self.gridContainer = gridContainer
+        self.buildButtonTree()
+    }
+    
+    /*
+     * Builds the button tree and places the buttons on the view.
+     * This function will clean any previous button tree.
+     * Finally, the switch button is brought in front of the button tree nodes.
+     */
+    func buildButtonTree() {
+        if self.buttonTree != nil {
+            self.removeTreeFromView(buttonTree)
+        }
+        let settings = GlobalSettings.getUserSettings()
         self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize(), dummyNum: 0)
-        
-        let (rows, cols) = settings.getGridSize()
-        //    there are three magic numbers in the below function call
-        //    need to modify these magic numbers to appropriate variables
-        self.buttonTree.setFrameSizeForTree (row: rows, col: cols, screenWidth: Int(UIScreen.main.bounds.width), screenHeight: Int(UIScreen.main.bounds.height), topBarHeight: 140, maxButtonHeight: 200, maxButtonWidth: 200)
-        
-        addTreeToView(T: buttonTree)
-        curNode = buttonTree.rootNode!
+        self.buttonTree.setUIDimensionsForTree(gridSize: settings.getGridSize(), gridContainer: self.gridContainer, maxButtonSize: (200, 200))
+        self.addTreeToView(buttonTree)
+        self.curNode = buttonTree.rootNode!
+        TouchSelectionViewController.bringSwitchButtonToFront()
     }
     
     /*
-     add all the buttons present in the leaf nodes of the
-     input tree to the view
+     * Adds all the buttons present in the leaf nodes of the input tree to the view.
      */
-    func addTreeToView(T: Tree) {
-        addSubTreeToView(node: T.rootNode!)
+    func addTreeToView(_ T: Tree) {
+        addSubTreeToView(T.rootNode!)
     }
     
     /*
-     add all the buttons present in the leaf nodes of the
-     tree rooted at node to the view
+     * Removes all the buttons present in the leaf nodes of the input tree from the view.
      */
-    func addSubTreeToView(node: Node) {
-        //    if node is of an object of class ButtonNode i.e. it is a leaf node
+    func removeTreeFromView(_ T: Tree) {
+        removeSubTreeFromView(T.rootNode!)
+    }
+    
+    /*
+     * Adds all the buttons present in the leaf nodes of the tree rooted at node to the view.
+     */
+    func addSubTreeToView(_ node: Node) {
+        // If node is of an object of class ButtonNode (i.e. it is a leaf node)
         if let curNode = node as? ButtonNode {
-            viewContainer.addSubview(curNode.button)
+            gridContainer.superview!.addSubview(curNode.button)
             return
         }
         
         for childnode in node.childNodes {
-            addSubTreeToView(node: childnode)
+            addSubTreeToView(childnode)
         }
     }
     
     /*
-     Highlight the childNumber'th child node of the curNode
+     * Removes all the buttons present in the leaf nodes of the tree rooted at node from the view.
+     */
+    func removeSubTreeFromView(_ node: Node) {
+        // if node is of an object of class ButtonNode (i.e. it is a leaf node)
+        if let curNode = node as? ButtonNode {
+            curNode.button.removeFromSuperview()
+            return
+        }
+        
+        for childnode in node.childNodes {
+            removeSubTreeFromView(childnode)
+        }
+    }
+    
+    /*
+     * Highlights the childNumber'th child node of the curNode.
      */
     func selectSubTree() {
         curNode.childNodes[childNumber].highlightSubTree()
         let previousCurNode: Node = curNode
 		var timeDelay = 0.0
 		if (!curNode.childNodes[childNumber].dummy) {
-			timeDelay = self.settings.scanSpeed.rawValue
+			timeDelay = GlobalSettings.getUserSettings().scanSpeed.rawValue
 		}
         delay(timeDelay) {
-            //    we will unhighlight the previously highlighted subtree iff the curNode is
-            //    not a leaf node and is not a dummy node
+            // We will unhighlight the previously highlighted subtree iff the curNode is not a leaf node and is not a dummy node.
             if self.curNode.childNodes.count != 0 {
                 previousCurNode.unHighlightSubTree()
             }
            
-            //    check if the cur node has changed
+            // Check if the cur node has changed.
             if !self.curNodeUpdated {
                 self.childNumber = (self.childNumber + 1) % self.curNode.childNodes.count
             } else {
@@ -90,7 +112,7 @@ class TouchGrid {
                 if (self.curNode.childNodes[0] as? ButtonNode)?.dummy == true {
                       self.curNode=self.buttonTree.rootNode!
                 }
-                //    i.e. we have not yet reached a leaf node while scanning
+                // We have not yet reached a leaf node while scanning.
                 self.selectSubTree()
             }
             
@@ -100,21 +122,26 @@ class TouchGrid {
         }
     }
     
-    /* ensures a time delay for executing a block of code */
+    /*
+     * Ensures a time delay for executing a block of code.
+     */
     func delay(_ seconds: Double, completion: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             completion()
         }
     }
     
+    /*
+     * Gets the button tree's root node.
+     */
     func getRootNode() -> Node? {
         return buttonTree.rootNode
     }
     
     func makeSelection() -> String? {
-        //    select a subtree from the current subtree stored in curNode
+        // Select a subtree from the current subtree stored in curNode
         if self.curNode.childNodes.count > 0 {
-            //    i.e. we have not yet reached a leafnode
+            // We have not yet reached a leafnode
             self.curNode = curNode.childNodes[childNumber]
             self.childNumber = 0
             self.curNodeUpdated = true
@@ -128,10 +155,11 @@ class TouchGrid {
     }
 	
 	/*
-	*	takes as input an array of phrases which needs to be filled into the grid structure
-	*	the assumption is that the input array size exactly matches the grid size
-	*/
+	 *	Takes as input an array of phrases which needs to be filled into the grid structure
+     *	Assumption: the input array size exactly matches the grid size
+	 */
 	func fillTouchGrid(phrases: [String]) {
+        let settings = GlobalSettings.getUserSettings()
 		let (rows, cols) = settings.getGridSize()
 		let type = settings.scanType
 		switch(type) {
@@ -157,20 +185,18 @@ class TouchGrid {
 	}
 	
 	/*
-	* 	sets the dummy variable for input node
-	*	if input node is a leaf node (i.e. a button node), check if title is "---"
-	*	if input node is a non-leaf node check if all its chidren are dummy nodes
-	*/
+	 * 	Sets the dummy variable for input node.
+	 *	if input node is a leaf node (i.e. a button node), check if title is "---".
+	 *	if input node is a non-leaf node check if all its chidren are dummy nodes.
+	 */
 	func determineDummy(node: Node) {
 		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
 			if ((node as? ButtonNode)?.button.title(for: .normal) == "---") {
 				(node as? ButtonNode)?.dummy = true
+			} else {
+                (node as? ButtonNode)?.dummy = false
 			}
-			else {
-			(node as? ButtonNode)?.dummy = false
-			}
-		}
-		else {	//	i.e. input node is an intermediary node (non-leaf)
+		} else {	//	i.e. input node is an intermediary node (non-leaf)
 			node.dummy = true
 			for index in 0...(node.childNodes.count - 1) {
 				if (node.childNodes[index].dummy == false) {
@@ -182,10 +208,10 @@ class TouchGrid {
 	}
 	
 	/*
-	*	scanning restarts from the beginning where no cell is selected yet
-	*	update the curNode and childNumber to root and 0 respectively
-	*	function also unhighlights the entire grid structure
-	*/
+	 *	Scanning restarts from the beginning where no cell is selected yet.
+	 *	Update the curNode and childNumber to root and 0 respectively.
+	 *	This also unhighlights the entire grid structure.
+	 */
 	func resetTouchGrid() {
 		curNode = self.getRootNode()!
 		childNumber = 0

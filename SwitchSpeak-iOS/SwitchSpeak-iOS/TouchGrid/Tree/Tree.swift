@@ -31,32 +31,40 @@ class Tree {
 		Input is the grid dimensions of the view, the width and height of the screen, the height of the top bar, and the max button dimensions
 		In this function we resize each button in the tree so as to fit it entirely in the view
 	*/
-	func setFrameSizeForTree (row: Int, col: Int, screenWidth: Int, screenHeight: Int, topBarHeight: Int, maxButtonHeight: Int, maxButtonWidth: Int) {
+    func setUIDimensionsForTree (gridSize:(Int, Int), gridContainer:UIView, maxButtonSize:(Int, Int)) {
+        let (numRows, numCols) = gridSize
+        let containerWidth = Int(UIScreen.main.bounds.width)
+        let containerTop = Int(gridContainer.frame.minY)
+        let containerHeight = Int(UIScreen.main.bounds.height) - containerTop
+        
 		//	first we compute the size of buttons to be placed in view
-		let buttonSize = Tree.computeButtonSize(row: row, col: col, width: screenWidth, height: screenHeight - topBarHeight, maxButtonHeight: maxButtonHeight, maxButtonWidth: maxButtonWidth)
+        let buttonSize = Tree.computeButtonSize(gridSize: gridSize, containerSize: (containerWidth, containerHeight), maxButtonSize: maxButtonSize)
 		
-		//	check if the tree is having the appropriate dimensions and is linear scan type (i.e. a depth 2 tree)
-		if (self.size == row * col && self.treeType == .LINEAR) {
-			for i in 0...(row - 1) {
-				for j in 0...(col - 1) {
-					(self.rootNode?.childNodes[col * i + j] as? ButtonNode)?.button.frame = CGRect(x: (buttonSize.buttonWidth + buttonSize.colGap) * j + buttonSize.colGap, y:  topBarHeight + (buttonSize.buttonHeight + buttonSize.rowGap) * i + buttonSize.rowGap, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
+        let colFullWidth = buttonSize.buttonWidth + buttonSize.colGap
+        let rowFullHeight = buttonSize.buttonHeight + buttonSize.rowGap
+		
+        //	check if the tree has the appropriate dimensions and is linear scan type (i.e. a depth 2 tree)
+		if (self.size == numRows * numCols && self.treeType == .LINEAR) {
+			for i in 0...(numRows - 1) {
+				for j in 0...(numCols - 1) {
+					(self.rootNode?.childNodes[numCols * i + j] as? ButtonNode)?.button.frame = CGRect(x: colFullWidth * j + buttonSize.colGap, y: containerTop + rowFullHeight * i, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
 				}
 			}
 		}
 		
-		if (self.rootNode!.childNodes.count == row && self.treeType == .ROW_COLUMN) {
+		if (self.rootNode!.childNodes.count == numRows && self.treeType == .ROW_COLUMN) {
 			var checkDimensions = true	//	is set to false if dimensions of the tree are not in accordance with a row-col scan tree
 			for childNode in self.rootNode!.childNodes {
-				if (childNode.childNodes.count != col) {
+				if (childNode.childNodes.count != numCols) {
 						checkDimensions = false
 				}
 			}
 			//	if tree is of row-column scan type of dimensions rowXcol
 			if (checkDimensions) {
-				for i in 0...(row - 1) {
+				for i in 0...(numRows - 1) {
 					let curNode = self.rootNode!.childNodes[i]
-					for j in 0...(col - 1) {
-						(curNode.childNodes[j] as? ButtonNode)?.button.frame = CGRect(x: (buttonSize.buttonWidth + buttonSize.colGap) * j + buttonSize.colGap, y:  topBarHeight + (buttonSize.buttonHeight + buttonSize.rowGap) * i + buttonSize.rowGap, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
+					for j in 0...(numCols - 1) {
+						(curNode.childNodes[j] as? ButtonNode)?.button.frame = CGRect(x: colFullWidth * j + buttonSize.colGap, y: containerTop + rowFullHeight * i, width: buttonSize.buttonWidth, height: buttonSize.buttonHeight)
 					}
 				}
 			}
@@ -68,19 +76,23 @@ class Tree {
      Input is the grid dimensions, the width and height of the screen, the max button dimensions
      It outputs the width, height of the button along with the row gap and column gap that seperates these buttons
      */
-    class func computeButtonSize  (row: Int, col: Int, width: Int, height: Int, maxButtonHeight: Int, maxButtonWidth: Int) -> (buttonHeight: Int, buttonWidth: Int, colGap: Int, rowGap: Int) {
+    class func computeButtonSize  (gridSize: (Int, Int), containerSize: (Int, Int), maxButtonSize: (Int, Int)) -> (buttonHeight: Int, buttonWidth: Int, colGap: Int, rowGap: Int) {
+        let (numRows, numCols) = gridSize
+        let (containerWidth, containerHeight) = containerSize
+        let (maxButtonWidth, maxButtonHeight) = maxButtonSize
+        
         var colGap = 5, rowGap = 5    //    this would be the gap between successive buttons on the view
         //    5 is  magic number above and it correponds to the minimum gap between buttons
-        var buttonHeight = (height - rowGap * (row + 1)) / row
-        var buttonWidth = (width - colGap * (col + 1)) / col
+        var buttonHeight = (containerHeight - rowGap * (numRows + 1)) / numRows
+        var buttonWidth = (containerWidth - colGap * (numCols + 1)) / numCols
         
         if (buttonHeight > maxButtonHeight) {
             buttonHeight = maxButtonHeight
-            rowGap = (height - (row * buttonHeight)) / (row + 1)
+            rowGap = (containerHeight - (numRows * buttonHeight)) / (numRows + 1)
         }
         if (buttonWidth > maxButtonWidth) {
             buttonWidth = maxButtonWidth
-            colGap = (width - (col * buttonWidth)) / (col + 1)
+            colGap = (containerWidth - (numCols * buttonWidth)) / (numCols + 1)
         }
         return (buttonHeight, buttonWidth, colGap, rowGap)
     }

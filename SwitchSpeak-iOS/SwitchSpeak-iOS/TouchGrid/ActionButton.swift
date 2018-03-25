@@ -27,7 +27,7 @@ class ButtonAction {
 	}
 	
 	static func doHome(touchSelection: TouchSelection) {
-		//	remove all the breadcrumbs and resart sentence formation
+		//	remove all the breadcrumbs and restart sentence formation
 		let phrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]		//	dummy phrases
 		touchSelection.breadcrumbs.emptyCrumbStack()
 		touchSelection.updatePhrases(phrases: phrases)		//	update set of phrases for the next selection
@@ -41,6 +41,7 @@ class ButtonAction {
 	static func doDone(touchSelection: TouchSelection) {
 		//	i.e. the sentence is selected
 		//	add other code including speech output related code
+        SpeechManager.say(phrase: touchSelection.breadcrumbs.getString(), withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
 	}
 	
 	static func callAction(actionButton: ActionButton, touchSelection: TouchSelection) {

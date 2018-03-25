@@ -73,10 +73,13 @@ class UserSettingsTableViewController: UITableViewController {
     }
     
     override func didMove(toParentViewController parent: UIViewController?) {
-        if parent != self.parent {
+        if parent != nil {
             return
         }
+        
         GlobalSettings.saveUserSettings()
+        let tsvc:TouchSelectionViewController = TouchSelectionViewController.sharedInstance!
+        tsvc.registerSettingsUpdate()
     }
     
     /*

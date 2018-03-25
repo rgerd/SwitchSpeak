@@ -10,29 +10,16 @@ import Foundation
 import UIKit
 
 class TouchSelection {
-
-	var userId:Int!
-	var settings:UserSettings!
 	var touchGrid:TouchGrid?
 	var breadcrumbs = CrumbStack()
     var breadcrumbContainer:UIView?
 	var phrases:[String]
-	var gridSize:Int
 	var index:Int		//	keeps track of which set of phrases from the array 'phrases' we are currently printing on the gird
 	
-	private var viewContainer:UIView!
-	
-	
-    init(userId:Int, viewContainer:UIView, breadcrumbContainer:UIView, phrases: [String]) {
-		self.userId = userId
-		self.settings = GlobalSettings.userSettings[userId]
-		self.viewContainer = viewContainer
-		self.touchGrid = TouchGrid(userId: userId, viewContainer: viewContainer)
+    init(breadcrumbContainer:UIView, gridContainer:UIView, phrases: [String]) {
 		self.phrases = phrases
-		let (rows, cols) = settings.getGridSize()
-		self.gridSize = rows * cols
         self.breadcrumbContainer = breadcrumbContainer
-        
+        self.touchGrid = TouchGrid(gridContainer: gridContainer)
 		self.index = 0
 		self.refillGrid()
 	}
@@ -42,6 +29,9 @@ class TouchSelection {
 	*	the string array 'phrases' starting at index location 'index'
 	*/
 	func refillGrid() {
+        let (rows, cols) = GlobalSettings.getUserSettings().getGridSize()
+        let gridSize:Int = rows * cols
+        
 		let lastIndex = min(phrases.count - 1, index + gridSize - 5)
 		var gridPhrases = Array(phrases[index...lastIndex])
 		//	next we add dummy elements for the remaining grid cells excluding the last 4 cells,
@@ -73,20 +63,13 @@ class TouchSelection {
 		}
 		
 		guard let actionButton = ActionButton(rawValue: choice!) else {
-			if (choice == "---") {
-				//	dummy grid cell
-				//	do nothing i.e. continue scanning
-				//	some code that Ning is working on will probably be merged with this...since
-				//	we wish to avoid scanning over dummy elements
-			}
-			else {
-				// i.e. a phrase is selected
-				//	we may update the arry of phrases and update the grid content
-				breadcrumbs.push(string: choice!)
-				breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
-				let nextSetOfPhrases = ["juice","sun","sleep","awake","friend","teacher"]
-				self.updatePhrases(phrases: nextSetOfPhrases)
-			}
+            // i.e. a phrase is selected
+            //	we may update the arry of phrases and update the grid content
+            breadcrumbs.push(string: choice!)
+            breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
+            let nextSetOfPhrases = ["juice","sun","sleep","awake","friend","teacher"]
+            self.updatePhrases(phrases: nextSetOfPhrases)
+            
 			return
 		}
 		
@@ -97,11 +80,8 @@ class TouchSelection {
 	*	update the set of phrases from which we wish to select
 	*/
 	func updatePhrases(phrases: [String]) {
-		
 		self.phrases = phrases
 		self.index = 0
 		self.refillGrid()
 	}
-
-	
 }
