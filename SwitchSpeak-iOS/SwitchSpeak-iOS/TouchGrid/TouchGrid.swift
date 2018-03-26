@@ -158,31 +158,23 @@ class TouchGrid {
 	 *	Takes as input an array of phrases which needs to be filled into the grid structure
      *	Assumption: the input array size exactly matches the grid size
 	 */
-	func fillTouchGrid(phrases: [String]) {
-        let settings = GlobalSettings.getUserSettings()
-		let (rows, cols) = settings.getGridSize()
-		let type = settings.scanType
-		switch(type) {
-		case .ROW_COLUMN:
-			for i in 0...(rows - 1) {
-				for j in 0...(cols - 1) {
-					let buttonNode = self.getRootNode()?.childNodes[i].childNodes[j]
-					(buttonNode as? ButtonNode)?.button.setTitle(phrases[i * cols + j], for: .normal)
-					self.determineDummy(node: buttonNode!)
-				}
-				self.determineDummy(node: (self.getRootNode()?.childNodes[i])!)
-			}
-			break
-		case .BINARY_TREE:
-			break
-		case .LINEAR:
-			for i in 0...(rows * cols - 1) {
-				let buttonNode = self.getRootNode()?.childNodes[i]
-				(buttonNode as? ButtonNode)?.button.setTitle(phrases[i], for: .normal)
-				self.determineDummy(node: buttonNode!)
-			}
-		}
+	func fillTouchGrid(cards: [VocabCard]) {
+        fillTouchGridSubTree(self.getRootNode()!, cards)
 	}
+    
+    func fillTouchGridSubTree(_ node:Node, _ cards:[VocabCard]) {
+        let settings = GlobalSettings.getUserSettings()
+        let (_, numCols) = settings.getGridSize()
+        
+        let buttonNode:ButtonNode = node as! ButtonNode
+        let (gridRow, gridCol) = buttonNode.gridPosition
+        
+        buttonNode.setCardData(cardData: cards[gridCol + gridRow * numCols])
+        
+        for childnode in node.childNodes {
+            fillTouchGridSubTree(childnode, cards)
+        }
+    }
 	
 	/*
 	 * 	Sets the dummy variable for input node.
@@ -196,7 +188,7 @@ class TouchGrid {
 			} else {
                 (node as? ButtonNode)?.dummy = false
 			}
-		} else {	//	i.e. input node is an intermediary node (non-leaf)
+        } else { //	i.e. input node is an intermediary node (non-leaf)
 			node.dummy = true
 			for index in 0...(node.childNodes.count - 1) {
 				if (node.childNodes[index].dummy == false) {

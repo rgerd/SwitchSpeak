@@ -85,6 +85,7 @@ let USER_SETTINGS_PICKER_OPTIONS = [
 
 struct UserSettings : Codable {
     var name:String
+    var tableName:String
     var scanSpeed:ScanSpeed
     var scanType:ScanType
     var fontSize:FontSize
@@ -95,6 +96,7 @@ struct UserSettings : Codable {
     
     init(_ name:String) {
         self.name = name
+        tableName = "User1"
         scanSpeed = .MEDIUM
         scanType = .ROW_COLUMN
         fontSize = .MEDIUM

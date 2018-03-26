@@ -14,11 +14,24 @@ import UIKit
 */
 class ButtonNode: Node {
     var button:UIButton = UIButton(type: UIButtonType.custom)
+    var cardData:VocabCard?
+    var gridPosition:(Int, Int)
 	
-	init(button: UIButton) {
+    init(button: UIButton, gridPosition:(Int, Int)) {
 		self.button = button
+        self.gridPosition = gridPosition
 		super.init()
 	}
+    
+    func setCardData(cardData:VocabCard) {
+        self.cardData = cardData
+        
+        self.button.setTitle(cardData.text, for: .normal)
+        self.button.backgroundColor = UIColor.darkGray
+        let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        self.button.layer.borderColor = uhcolor.cgColor
+        self.button.layer.borderWidth = 5
+    }
 	
 	override func highlightSubTree() {
         if dummy {

@@ -48,7 +48,7 @@ class SwitchSpeak_iOSTests: XCTestCase {
         
         //2) Test that getCardArr is not nil for all possible prefixes
         var prefixes:[Int64] = []
-        var initialCards:[vocabCard]?
+        var initialCards:[VocabCard]?
         
         do{
             initialCards = try self.Database?.getCardArr(table: "User1", id: 4)
