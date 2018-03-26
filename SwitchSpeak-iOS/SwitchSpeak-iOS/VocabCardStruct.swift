@@ -13,7 +13,7 @@ struct VocabCard {
     var id: Int64?
     var type: VocabCardType
     var text: String
-    var imagefile: NSData
+    var imagefile: Data
     var parentid: Int64
     var voice: Bool
     var color: String
@@ -37,7 +37,7 @@ extension VocabCard : RowConvertible {
     }
     
     // Programmer's initializer
-    init(type:VocabCardType, text:String, imagefile:NSData, voice:Bool, color:String) {
+    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:String) {
         self.id = 0
         self.parentid = 0
         self.type = type
@@ -48,14 +48,14 @@ extension VocabCard : RowConvertible {
     }
 }
 
-let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: NSData(), voice: false, color: "ffffff")
+let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
 
-let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
 
-let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
 
-let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
 
-let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
 
 
