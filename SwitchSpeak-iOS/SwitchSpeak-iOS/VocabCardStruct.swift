@@ -16,7 +16,7 @@ struct VocabCard {
     var id: Int64?
     var target: String
     var text: String
-    var imagefile: String
+    var imagefile: NSData
     var parentid: Int64
 }
 
