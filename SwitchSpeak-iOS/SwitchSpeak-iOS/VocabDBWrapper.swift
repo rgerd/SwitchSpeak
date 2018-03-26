@@ -21,7 +21,7 @@ class cardDB{
         try self.db.inDatabase { db in
             try db.create(table: tablename) { t in
                 t.column("id", .integer).primaryKey()
-                t.column("target", .text)
+                t.column("type", .integer)
                 t.column("text", .text)
                 t.column("imagefile", .blob)
                 t.column("parentid", .integer)
@@ -65,8 +65,8 @@ class cardDB{
         // Add a card to the given table with the specified parameters.
         
         try self.db.inDatabase{ db in
-            try db.execute("INSERT INTO " + table + " (target, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
-                arguments: [card.target, card.text, card.imagefile, card.parentid, card.voice, card.color])
+            try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
+                arguments: [card.type, card.text, card.imagefile, card.parentid, card.voice, card.color])
         }
     }
     
