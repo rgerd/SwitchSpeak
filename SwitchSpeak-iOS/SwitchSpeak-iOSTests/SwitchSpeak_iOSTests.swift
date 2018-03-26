@@ -68,7 +68,7 @@ class SwitchSpeak_iOSTests: XCTestCase {
     
     func testChild(card: VocabCard)
     {
-        let children:[VocabCard]? = try self.Databse?.getCardArr(table: "User1", id: card.id)
+        let children:[VocabCard]? = try self.Database?.getCardArr(table: "User1", id: card.id)
         if card.type == VocabCardType.word {
             XCTAssertNil(children)
         }
