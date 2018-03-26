@@ -19,12 +19,12 @@ enum ActionButton : String {
 class ButtonAction {
 	
 	static func doOops(touchSelection: TouchSelection) {
-        guard let lastButton:ButtonNode = touchSelection.breadcrumbs.pop() else {
+        guard let lastCard:VocabCard = touchSelection.breadcrumbs.pop() else {
             return
         }
         
-        if lastButton.cardData!.type == .category {
-            touchSelection.setScreenId(lastButton.cardData!.parentid)   //    update set of phrases for the next selection
+        if lastCard.type == .category {
+            touchSelection.setScreenId(lastCard.parentid)   //    update set of phrases for the next selection
         }
 	}
 	

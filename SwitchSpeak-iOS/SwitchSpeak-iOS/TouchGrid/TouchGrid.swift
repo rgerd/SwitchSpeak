@@ -166,14 +166,16 @@ class TouchGrid {
         let settings = GlobalSettings.getUserSettings()
         let (_, numCols) = settings.getGridSize()
         
-        let buttonNode:ButtonNode = node as! ButtonNode
-        let (gridRow, gridCol) = buttonNode.gridPosition
-        
-        buttonNode.setCardData(cardData: cards[gridCol + gridRow * numCols])
-        
-        for childnode in node.childNodes {
-            fillTouchGridSubTree(childnode, cards)
+        guard let buttonNode:ButtonNode = node as? ButtonNode else {
+            for childnode in node.childNodes {
+                fillTouchGridSubTree(childnode, cards)
+            }
+            determineDummy(node: node)
+            return
         }
+        let (gridRow, gridCol) = buttonNode.gridPosition
+        buttonNode.setCardData(cardData: cards[((gridCol - 1) + (gridRow - 1) * numCols)])
+        determineDummy(node: buttonNode)
     }
 	
 	/*
@@ -183,7 +185,7 @@ class TouchGrid {
 	 */
 	func determineDummy(node: Node) {
 		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
-			if ((node as? ButtonNode)?.button.title(for: .normal) == "---") {
+			if ((node as? ButtonNode)?.button.title(for: .normal) == "   ") {
 				(node as? ButtonNode)?.dummy = true
 			} else {
                 (node as? ButtonNode)?.dummy = false
