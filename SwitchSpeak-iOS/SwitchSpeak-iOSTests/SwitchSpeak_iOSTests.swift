@@ -74,7 +74,7 @@ class SwitchSpeak_iOSTests: XCTestCase {
         }
         else{
             XCTAssertNotNil(children)
-            for item in children
+            for item in children!
             {
                 self.testChild(card: item)
             }
