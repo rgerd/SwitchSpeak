@@ -14,7 +14,7 @@ import GRDB
 
 struct VocabCard {
     var id: Int64?
-    var target: String
+    var type: Int // 0 is empty, 1 is action, 2 is word, 3 is category
     var text: String
     var imagefile: NSData
     var parentid: Int64
@@ -25,7 +25,7 @@ struct VocabCard {
 extension VocabCard : RowConvertible {
     init(row:Row) {
         id = row["id"]
-        target = row["target"]
+        type = row["type"]
         text = row["text"]
         imagefile = row["imagefile"]
         parentid = row["parentid"]
