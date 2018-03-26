@@ -23,7 +23,7 @@ class cardDB{
                 t.column("id", .integer).primaryKey()
                 t.column("target", .text)
                 t.column("text", .text)
-                t.column("imagefile", .text)
+                t.column("imagefile", .blob)
                 t.column("parentid", .integer)
             }
         }
