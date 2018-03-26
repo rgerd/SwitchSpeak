@@ -41,31 +41,44 @@ class SwitchSpeak_iOSTests: XCTestCase {
         do{
             names = try self.Database?.getTables()
         }catch{
-            names = nil
+            print(error.localizedDescription)
         }
         XCTAssertNotNil(names)
         XCTAssertEqual(names?[0], "User1", "Name not equal User1")
         
-        //2) Test that getCardArr is not nil for all possible prefixes
+        //2) Test every card from the home screen
         var prefixes:[Int64] = []
         var initialCards:[VocabCard]?
         
         do{
-            initialCards = try self.Database?.getCardArr(table: "User1", id: 4)
+            initialCards = try self.Database?.getCardArr(table: "User1", id: 0)
             
         }catch{
             print(error.localizedDescription)
             
         }
         
-        if initialCards != nil{
-            for item in initialCards!{
-                prefixes.append( item.id )
+        XCTAssertNotNil(initialCards)
+        for item in initialCards!{
+            self.testChild(card: item)
+        }
+        
+    }
+    
+    
+    func testChild(card: VocabCard)
+    {
+        let children:[VocabCard]? = try self.Database?.getCardArr(table: "User1", id: card.id)
+        if card.type == VocabCardType.word {
+            XCTAssertNil(children)
+        }
+        else{
+            XCTAssertNotNil(children)
+            for item in children!
+            {
+                self.testChild(card: item)
             }
         }
-        XCTAssertNotNil(initialCards)
-        XCTAssertEqual(prefixes.count, 2, "Incorrect number of initial items")
-        
     }
     
     func testPerformanceExample() {
