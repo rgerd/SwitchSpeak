@@ -29,7 +29,19 @@ enum VocabCardType:Int {
 extension VocabCard : RowConvertible {
     // Initializer from database
     init(row:Row) {
-        let cardType:VocabCardType = row["type"] as! VocabCardType
+        var cardType:VocabCardType
+        switch row["type"] as Int {
+        case 0:
+            cardType = .empty
+        case 1:
+            cardType = .action
+        case 2:
+            cardType = .word
+        case 3:
+            cardType = .category
+        default:
+            cardType = .word
+        }
         let usesVoice:Bool = row["voice"] == 1
         self.init(type: cardType, text: row["text"], imagefile: row["imagefile"], voice: usesVoice, color: row["color"])
         self.id = row["id"]
