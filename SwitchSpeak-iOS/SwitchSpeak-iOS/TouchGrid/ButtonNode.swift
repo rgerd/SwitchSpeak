@@ -9,6 +9,20 @@
 import Foundation
 import UIKit
 
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+    
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}
+
 /*
 	a ButtonNode would always be a leaf node in the 'Tree' data structure
 */
@@ -27,16 +41,19 @@ class ButtonNode: Node {
         self.cardData = cardData
         
         self.button.setTitle(cardData.text, for: .normal)
-        self.button.backgroundColor = convertColortoUIColor(cardData.color)
-        let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        self.button.layer.cornerRadius = 10
+        self.button.backgroundColor = self.convertColorToUIColor(color: cardData.color)
+        let uhcolor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         self.button.layer.borderColor = uhcolor.cgColor
         self.button.layer.borderWidth = 5
+        self.button.layer.shadowOpacity = 0.0
     }
     
     func convertColorToUIColor(color: String) -> UIColor {
-        var rValue = UInt8(color[0...1], radix: 16)
-        var gValue = UInt8(color[2...3], radix: 16)
-        var bValue = UInt8(color[4...5], radix: 16)
+        let rValue = CGFloat(UInt8(color[0...1], radix: 16)!)
+        let gValue = CGFloat(UInt8(color[2...3], radix: 16)!)
+        let bValue = CGFloat(UInt8(color[4...5], radix: 16)!)
+        
         return UIColor(red: rValue/255.0, green: gValue/255.0, blue: bValue/255.0, alpha: 1.0)
     }
 	
@@ -44,7 +61,7 @@ class ButtonNode: Node {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+		let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
 	
@@ -52,7 +69,7 @@ class ButtonNode: Node {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+		let uhcolor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
    

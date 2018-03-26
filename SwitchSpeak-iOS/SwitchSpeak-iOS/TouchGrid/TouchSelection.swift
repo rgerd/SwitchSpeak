@@ -29,6 +29,13 @@ class TouchSelection {
 	 *	the string array 'phrases' starting at index location 'index'
 	 */
 	func refillGrid() {
+        refillGrid(withoutPaging: false)
+	}
+    
+    func refillGrid(withoutPaging:Bool) {
+        if withoutPaging {
+            pageOffset = 0 // For now. We will want to just reset to page boundary in the future
+        }
         let settings:UserSettings = GlobalSettings.getUserSettings()
         var cards:[VocabCard]
         do {
@@ -40,22 +47,22 @@ class TouchSelection {
         let (rows, cols) = settings.getGridSize()
         let gridSize:Int = rows * cols
         
-        let lastIndex:Int = min(cards.count, pageOffset + gridSize) - 1 // - 4)
-		var gridCards = Array(cards[pageOffset...lastIndex])
-		//	next we add dummy elements for the remaining grid cells excluding the last 4 cells,
-		//	which correspond to the 4 action buttons (home,done,oops,next)
-		if (gridCards.count < gridSize - 4) {
-			//	the string '---' represents a dummy cell in the grid
-			//	need to change this depending on how dummy cells are identified
-			gridCards += [VocabCard](repeating: EmptyVocabCard, count: gridSize - gridCards.count)// - 4)
-		}
-		//	functional grid cells or action buttons are recognized by the four phrases mentioned below
-		gridCards += [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
-		
-		touchGrid!.resetTouchGrid()
+        let lastIndex:Int = min(cards.count, pageOffset + gridSize - 4) - 1
+        var gridCards = Array(cards[pageOffset...lastIndex])
+        //    next we add dummy elements for the remaining grid cells excluding the last 4 cells,
+        //    which correspond to the 4 action buttons (home,done,oops,next)
+        if (gridCards.count < gridSize - 4) {
+            //    the string '---' represents a dummy cell in the grid
+            //    need to change this depending on how dummy cells are identified
+            gridCards += [VocabCard](repeating: EmptyVocabCard, count: gridSize - gridCards.count - 4)
+        }
+        //    functional grid cells or action buttons are recognized by the four phrases mentioned below
+        gridCards += [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
+        
+        touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
-		pageOffset = (lastIndex + 1) % cards.count
-	}
+        pageOffset = (lastIndex + 1) % cards.count
+    }
 	
 	/*
 	*	This function selects the currently highlighted phrase in the grid and performs computation

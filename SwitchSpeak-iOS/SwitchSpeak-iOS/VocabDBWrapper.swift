@@ -15,7 +15,7 @@ class VocabCardDB {
     
     static func load() {
         do {
-            try shared = VocabCardDB("SwitchSpeakDB.sql")
+            try shared = VocabCardDB("/Users/rgerdisch/Everything/Work/SwitchSpeak/SwitchSpeak-iOS/SwitchSpeak-iOS/Base.lproj/SwitchSpeakDB.sql")
         } catch {
             fatalError("Database not correctly loaded.")
         }
