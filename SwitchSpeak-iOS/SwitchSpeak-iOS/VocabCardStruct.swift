@@ -18,6 +18,8 @@ struct VocabCard {
     var text: String
     var imagefile: NSData
     var parentid: Int64
+    var voice: Int
+    var color: String
 }
 
 extension VocabCard : RowConvertible {
@@ -27,5 +29,7 @@ extension VocabCard : RowConvertible {
         text = row["text"]
         imagefile = row["imagefile"]
         parentid = row["parentid"]
+        voice = voice["voice"]
+        color = color["color"]
     }
 }
