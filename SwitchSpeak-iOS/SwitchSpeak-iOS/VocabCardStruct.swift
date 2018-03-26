@@ -48,5 +48,14 @@ extension VocabCard : RowConvertible {
     }
 }
 
-let EmptyVocabCard = VocabCard(type: .empty, text: "------", imagefile: NSData(), voice: false, color: "#fff")
+let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: NSData(), voice: false, color: "ffffff")
+
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+
 
