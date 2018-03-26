@@ -138,7 +138,7 @@ class TreeFactory {
 				let button = UIButton()
 				//	next we will set the attributes of the button
                 button.setTitle(nouns[i + j * cols], for: .normal)	//	arbitrary title for now
-				button.backgroundColor = UIColor.lightGray
+				button.backgroundColor = UIColor.darkGray
 				let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 				button.layer.borderColor = uhcolor.cgColor
 				button.layer.borderWidth = 5

@@ -32,7 +32,7 @@ class TouchSelectionViewController: UIViewController {
     
     func registerSettingsUpdate() {
         let newSettings:UserSettings = GlobalSettings.getUserSettings()
-        if lastSettings!.gridSize != newSettings.gridSize || lastSettings!.vocabLevel != newSettings.vocabLevel {
+        if lastSettings!.gridSize != newSettings.gridSize || lastSettings!.vocabLevel != newSettings.vocabLevel || lastSettings?.scanType != newSettings.scanType {
             touchSelection!.touchGrid!.buildButtonTree()
             touchSelection!.refillGrid()
         }
