@@ -138,7 +138,7 @@ class TouchGrid {
         return buttonTree.rootNode
     }
     
-    func makeSelection() -> String? {
+    func makeSelection() -> ButtonNode? {
         // Select a subtree from the current subtree stored in curNode
         if self.curNode.childNodes.count > 0 {
             // We have not yet reached a leafnode
@@ -146,7 +146,7 @@ class TouchGrid {
             self.childNumber = 0
             self.curNodeUpdated = true
             if curNode.childNodes.count == 0 {
-                let choice = (curNode as? ButtonNode)?.button.title(for: .normal)
+                let choice:ButtonNode = (curNode as? ButtonNode)!
                 self.curNode = (self.getRootNode())!
                 return choice
             }

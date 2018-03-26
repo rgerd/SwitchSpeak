@@ -9,10 +9,19 @@
 import Foundation
 import GRDB
 
-class cardDB{
+class VocabCardDB {
+    static var shared:VocabCardDB?
     var db:DatabaseQueue
     
-    init(filename:String) throws {
+    static func load() {
+        do {
+            try shared = VocabCardDB("SwitchSpeakDB.sql")
+        } catch {
+            fatalError("Database not correctly loaded.")
+        }
+    }
+    
+    init(_ filename:String) throws {
         db = try DatabaseQueue(path: filename)
     }
     
@@ -33,18 +42,16 @@ class cardDB{
         return tablename
     }
     
+    // Return a list of all tables in the current database (different users can have different tables.
     func getTables() throws -> [String]? {
-        // Return a list of all tables in the current database (different users can have
-        // different tables.
         let tables = try self.db.inDatabase { db in
             try String.fetchAll(db, "SELECT name FROM sqlite_master where type='table'")
         }
         return tables
     }
     
-    func getCardArr(table: String, id: Int) throws -> [VocabCard]? {
-        // Return an arr of all vocab cards which have parentid == 'id', from the table 'table'.
-        
+    // Return an arr of all vocab cards which have parentid == 'id', from the table 'table'.
+    func getCardArray(table: String, id: Int) throws -> [VocabCard]! {
         let cards = try self.db.inDatabase { db in
             try VocabCard.fetchAll(db, "SELECT * FROM " + table + " WHERE parentid = ?", arguments: [id])
         }

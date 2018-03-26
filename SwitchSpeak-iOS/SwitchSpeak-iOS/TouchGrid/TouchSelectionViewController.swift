@@ -17,10 +17,8 @@ class TouchSelectionViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         TouchSelectionViewController.sharedInstance = self
-		//	dummy array of phrases for the first grid selection
-		let dummyPhrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]
-		
-        self.touchSelection = TouchSelection(breadcrumbContainer: breadcrumbContainer, gridContainer: (switchButton as UIView), phrases: dummyPhrases)
+        
+        self.touchSelection = TouchSelection(breadcrumbContainer: breadcrumbContainer, gridContainer: (switchButton as UIView))
         touchSelection!.touchGrid!.selectSubTree()
         
         lastSettings = GlobalSettings.getUserSettings()
