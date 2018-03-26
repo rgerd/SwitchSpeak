@@ -56,6 +56,6 @@ let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, i
 
 let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
 
-let NextVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: NSData(), voice: false, color: "1aa3ff")
 
 
