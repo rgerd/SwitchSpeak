@@ -11,26 +11,26 @@ import Foundation
 
 enum ActionButton : String {
 	case oops = "Oops"			//	remove the previously selected phrase and restart from that spot
-	case home = "Home"			//	restart the sentence formation process
+	case home = "Home Screen"	//	restart the sentence formation process
 	case next = "Next"			//	go to the next grid i.e. the next set of phrases
-	case done = "Done"			//	sentence is formed
+	case done = "Speak"			//	sentence is formed
 }
 
 class ButtonAction {
 	
 	static func doOops(touchSelection: TouchSelection) {
-		//	go to the previous set of phrases for selection
-		//	update phrases array
-		let phrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]		//	dummy phrases
-		touchSelection.breadcrumbs.pop()
-		touchSelection.updatePhrases(phrases: phrases)		//	update set of phrases for the next selection
+        guard let lastButton:ButtonNode = touchSelection.breadcrumbs.pop() else {
+            return
+        }
+        
+        if lastButton.cardData!.type == .category {
+            touchSelection.setScreenId(lastButton.cardData!.parentid)   //    update set of phrases for the next selection
+        }
 	}
 	
 	static func doHome(touchSelection: TouchSelection) {
-		//	remove all the breadcrumbs and restart sentence formation
-		let phrases: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","9","10","11"]		//	dummy phrases
 		touchSelection.breadcrumbs.emptyCrumbStack()
-		touchSelection.updatePhrases(phrases: phrases)		//	update set of phrases for the next selection
+		touchSelection.setScreenId(0)
 	}
 	
 	static func doNext(touchSelection: TouchSelection) {

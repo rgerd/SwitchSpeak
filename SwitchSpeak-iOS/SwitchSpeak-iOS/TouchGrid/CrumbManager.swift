@@ -15,15 +15,17 @@ class CrumbStack {
      * A private structure to handle the storage and rendering of breadcrumbs.
      */
     private struct Crumb {
+        var buttonNode:ButtonNode
         // The UI element holding the string describing the breadcrumb.
         // i.e. "I", "am", etc.
         var label:UILabel
         // scale is used to decide the size of crumb according to the number of crumbs
         var scale:CGFloat
         
-        init(content:String) {
+        init(_ buttonNode:ButtonNode) {
+            self.buttonNode = buttonNode
             label = UILabel()
-            label.text = content
+            label.text = buttonNode.button.titleLabel?.text!
             scale = 1
         }
         
@@ -82,11 +84,13 @@ class CrumbStack {
      * Removes a breadcrumb.
 	 * add remove the breadcrum from the view as well
      */
-    func pop() {
+    func pop() -> ButtonNode? {
 		if (self.getString() != "") {	//	i.e. the stack is not empty
-			items.removeLast().label.removeFromSuperview()
+            let lastItem:Crumb = items.removeLast()
+			lastItem.label.removeFromSuperview()
+            return lastItem.buttonNode
 		}
-		
+        return nil
     }
 	
 	/*
@@ -94,15 +98,15 @@ class CrumbStack {
 	*/
 	func emptyCrumbStack() {
 		while (self.getString() != "") {		//	pop all the elements in the breadcrums stack
-			self.pop()
+			let _ = self.pop()
 		}
 	}
     
     /*
-     * Pushes a breadcrumb containing [string] to the stack.
+     * Pushes a breadcrumb referencing [buttonNode] to the stack.
      */
-    func push(string:String) {
-        let newCrumb = Crumb(content: string)
+    func push(buttonNode:ButtonNode) {
+        let newCrumb = Crumb(buttonNode)
         items.append(newCrumb)
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
