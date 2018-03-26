@@ -27,17 +27,24 @@ class ButtonNode: Node {
         self.cardData = cardData
         
         self.button.setTitle(cardData.text, for: .normal)
-        self.button.backgroundColor = UIColor.darkGray
-        let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        self.button.backgroundColor = convertColortoUIColor(cardData.color)
+        let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         self.button.layer.borderColor = uhcolor.cgColor
         self.button.layer.borderWidth = 5
+    }
+    
+    func convertColorToUIColor(color: String) -> UIColor {
+        var rValue = UInt8(color[0...1], radix: 16)
+        var gValue = UInt8(color[2...3], radix: 16)
+        var bValue = UInt8(color[4...5], radix: 16)
+        return UIColor(red: rValue/255.0, green: gValue/255.0, blue: bValue/255.0, alpha: 1.0)
     }
 	
 	override func highlightSubTree() {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 200.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)
+		let uhcolor = UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
 	
@@ -45,7 +52,7 @@ class ButtonNode: Node {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+		let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 		button.layer.borderColor = uhcolor.cgColor
 	}
    
