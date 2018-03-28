@@ -73,7 +73,7 @@ class VocabCardDB {
         
         try self.db.inDatabase{ db in
             try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
-                arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.color])
+                arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorHex])
         }
     }
     

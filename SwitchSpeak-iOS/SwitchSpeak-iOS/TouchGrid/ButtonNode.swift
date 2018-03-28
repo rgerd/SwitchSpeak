@@ -9,24 +9,15 @@
 import Foundation
 import UIKit
 
-extension String {
-    subscript (bounds: CountableClosedRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[start...end])
-    }
-    
-    subscript (bounds: CountableRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[start..<end])
-    }
-}
-
 /*
 	a ButtonNode would always be a leaf node in the 'Tree' data structure
 */
 class ButtonNode: Node {
+    static let inertColor:CGColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+    static let highlightColor:CGColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+    // Tunable parameter for scaling the bottom margin with respect to font size
+    static let titleBottomMarginScale:CGFloat = 730.0
+    
     var button:UIButton = UIButton(type: UIButtonType.custom)
     var cardData:VocabCard?
     var gridPosition:(Int, Int)
@@ -41,36 +32,56 @@ class ButtonNode: Node {
         self.cardData = cardData
         
         self.button.setTitle(cardData.text, for: .normal)
+        self.button.titleLabel!.numberOfLines = 0; // Dynamic number of lines
+        self.button.titleLabel!.lineBreakMode = .byWordWrapping;
+        
+        let fontSize:CGFloat = GlobalSettings.getUserSettings().getFontSize()
+        let sizedFont:UIFont = self.button.titleLabel!.font!.withSize(fontSize)
+        self.button.titleLabel!.font = sizedFont
+        
+        if let cardImage:UIImage = UIImage(data:cardData.imagefile) {
+            let buttonWidth:CGFloat = self.button.frame.width
+            let buttonHeight:CGFloat = self.button.frame.height
+            let buttonAR:CGFloat = buttonWidth / buttonHeight // Button Aspect Ratio
+            let _buttonAR:CGFloat = 1.0 / buttonAR
+            
+            let imageBorderTop:CGFloat = 12
+            let imageBorderSides:CGFloat = fontSize * 1.2 // Vary image size with font size.
+            
+            let imageTop:CGFloat = imageBorderTop * _buttonAR
+            let imageBottom:CGFloat = (2 * imageBorderSides - imageBorderTop) * _buttonAR // Think about it...
+            let imageSides:CGFloat = imageBorderSides * buttonAR
+            
+            let titleOffs:CGFloat = (self.button.frame.height) - fontSize - (ButtonNode.titleBottomMarginScale / fontSize)
+            
+            self.button.setImage(cardImage, for: .normal)
+            self.button.imageEdgeInsets = UIEdgeInsets(top: imageTop, left: imageSides, bottom: imageBottom, right: imageSides)
+            
+            self.button.titleEdgeInsets = UIEdgeInsets(top: titleOffs, left: -cardImage.size.width, bottom: 0, right: 0)
+        }
+        
+        self.button.backgroundColor = cardData.color
+        
         self.button.layer.cornerRadius = 10
-        self.button.backgroundColor = self.convertColorToUIColor(color: cardData.color)
-        let uhcolor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        self.button.layer.borderColor = uhcolor.cgColor
+        self.button.layer.borderColor = ButtonNode.inertColor
         self.button.layer.borderWidth = 5
         self.button.layer.shadowOpacity = 0.0
-    }
-    
-    func convertColorToUIColor(color: String) -> UIColor {
-        let rValue = CGFloat(UInt8(color[0...1], radix: 16)!)
-        let gValue = CGFloat(UInt8(color[2...3], radix: 16)!)
-        let bValue = CGFloat(UInt8(color[4...5], radix: 16)!)
         
-        return UIColor(red: rValue/255.0, green: gValue/255.0, blue: bValue/255.0, alpha: 1.0)
+        self.button.layoutIfNeeded()
     }
 	
 	override func highlightSubTree() {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-		button.layer.borderColor = uhcolor.cgColor
+		button.layer.borderColor = ButtonNode.highlightColor
 	}
 	
 	override func unHighlightSubTree() {
         if dummy {
             return
         }
-		let uhcolor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-		button.layer.borderColor = uhcolor.cgColor
+		button.layer.borderColor = ButtonNode.inertColor
 	}
    
    
