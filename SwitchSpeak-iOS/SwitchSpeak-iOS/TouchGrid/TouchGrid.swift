@@ -104,7 +104,6 @@ class TouchGrid {
      * Highlights the next child node of the scanNode.
      */
     func selectSubTree() {
-
 		if (scanNode.childNodes.count > 0 && scanNode.countNonDummyChildNodes() > 0) {
 			self.prevScanNode.unHighlightSubTree()
 			scanChildIndex = nextScanChildIndex
@@ -146,6 +145,7 @@ class TouchGrid {
 	 */
 	func fillTouchGrid(cards: [VocabCard]) {
         fillTouchGridSubTree(self.getRootNode()!, cards)
+        self.getRootNode()?.shrinkChildren()
 	}
     
     func fillTouchGridSubTree(_ node:Node, _ cards:[VocabCard]) {
@@ -190,12 +190,14 @@ class TouchGrid {
 	/*
 	 *	Scanning restarts from the beginning where no cell is selected yet.
 	 *	Update the curNode and childNumber to root and 0 respectively.
+     *  Update the tree structure to a complete and unshrunk tree 
 	 *	This also unhighlights the entire grid structure.
 	 */
 	func resetTouchGrid() {
 		self.stopScanning()
 		scanNode = self.getRootNode()!
 		prevScanNode = self.getRootNode()!
+        self.buildButtonTree()
 		scanChildIndex = 0
 		nextScanChildIndex = 0
 		self.startScanning()

@@ -12,20 +12,20 @@ import XCTest
 
 class DatabaseTest: XCTestCase {
     var testDatabase:VocabCardDB!
-
+    
     // This method is called before the invocation of each test method in the class.
     override func setUp(){
         super.setUp()
         testDatabase = VocabCardDB("\(Bundle.main.bundlePath)/SwitchSpeakDB.sql")
     }
-
+    
     // This method is called after the invocation of each test method in the class.
     override func tearDown() {
         testDatabase = nil
         super.tearDown()
-
+        
     }
-
+    
     // Test that Database is open and has tables
     func testDB() {
         let tableNames:[String]? = testDatabase.getTables()
@@ -35,14 +35,14 @@ class DatabaseTest: XCTestCase {
     // Test every card on the home screen
     func testHomeScreenCards() {
         let initialCards:[VocabCard] = testDatabase.getCardArray(inTable:"User1" , withId: 0)
-    
+        
         XCTAssertNotNil(initialCards)
         
         for item in initialCards {
             self.testChild(card: item)
         }
     }
-
+    
     func testChild(card: VocabCard) {
         let children:[VocabCard] = testDatabase.getCardArray(inTable: "User1", withId:card.id!)
         
@@ -246,7 +246,7 @@ class CrumbManagerTest: XCTestCase {
     func textCrumbStackPush()  {
         var vCard1 = VocabCard(); vCard1.text = "hello test1"; vCard1.type = .word; vCard1.voice = true
         var vCard2 = VocabCard(); vCard2.text = "hello test2"; vCard2.type = .word; vCard2.voice = true
-
+        
         let node1 = ButtonNode(button: UIButton(), gridPosition: (1,1))
         let node2 = ButtonNode(button: UIButton(), gridPosition: (2,2))
         
@@ -265,11 +265,11 @@ class CrumbManagerTest: XCTestCase {
         
         let node = ButtonNode(button: UIButton(), gridPosition: (1,1))
         node.setCardData(cardData: vCard)
-
+        
         testCrumbManager.push(buttonNode: node)
         XCTAssertEqual(testCrumbManager.getString(), "\(vCard.text) ")
     }
-
+    
     // NOTE: This should be a UI test
     //    func testCrumbUpdateSubview() {
     //        let TestView = UIView()
