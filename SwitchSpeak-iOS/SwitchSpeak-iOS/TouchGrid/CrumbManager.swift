@@ -15,15 +15,17 @@ class CrumbStack {
      * A private structure to handle the storage and rendering of breadcrumbs.
      */
     private struct Crumb {
+        var cardData:VocabCard
         // The UI element holding the string describing the breadcrumb.
         // i.e. "I", "am", etc.
         var label:UILabel
         // scale is used to decide the size of crumb according to the number of crumbs
         var scale:CGFloat
         
-        init(content:String) {
+        init(_ cardData:VocabCard) {
+            self.cardData = cardData
             label = UILabel()
-            label.text = content
+            label.text = cardData.text
             scale = 1
         }
         
@@ -82,11 +84,13 @@ class CrumbStack {
      * Removes a breadcrumb.
 	 * add remove the breadcrum from the view as well
      */
-    func pop() {
-		if (self.getString() != "") {	//	i.e. the stack is not empty
-			items.removeLast().label.removeFromSuperview()
+    func pop() -> VocabCard? {
+		if items.count > 0 {	//	i.e. the stack is not empty
+            let lastItem:Crumb = items.removeLast()
+			lastItem.label.removeFromSuperview()
+            return lastItem.cardData
 		}
-		
+        return nil
     }
 	
 	/*
@@ -94,28 +98,32 @@ class CrumbStack {
 	*/
 	func emptyCrumbStack() {
 		while (self.getString() != "") {		//	pop all the elements in the breadcrums stack
-			self.pop()
+			let _ = self.pop()
 		}
 	}
     
     /*
-     * Pushes a breadcrumb containing [string] to the stack.
+     * Pushes a breadcrumb referencing [buttonNode] to the stack.
      */
-    func push(string:String) {
-        let newCrumb = Crumb(content: string)
+    func push(buttonNode:ButtonNode) {
+        let newCrumb = Crumb(buttonNode.cardData!)
         items.append(newCrumb)
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         
-        if items.count > threshold {
+        
+        let spokenItems:[Crumb] = getSpokenItems()
+        if spokenItems.count > threshold {
             self.crumbWidth = screenWidth / CGFloat(items.count + 1)
             var index:Int = 0
-            for item in items {
+            for item in spokenItems {
                 item.setLocationAndSize(byIndex: index, withWidth:self.crumbWidth)
-                index = index + 1
+                index += 1
             }
         }
-        newCrumb.setLocationAndColor(byIndex: items.count - 1, withWidth: self.crumbWidth)
+        if newCrumb.cardData.voice {
+            newCrumb.setLocationAndColor(byIndex: spokenItems.count - 1, withWidth: self.crumbWidth)
+        }
     }
     
     /*
@@ -134,9 +142,13 @@ class CrumbStack {
      */
     func getString() -> String {
         var fullString:String = ""
-        for item in items {
+        for item in getSpokenItems() {
             fullString += item.label.text! + " "
         }
         return fullString
+    }
+    
+    private func getSpokenItems() -> [Crumb] {
+        return items.filter { $0.cardData.voice }
     }
 }

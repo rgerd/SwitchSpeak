@@ -13,41 +13,56 @@ class TouchSelection {
 	var touchGrid:TouchGrid?
 	var breadcrumbs = CrumbStack()
     var breadcrumbContainer:UIView?
-	var phrases:[String]
-	var index:Int		//	keeps track of which set of phrases from the array 'phrases' we are currently printing on the gird
+	var pageOffset:Int
+    var screenId:Int64
 	
-    init(breadcrumbContainer:UIView, gridContainer:UIView, phrases: [String]) {
-		self.phrases = phrases
+    init(breadcrumbContainer:UIView, gridContainer:UIView) {
         self.breadcrumbContainer = breadcrumbContainer
         self.touchGrid = TouchGrid(gridContainer: gridContainer)
-		self.index = 0
+        self.pageOffset = 0
+        self.screenId = 0
 		self.refillGrid()
 	}
 	
 	/*
-	*	refills the touch grid with the content of the next set of phrases stored in
-	*	the string array 'phrases' starting at index location 'index'
-	*/
+	 *	Refills the touch grid with the content of the next set of phrases stored in
+	 *	the string array 'phrases' starting at index location 'index'
+	 */
 	func refillGrid() {
-        let (rows, cols) = GlobalSettings.getUserSettings().getGridSize()
+        refillGrid(withoutPaging: false)
+	}
+    
+    func refillGrid(withoutPaging:Bool) {
+        if withoutPaging {
+            pageOffset = 0 // For now. We will want to just reset to page boundary in the future
+        }
+        let settings:UserSettings = GlobalSettings.getUserSettings()
+        var cards:[VocabCard]
+        do {
+            cards = try VocabCardDB.shared!.getCardArray(table: settings.tableName, id: Int(self.screenId))
+        } catch _ {
+            fatalError("Problem getting cards from table \(settings.tableName) with id \(self.screenId)!")
+        }
+        
+        let (rows, cols) = settings.getGridSize()
         let gridSize:Int = rows * cols
         
-		let lastIndex = min(phrases.count - 1, index + gridSize - 5)
-		var gridPhrases = Array(phrases[index...lastIndex])
-		//	next we add dummy elements for the remaining grid cells excluding the last 4 cells,
-		//	which correspond to the 4 action buttons (home,done,oops,next)
-		if (gridPhrases.count < gridSize - 4) {
-			//	the string '---' represents a dummy cell in the grid
-			//	need to change this depending on how dummy cells are identified
-			gridPhrases += [String](repeating: "---", count: gridSize - gridPhrases.count - 4)
-		}
-		//	functional grid cells or action buttons are recognized by the four phrases mentioned below
-		gridPhrases += ["Oops","Next","Home","Done"]
-		
-		touchGrid!.resetTouchGrid()
-		touchGrid!.fillTouchGrid(phrases: gridPhrases)
-		index = (lastIndex + 1) % phrases.count
-	}
+        let lastIndex:Int = min(cards.count, pageOffset + gridSize - 4) - 1
+        var gridCards = Array(cards[pageOffset...lastIndex])
+        //    next we add dummy elements for the remaining grid cells excluding the last 4 cells,
+        //    which correspond to the 4 action buttons (home,done,oops,next)
+        if (gridCards.count < gridSize - 4) {
+            //    the string '---' represents a dummy cell in the grid
+            //    need to change this depending on how dummy cells are identified
+            gridCards += [VocabCard](repeating: EmptyVocabCard, count: gridSize - gridCards.count - 4)
+        }
+        //    functional grid cells or action buttons are recognized by the four phrases mentioned below
+        gridCards += [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
+        
+        touchGrid!.resetTouchGrid()
+        touchGrid!.fillTouchGrid(cards: gridCards)
+        pageOffset = (lastIndex + 1) % cards.count
+    }
 	
 	/*
 	*	This function selects the currently highlighted phrase in the grid and performs computation
@@ -56,19 +71,22 @@ class TouchSelection {
 	*	a more suitable function name can be considered since its name is the same as a function in the TouchGrid class
 	*/
 	func makeSelection() {
-		let choice:String? = touchGrid!.makeSelection()
+		let choice:ButtonNode? = touchGrid!.makeSelection()
 		
 		if(choice == nil) { // If we're still scanning deeper
 			return
 		}
+        
+        let choiceText:String = choice!.button.titleLabel!.text!
 		
-		guard let actionButton = ActionButton(rawValue: choice!) else {
+		guard let actionButton = ActionButton(rawValue: choiceText) else {
             // i.e. a phrase is selected
             //	we may update the arry of phrases and update the grid content
-            breadcrumbs.push(string: choice!)
+            breadcrumbs.push(buttonNode: choice!)
             breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
-            let nextSetOfPhrases = ["juice","sun","sleep","awake","friend","teacher"]
-            self.updatePhrases(phrases: nextSetOfPhrases)
+            if choice!.cardData!.type == .category {
+                self.setScreenId(choice!.cardData!.id!)
+            }
             
 			return
 		}
@@ -79,9 +97,13 @@ class TouchSelection {
 	/*
 	*	update the set of phrases from which we wish to select
 	*/
-	func updatePhrases(phrases: [String]) {
-		self.phrases = phrases
-		self.index = 0
+	func pageNext() {
 		self.refillGrid()
 	}
+    
+    func setScreenId(_ id: Int64) {
+        self.pageOffset = 0
+        self.screenId = id
+        self.refillGrid()
+    }
 }

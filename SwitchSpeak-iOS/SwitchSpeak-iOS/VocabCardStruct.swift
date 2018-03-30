@@ -13,7 +13,7 @@ struct VocabCard {
     var id: Int64?
     var type: VocabCardType
     var text: String
-    var imagefile: NSData
+    var imagefile: Data
     var parentid: Int64
     var voice: Bool
     var color: String
@@ -29,7 +29,19 @@ enum VocabCardType:Int {
 extension VocabCard : RowConvertible {
     // Initializer from database
     init(row:Row) {
-        let cardType:VocabCardType = row["type"] as! VocabCardType
+        var cardType:VocabCardType
+        switch row["type"] as Int {
+        case 0:
+            cardType = .empty
+        case 1:
+            cardType = .action
+        case 2:
+            cardType = .word
+        case 3:
+            cardType = .category
+        default:
+            cardType = .word
+        }
         let usesVoice:Bool = row["voice"] == 1
         self.init(type: cardType, text: row["text"], imagefile: row["imagefile"], voice: usesVoice, color: row["color"])
         self.id = row["id"]
@@ -37,7 +49,7 @@ extension VocabCard : RowConvertible {
     }
     
     // Programmer's initializer
-    init(type:VocabCardType, text:String, imagefile:NSData, voice:Bool, color:String) {
+    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:String) {
         self.id = 0
         self.parentid = 0
         self.type = type
@@ -48,5 +60,14 @@ extension VocabCard : RowConvertible {
     }
 }
 
-let EmptyVocabCard = VocabCard(type: .empty, text: "------", imagefile: NSData(), voice: false, color: "#fff")
+let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
+
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+
 
