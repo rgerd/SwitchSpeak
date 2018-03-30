@@ -103,7 +103,7 @@ class VocabCardDB {
         }
     }
 
-    func removeCardfromTable(table: String, id: Int) throws {
+    func removeCard(table: String, id: Int) throws {
         // Removes the card given by id (and all its children) from the given table
 
         let card = try self.db.inDatabase{ db in 
@@ -113,7 +113,7 @@ class VocabCardDB {
         if(card!.type == VocabCardType.category){
             let children = self.getCardArray(table: table, id: id)
             for child in children {
-                self.removeCardfromTable(table:table, id: child.id)
+                self.removeCard(table:table, id: child.id)
             }
         }
 
