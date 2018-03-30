@@ -68,13 +68,17 @@ class VocabCardDB {
         return cards
     }
     
-    func addCardtoTable(table: String, card: VocabCard) throws {
-        // Add a card to the given table with the specified parameters.
+    func addCardtoTable(table: String, card: VocabCard) throws -> Int{
+        // Add a card to the given table with the specified parameters, and returns the unique id of the card
         
         try self.db.inDatabase{ db in
             try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
                 arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.color])
+            
+            let id = db.lastInsertedRowID
         }
+
+        return id
     }
     
     func clearTable(table: String) throws {
@@ -85,16 +89,49 @@ class VocabCardDB {
         }
     }
     
-    func copyTable(table1: String, table2: String) throws {
+    func copyTable(toTable: String, fromTable: String) throws {
         // Erase the contents of table1 and copy the contents of table2 to table1
         
-        try self.clearTable(table: table1)
+        try self.clearTable(table: toTable)
         
-        let cards = try self.getAllCards(table: table2)
+        let cards = try self.getAllCards(table: fromTable)
         
         if cards != nil {
             for card in cards!{
-                try addCardtoTable(table: table1, card: card)
+                try addCardtoTable(table: toTable, card: card)
+            }
+        }
+    }
+
+    func removeCardfromTable(table: String, id: Int) throws {
+        // Removes the card given by id (and all its children) from the given table
+
+        let card = try self.db.inDatabase{ db in 
+            try vocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [id])
+        }
+
+        if(card!.type == VocabCardType.category){
+            let children = self.getCardArray(table: table, id: id)
+            for child in children {
+                self.removeCardfromTable(table:table, id: child.id)
+            }
+        }
+
+        try self.db.inDatabase{ db in
+            try db.execute("DELETE FROM " + table + " WHERE id = ?", arguemtns: [id])
+        }
+    }
+
+    func copyCard(toTable: String, fromTable: String, card: VocabCard) throws {
+        // Copies the given card from one table to another. The new parentid of the card must be updated before being passed to this function
+
+        let new_id = self.addCardtoTable(table: toTable, card: card)
+
+        if(card.type == VocabCardType.category){
+            let children = self.getCardArray(table: fromTable, id: id)
+            for child in children {
+                child.parentid = new_id
+                self.copyCardfromTable(toTable: toTable, card: child)
             }
         }
     }
