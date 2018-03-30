@@ -14,8 +14,9 @@ class VocabCardDB {
     var db:DatabaseQueue
     
     static func load() {
+        let dbURL:String = "\(Bundle.main.bundlePath)/SwitchSpeakDB.sql"
         do {
-            try shared = VocabCardDB("/Users/rgerdisch/Everything/Work/SwitchSpeak/SwitchSpeak-iOS/SwitchSpeak-iOS/Base.lproj/SwitchSpeakDB.sql")
+            try shared = VocabCardDB(dbURL)
         } catch {
             fatalError("Database not correctly loaded.")
         }
