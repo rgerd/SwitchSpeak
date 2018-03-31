@@ -43,7 +43,7 @@ class CrumbStack {
             setLocationAndSize(byIndex:index, withWidth: width)
             label.textAlignment = .center
             label.textColor = UIColor.white
-            label.backgroundColor = [UIColor.darkGray, UIColor.lightGray][index % 2]
+            label.backgroundColor = self.cardData.color.getDarker().getDarker()
         }
         
         /*

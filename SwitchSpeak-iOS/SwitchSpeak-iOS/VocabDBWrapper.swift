@@ -14,8 +14,9 @@ class VocabCardDB {
     var db:DatabaseQueue
     
     static func load() {
+        let dbURL:String = "\(Bundle.main.bundlePath)/SwitchSpeakDB.sql"
         do {
-            try shared = VocabCardDB("/Users/rgerdisch/Everything/Work/SwitchSpeak/SwitchSpeak-iOS/SwitchSpeak-iOS/Base.lproj/SwitchSpeakDB.sql")
+            try shared = VocabCardDB(dbURL)
         } catch {
             fatalError("Database not correctly loaded.")
         }
@@ -71,11 +72,10 @@ class VocabCardDB {
     func addCardtoTable(table: String, card: VocabCard) throws -> Int {
         // Add a card to the given table with the specified parameters, and returns the unique id of the card
         
-        try self.db.inDatabase{ db in
+        try self.db.inDatabase { db in
             try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
-                arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.color])
-            
-            let id = db.lastInsertedRowID
+                           arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorHex])
+            let id = db.lastInsertedRowID              
         }
 
         return id
