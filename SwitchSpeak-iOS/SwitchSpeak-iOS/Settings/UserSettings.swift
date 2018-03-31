@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ScanSpeed : Double, Codable {
     case SLOWER = 0.8
@@ -20,10 +21,10 @@ enum ScanType : Int, Codable {
     case LINEAR
 }
 
-enum FontSize : Int, Codable {
-    case SMALL
-    case MEDIUM
-    case LARGE
+enum FontSize : Float, Codable {
+    case SMALL = 26
+    case MEDIUM = 32
+    case LARGE = 44
 }
 
 enum GridSize : String, Codable {
@@ -108,6 +109,10 @@ struct UserSettings : Codable {
     
     func getVoiceName() -> String {
         return voiceType.rawValue
+    }
+    
+    func getFontSize() -> CGFloat {
+        return CGFloat(fontSize.rawValue)
     }
     
     private func parseRowsAndColumns(gridSize:GridSize) -> (Int, Int) {

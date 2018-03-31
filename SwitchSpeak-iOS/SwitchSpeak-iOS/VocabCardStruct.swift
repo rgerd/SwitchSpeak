@@ -7,7 +7,38 @@
 //
 
 import Foundation
+import UIKit
 import GRDB
+
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+    
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}
+
+extension UIColor {
+    func getDarker() -> UIColor {
+        var hue:CGFloat = 0.0, saturation:CGFloat = 0.0, brightness:CGFloat = 0.0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness * 0.8, alpha: 1.0)
+    }
+}
+
+func convertColorToUIColor(_ color: String) -> UIColor {
+    let rValue = CGFloat(UInt8(color[0...1], radix: 16)!)
+    let gValue = CGFloat(UInt8(color[2...3], radix: 16)!)
+    let bValue = CGFloat(UInt8(color[4...5], radix: 16)!)
+    
+    return UIColor(red: rValue/255.0, green: gValue/255.0, blue: bValue/255.0, alpha: 1.0)
+}
 
 struct VocabCard {
     var id: Int64?
@@ -16,7 +47,8 @@ struct VocabCard {
     var imagefile: Data
     var parentid: Int64
     var voice: Bool
-    var color: String
+    var color: UIColor
+    var colorHex: String
 }
 
 enum VocabCardType:Int {
@@ -56,7 +88,8 @@ extension VocabCard : RowConvertible {
         self.text = text
         self.imagefile = imagefile
         self.voice = voice
-        self.color = color
+        self.color = convertColorToUIColor(color)
+        self.colorHex = color
     }
 }
 
