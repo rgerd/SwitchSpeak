@@ -17,8 +17,6 @@ class TouchGrid {
     var childNumber: Int = 0            // The index of the highlighted child of curNode
 	var nextChildNumber: Int = 0
 	weak var scanningTimer: Timer?
-	var curNodeUpdated: Bool = false
-
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
