@@ -12,10 +12,12 @@ import UIKit
 
 class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
-    var curNode = Node()                // The node in the tree we are currently scanning
-    var childNumber: Int = 0            // The index of the highlighted child of curNode
-    var curNodeUpdated: Bool = false    // This is set to true whenever curNode is updated
-    
+    var scanNode = Node()                // The node in the tree we are currently scanning
+	var prevScanNode = Node()		//	scanNode during the previous scanning step
+    var scanChildIndex: Int = 0            // The index of the highlighted child of scanNode
+	var nextScanChildIndex: Int = 0
+	weak var scanningTimer: Timer?
+
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
     
@@ -37,7 +39,7 @@ class TouchGrid {
         self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize(), dummyNum: 0)
         self.buttonTree.setUIDimensionsForTree(gridSize: settings.getGridSize(), gridContainer: self.gridContainer, maxButtonSize: (200, 200))
         self.addTreeToView(buttonTree)
-        self.curNode = buttonTree.rootNode!
+        self.scanNode = buttonTree.rootNode!
         TouchSelectionViewController.bringSwitchButtonToFront()
     }
     
@@ -84,53 +86,37 @@ class TouchGrid {
             removeSubTreeFromView(childnode)
         }
     }
+	
+
+	func startScanning() {
+		let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
+		scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
+			self?.selectSubTree()
+		}
+	}
+	
+	func stopScanning() {
+		scanningTimer?.invalidate()
+	}
+	
     
     /*
-     * Highlights the childNumber'th child node of the curNode.
+     * Highlights the next child node of the scanNode.
      */
     func selectSubTree() {
-        curNode.childNodes[childNumber].highlightSubTree()
-        let previousCurNode: Node = curNode
-		var timeDelay = 0.0
-		if (!curNode.childNodes[childNumber].dummy) {
-			timeDelay = GlobalSettings.getUserSettings().scanSpeed.rawValue
+
+		if (scanNode.childNodes.count > 0 && scanNode.countNonDummyChildNodes() > 0) {
+			self.prevScanNode.unHighlightSubTree()
+			scanChildIndex = nextScanChildIndex
+			self.scanNode.childNodes[scanChildIndex].highlightSubTree()
+			self.prevScanNode = scanNode
+			repeat {		//	repeat until we find a non-dummy node
+				nextScanChildIndex = (nextScanChildIndex + 1) % self.scanNode.childNodes.count
+			} while (scanNode.childNodes[nextScanChildIndex].dummy)
 		}
-        delay(timeDelay) {
-            // We will unhighlight the previously highlighted subtree iff the curNode is not a leaf node and is not a dummy node.
-            if self.curNode.childNodes.count != 0 {
-                previousCurNode.unHighlightSubTree()
-            }
-           
-            // Check if the cur node has changed.
-            if !self.curNodeUpdated {
-                self.childNumber = (self.childNumber + 1) % self.curNode.childNodes.count
-            } else {
-                self.curNodeUpdated = false
-            }
-            
-            if self.curNode.childNodes.count != 0 {
-                if (self.curNode.childNodes[0] as? ButtonNode)?.dummy == true {
-                      self.curNode=self.buttonTree.rootNode!
-                }
-                // We have not yet reached a leaf node while scanning.
-                self.selectSubTree()
-            }
-            
-            if (self.curNode as? ButtonNode)?.dummy == true {
-                self.curNode=self.buttonTree.rootNode!
-            }
-        }
     }
-    
-    /*
-     * Ensures a time delay for executing a block of code.
-     */
-    func delay(_ seconds: Double, completion: @escaping () -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            completion()
-        }
-    }
-    
+	
+	
     /*
      * Gets the button tree's root node.
      */
@@ -139,15 +125,15 @@ class TouchGrid {
     }
     
     func makeSelection() -> ButtonNode? {
-        // Select a subtree from the current subtree stored in curNode
-        if self.curNode.childNodes.count > 0 {
-            // We have not yet reached a leafnode
-            self.curNode = curNode.childNodes[childNumber]
-            self.childNumber = 0
-            self.curNodeUpdated = true
-            if curNode.childNodes.count == 0 {
-                let choice:ButtonNode = (curNode as? ButtonNode)!
-                self.curNode = (self.getRootNode())!
+        // Select a subtree from the current subtree stored in scanNode
+        if self.scanNode.childNodes.count > 0 {
+			self.prevScanNode = scanNode
+            self.scanNode = scanNode.childNodes[scanChildIndex]
+            self.scanChildIndex = 0
+			self.nextScanChildIndex = 0
+            if scanNode.childNodes.count == 0 {
+                let choice:ButtonNode = (scanNode as? ButtonNode)!
+                self.scanNode = (self.getRootNode())!
                 return choice
             }
         }
@@ -207,8 +193,12 @@ class TouchGrid {
 	 *	This also unhighlights the entire grid structure.
 	 */
 	func resetTouchGrid() {
-		curNode = self.getRootNode()!
-		childNumber = 0
-		curNode.unHighlightSubTree()
+		self.stopScanning()
+		scanNode = self.getRootNode()!
+		prevScanNode = self.getRootNode()!
+		scanChildIndex = 0
+		nextScanChildIndex = 0
+		self.startScanning()
 	}
 }
+

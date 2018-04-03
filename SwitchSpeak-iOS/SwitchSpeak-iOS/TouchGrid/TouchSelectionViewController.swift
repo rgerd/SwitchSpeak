@@ -19,7 +19,6 @@ class TouchSelectionViewController: UIViewController {
         TouchSelectionViewController.sharedInstance = self
         
         self.touchSelection = TouchSelection(breadcrumbContainer: breadcrumbContainer, gridContainer: (switchButton as UIView))
-        touchSelection!.touchGrid!.selectSubTree()
         
         lastSettings = GlobalSettings.getUserSettings()
 	}
@@ -30,17 +29,19 @@ class TouchSelectionViewController: UIViewController {
     
     func registerSettingsUpdate() {
         let newSettings:UserSettings = GlobalSettings.getUserSettings()
-        
+
         var shouldRebuildGrid:Bool = false
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.gridSize != newSettings.gridSize
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.vocabLevel != newSettings.vocabLevel
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.scanType != newSettings.scanType
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.fontSize != newSettings.fontSize
+        shouldRebuildGrid = shouldRebuildGrid || lastSettings!.scanSpeed != newSettings.scanSpeed
         
         if shouldRebuildGrid {
             touchSelection!.touchGrid!.buildButtonTree()
             touchSelection!.refillGrid(withoutPaging: true)
         }
+      
         lastSettings = newSettings
     }
 

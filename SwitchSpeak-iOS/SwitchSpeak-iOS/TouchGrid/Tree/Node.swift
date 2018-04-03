@@ -47,7 +47,18 @@ class Node {
 		for childNode in self.childNodes {
 			childNode.unHighlightSubTree()
 		}
-	}	
+	}
+	
+	//	return the number of non-dummy child nodes
+	func countNonDummyChildNodes() -> Int {
+		var count: Int = 0
+		for index in 0...(self.childNodes.count - 1) {
+			if !self.childNodes[index].dummy {
+				count += 1
+			}
+		}
+		return count
+	}
 }
 
 

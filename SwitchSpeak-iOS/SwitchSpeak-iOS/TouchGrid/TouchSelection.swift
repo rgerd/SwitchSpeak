@@ -53,8 +53,8 @@ class TouchSelection {
         }
         //    functional grid cells or action buttons are recognized by the four phrases mentioned below
         gridCards += [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
-        
-        touchGrid!.resetTouchGrid()
+		
+		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
         pageOffset = (lastIndex + 1) % cards.count
     }
