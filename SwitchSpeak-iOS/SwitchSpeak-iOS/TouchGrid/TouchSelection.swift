@@ -37,12 +37,7 @@ class TouchSelection {
             pageOffset = 0 // For now. We will want to just reset to page boundary in the future
         }
         let settings:UserSettings = GlobalSettings.getUserSettings()
-        var cards:[VocabCard]
-        do {
-            cards = try VocabCardDB.shared!.getCardArray(table: settings.tableName, id: Int(self.screenId))
-        } catch _ {
-            fatalError("Problem getting cards from table \(settings.tableName) with id \(self.screenId)!")
-        }
+        let cards:[VocabCard] = VocabCardDB.shared!.getCardArray(inTable: settings.tableName, withId: self.screenId)
         
         let (rows, cols) = settings.getGridSize()
         let gridSize:Int = rows * cols
