@@ -12,10 +12,10 @@ import UIKit
 
 class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
-    var curNode = Node()                // The node in the tree we are currently scanning
-	var previousCurNode = Node()		//	curNode during the previous scanning step
-    var childNumber: Int = 0            // The index of the highlighted child of curNode
-	var nextChildNumber: Int = 0
+    var scanNode = Node()                // The node in the tree we are currently scanning
+	var prevScanNode = Node()		//	scanNode during the previous scanning step
+    var scanChildIndex: Int = 0            // The index of the highlighted child of scanNode
+	var nextScanChildIndex: Int = 0
 	weak var scanningTimer: Timer?
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
@@ -39,7 +39,7 @@ class TouchGrid {
         self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize(), dummyNum: 0)
         self.buttonTree.setUIDimensionsForTree(gridSize: settings.getGridSize(), gridContainer: self.gridContainer, maxButtonSize: (200, 200))
         self.addTreeToView(buttonTree)
-        self.curNode = buttonTree.rootNode!
+        self.scanNode = buttonTree.rootNode!
         TouchSelectionViewController.bringSwitchButtonToFront()
     }
     
@@ -88,8 +88,9 @@ class TouchGrid {
     }
 	
 
-	func beginScanning() {
-		scanningTimer = Timer.scheduledTimer(withTimeInterval: GlobalSettings.getUserSettings().scanSpeed.rawValue, repeats: true) { [weak self] _ in
+	func startScanning() {
+		let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
+		scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
 			self?.selectSubTree()
 		}
 	}
@@ -100,18 +101,18 @@ class TouchGrid {
 	
     
     /*
-     * Highlights the next child node of the curNode.
+     * Highlights the next child node of the scanNode.
      */
     func selectSubTree() {
 
-		if curNode.childNodes.count > 0 {
-			self.previousCurNode.unHighlightSubTree()
-			childNumber = nextChildNumber
-			self.curNode.childNodes[childNumber].highlightSubTree()
-			self.previousCurNode = curNode
+		if scanNode.childNodes.count > 0 {
+			self.prevScanNode.unHighlightSubTree()
+			scanChildIndex = nextScanChildIndex
+			self.scanNode.childNodes[scanChildIndex].highlightSubTree()
+			self.prevScanNode = scanNode
 			repeat {		//	repeat until we find a non-dummy node
-				nextChildNumber = (nextChildNumber + 1) % self.curNode.childNodes.count
-			} while (curNode.childNodes[nextChildNumber].dummy)
+				nextScanChildIndex = (nextScanChildIndex + 1) % self.scanNode.childNodes.count
+			} while (scanNode.childNodes[nextScanChildIndex].dummy)
 		}
     }
 	
@@ -123,15 +124,15 @@ class TouchGrid {
     }
     
     func makeSelection() -> ButtonNode? {
-        // Select a subtree from the current subtree stored in curNode
-        if self.curNode.childNodes.count > 0 {
-			self.previousCurNode = curNode
-            self.curNode = curNode.childNodes[childNumber]
-            self.childNumber = 0
-			self.nextChildNumber = 0
-            if curNode.childNodes.count == 0 {
-                let choice:ButtonNode = (curNode as? ButtonNode)!
-                self.curNode = (self.getRootNode())!
+        // Select a subtree from the current subtree stored in scanNode
+        if self.scanNode.childNodes.count > 0 {
+			self.prevScanNode = scanNode
+            self.scanNode = scanNode.childNodes[scanChildIndex]
+            self.scanChildIndex = 0
+			self.nextScanChildIndex = 0
+            if scanNode.childNodes.count == 0 {
+                let choice:ButtonNode = (scanNode as? ButtonNode)!
+                self.scanNode = (self.getRootNode())!
                 return choice
             }
         }
@@ -192,10 +193,11 @@ class TouchGrid {
 	 */
 	func resetTouchGrid() {
 		self.stopScanning()
-		curNode = self.getRootNode()!
-		previousCurNode = self.getRootNode()!
-		childNumber = 0
-		nextChildNumber = 0
-		self.beginScanning()
+		scanNode = self.getRootNode()!
+		prevScanNode = self.getRootNode()!
+		scanChildIndex = 0
+		nextScanChildIndex = 0
+		self.startScanning()
 	}
 }
+
