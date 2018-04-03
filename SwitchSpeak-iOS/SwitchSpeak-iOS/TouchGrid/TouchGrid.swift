@@ -105,7 +105,7 @@ class TouchGrid {
      */
     func selectSubTree() {
 
-		if scanNode.childNodes.count > 0 {
+		if (scanNode.childNodes.count > 0 && scanNode.countNonDummyChildNodes() > 0) {
 			self.prevScanNode.unHighlightSubTree()
 			scanChildIndex = nextScanChildIndex
 			self.scanNode.childNodes[scanChildIndex].highlightSubTree()
@@ -115,6 +115,7 @@ class TouchGrid {
 			} while (scanNode.childNodes[nextScanChildIndex].dummy)
 		}
     }
+	
 	
     /*
      * Gets the button tree's root node.
