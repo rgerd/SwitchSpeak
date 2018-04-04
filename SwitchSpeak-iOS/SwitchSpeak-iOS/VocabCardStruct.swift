@@ -91,6 +91,17 @@ extension VocabCard : RowConvertible {
         self.color = convertColorToUIColor(color)
         self.colorHex = color
     }
+    
+    init() {
+        self.id = 0
+        self.parentid = 0
+        self.type = .empty
+        self.text = ""
+        self.imagefile = Data()
+        self.voice = false
+        self.color = UIColor.brown
+        self.colorHex = ""
+    }
 }
 
 let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
