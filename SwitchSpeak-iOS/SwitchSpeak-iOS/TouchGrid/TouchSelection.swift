@@ -56,6 +56,7 @@ class TouchSelection {
 		
 		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
+
         pageOffset = (lastIndex + 1) % cards.count
     }
 	

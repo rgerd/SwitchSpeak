@@ -26,7 +26,7 @@ class Tree {
 		self.treeType = nil
 		self.size = 0
 	}
-	
+    
 	/*
 		Input is the grid dimensions of the view, the width and height of the screen, the height of the top bar, and the max button dimensions
 		In this function we resize each button in the tree so as to fit it entirely in the view
