@@ -10,209 +10,159 @@ import XCTest
 
 @testable import SwitchSpeak_iOS
 
-class SwitchSpeak_iOSTests: XCTestCase {
-    var Database:  VocabCardDB?
+class DatabaseTest: XCTestCase {
+    var testDatabase:VocabCardDB!
 
+    // This method is called before the invocation of each test method in the class.
     override func setUp(){
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        Database = VocabCardDB("\(Bundle.main.bundlePath)/SwitchSpeakDB.sql")
-
-
+        testDatabase = VocabCardDB("\(Bundle.main.bundlePath)/SwitchSpeakDB.sql")
     }
 
+    // This method is called after the invocation of each test method in the class.
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        Database = nil
+        testDatabase = nil
         super.tearDown()
 
     }
 
-//    func testDB() {
-//        //1) Test that Database is open and Default table exists
-//        XCTAssertNotNil(self.Database)
-//        var names:[String]?
-//        names = self.Database?.getTables()
-//        XCTAssertNotNil(names)
-//        XCTAssertEqual(names?[0], "User1", "Name not equal User1")
-//
-//        //2) Test every card from the home screen
-//        var initialCards:[VocabCard]?
-//
-//        initialCards = self.Database?.getCardArray(inTable:"User1" , withId: 0)
-//
-//        XCTAssertNotNil(initialCards)
-//        for item in initialCards!{
-//            self.testChild(card: item)
-//        }
-//
-//    }
-
-
-//    func testChild(card: VocabCard)
-//    {
-//        let children:[VocabCard]? = self.Database?.getCardArray(inTable: "User1", withId:card.id!)
-//        if card.type == VocabCardType.word {
-//            XCTAssertNil(children)
-//        }
-//        else{
-//            XCTAssertNotNil(children)
-//            for item in children!
-//            {
-//                self.testChild(card: item)
-//            }
-//        }
-//    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    // Test that Database is open and has tables
+    func testDB() {
+        let tableNames:[String]? = testDatabase.getTables()
+        XCTAssertNotNil(tableNames)
+    }
+    
+    // Test every card on the home screen
+    func testHomeScreenCards() {
+        let initialCards:[VocabCard] = testDatabase.getCardArray(inTable:"User1" , withId: 0)
+    
+        XCTAssertNotNil(initialCards)
+        
+        for item in initialCards {
+            self.testChild(card: item)
         }
     }
 
+    func testChild(card: VocabCard) {
+        let children:[VocabCard] = testDatabase.getCardArray(inTable: "User1", withId:card.id!)
+        
+        if card.type == .word {
+            XCTAssertEqual(children.count, 0, "Word has children in database")
+        } else {
+            XCTAssertGreaterThan(children.count, 0, "Non-word has no children in database")
+            for item in children {
+                self.testChild(card: item)
+            }
+        }
+    }
 }
 
 
-class TreeFactoryTests: XCTestCase {
+class TreeFactoryTest: XCTestCase {
     
-    //var factory: TreeFactory!
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // Check if the tree build is of the correct scan type.
+    func testBuildScanType() {
+        let scanType:ScanType = .LINEAR
+        let T = TreeFactory.buildTree(type: scanType, size: (3,4), dummyNum: 0)
+        XCTAssertEqual(T.treeType, ScanType.LINEAR, "Tree type does not match specified scan type.")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testbuildScanType() {
-        // check if the tree build is of the correct scan type
-        
-        let scanType = ScanType.LINEAR
-        let size = (3,4)
-        let T = TreeFactory.buildTree(type: scanType, size: size, dummyNum: 0)
-        if ( T.treeType != scanType ) {
-            XCTAssert(false)
-        }
-        else {
-            XCTAssert(true)
-        }
-    }
-    
+    // Check that the created tree has the right structure
     func testLinearScanTreeStructure() {
-        //    checks whether the tree created has the right structure
-        let T = TreeFactory.treeForCellByCellScanning(rows: 3, cols: 4, dummyNum: 0)
+        let numRows = 3
+        let numCols = 4
         
-        for i in 0...11 {
-            if (((T.rootNode?.childNodes[i] as? ButtonNode)) == nil) {    //    i.e. the node is not a button node
-                XCTAssert(false)
+        let T = TreeFactory.treeForCellByCellScanning(rows: numRows, cols: numCols, dummyNum: 0)
+        
+        let numNodes = numRows * numCols
+        for i in 0...(numNodes - 1) {
+            if (((T.rootNode?.childNodes[i] as? ButtonNode)) == nil) {
+                XCTFail("Leaf node is not a button node.")
             }
         }
-        XCTAssert(true)
     }
     
+    // Check that the created tree has the right structure
     func testRowColScanTreeStructure() {
-        //    checks whether the tree created has the right structure
-        let T = TreeFactory.treeForRowColumnScanning(rows: 3, cols: 4, dummyNum: 0)
+        let numRows = 3
+        let numCols = 4
         
-        for i in 0...2 {
+        let T = TreeFactory.treeForRowColumnScanning(rows: numRows, cols: numCols, dummyNum: 0)
+        
+        for i in 0...(numRows - 1) {
             let curNode = T.rootNode?.childNodes[i]
-            for j in 0...3 {
-                if (((curNode?.childNodes[j] as? ButtonNode)) == nil) {    //    i.e. the node is not a button node
-                    XCTAssert(false)
+            for j in 0...(numCols - 1) {
+                if (((curNode?.childNodes[j] as? ButtonNode)) == nil) {
+                    XCTFail("Leaf node is not a button node.")
                 }
             }
         }
-        XCTAssert(true)
     }
-    
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
 
 
 class ButtonNodeTests: XCTestCase {
+    var buttonNode:ButtonNode!
+    var dummyButtonNode:ButtonNode!
     
-    var buttonNode: ButtonNode?
-    var dummybuttonNode: ButtonNode?
+    // This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        let button1 = UIButton()
-        buttonNode = ButtonNode(button: button1, gridPosition: (2,3))    // arbitrary grid location (2,3)
-        let button2 = UIButton()
-        let dummyButtonNode = ButtonNode(button: button2, gridPosition: (2,3))
+        var mockVocabCard:VocabCard = VocabCard()
+        mockVocabCard.text = "Hello World"
+        
+        buttonNode = ButtonNode(button: UIButton(), gridPosition: (2,3)) // Arbitrary grid location (2,3)
+        buttonNode.setCardData(cardData: mockVocabCard)
+        
+        dummyButtonNode = ButtonNode(button: UIButton(), gridPosition: (2,3))
         dummyButtonNode.dummy = true
+        dummyButtonNode.setCardData(cardData: EmptyVocabCard)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
+    // Checks that non-dummy buttons can't be highlighted, and button nodes can be highlighted
     func testButtonHighlight() {
-        // checks if non-dummy button are highlighted
-        buttonNode?.highlightSubTree()
-        dummybuttonNode?.highlightSubTree()
+        buttonNode.highlightSubTree()
+        dummyButtonNode.highlightSubTree()
         
-        XCTAssertEqual(buttonNode?.button.layer.borderColor, UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor,"non dummy node not highlighted")
-        
-        XCTAssertEqual(dummybuttonNode?.button.layer.borderColor, nil)
+        XCTAssertEqual(buttonNode.button.layer.borderColor, ButtonNode.highlightColor,"Button node not highlighted")
+        XCTAssertEqual(dummyButtonNode.button.layer.borderColor, ButtonNode.inertColor, "Dummy node highlighted")
     }
     
+    // Checks that unhighlighting button node works
     func testButtonUnhighlight() {
-        // checks if non-dummy button are unhighlighted
-        buttonNode?.highlightSubTree()
-        buttonNode?.unHighlightSubTree()
+        buttonNode.highlightSubTree()
+        buttonNode.unHighlightSubTree()
         
-        dummybuttonNode?.highlightSubTree()
-        dummybuttonNode?.unHighlightSubTree()
-        
-        XCTAssertEqual(buttonNode?.button.layer.borderColor, UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor,"non dummy node not unhighlighted")
-        
-        XCTAssertEqual(dummybuttonNode?.button.layer.borderColor, nil)
+        XCTAssertEqual(buttonNode.button.layer.borderColor, ButtonNode.inertColor,"Button node still highlighted")
     }
     
+    func testButtonTitle() {
+        XCTAssertEqual(buttonNode.button.titleLabel!.text!, "Hello World", "Button node's title does not match vocab card text")
+    }
     
+    func testAssignCardData() {
+        XCTAssertNotNil(buttonNode.cardData)
+    }
 }
 
 class NodeTests: XCTestCase {
-    
     var node: Node!
     
+    // This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
         node = Node()
         
-        //    create 5 child nodes of the node object
+        // Create 5 child nodes for the node object
         for _ in 1...5 {
-            let newNode = Node()
-            node.childNodes.append(newNode)
+            node.childNodes.append(Node())
         }
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
-        node = nil
-        
-    }
-    
     func testChildCount() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(node.childNodes.count, 5, "incorrect number of child nodes")
+        XCTAssertEqual(node.childNodes.count, 5, "Incorrect number of child nodes")
     }
     
     func testAddChildFunc() {
@@ -224,147 +174,122 @@ class NodeTests: XCTestCase {
     func testAddChildrenFunc() {
         var newNodeArray: [Node]
         newNodeArray = []
-        //    create array of four nodes
+        // Create array of four nodes
         for _ in 1...4 {
             newNodeArray.append(Node())
         }
         node.addChildren(children: newNodeArray)
         XCTAssertEqual(node.childNodes.count, 9, "New children node not correctly inserted")
     }
-    
 }
 
 
 class TreeTests: XCTestCase {
-    
     var T: Tree!
+    
+    // This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         T = Tree()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
+    // Check that the button sizes computed by the computeButtonSize function are less than the input max button size
     func testButtonSizeLessThanMaxSize() {
-        // This checks that the button sizes computed by the computeButtonSize function are less than the input max button size
         let gridSize = (4,5)
         let containerSize = (100,200)
         let maxButtonSize = (10,10)
         let (buttonHeight, buttonWidth, _, _) = Tree.computeButtonSize(gridSize: gridSize, containerSize: containerSize, maxButtonSize: maxButtonSize)
-        //    check if no button size exceeds max button size
-        if (buttonWidth > maxButtonSize.0 || buttonHeight > maxButtonSize.1) {
-            XCTAssert(false, "button size exceeds max button size")
-        }
-        else{
-            XCTAssert(true)
-        }
+        
+        XCTAssertTrue(buttonWidth <= maxButtonSize.0 && buttonHeight <= maxButtonSize.1, "Button size exceeds max button size")
     }
     
+    // Checks if the buttons almost perfectly fits the container given the gap sizes
     func testButtonSizePreservesSize() {
-        // This checks if the buttons almost perfectly fit the container given the gap sizes
         let gridSize = (4,5)
         let containerSize = (100,200)
         let maxButtonSize = (10,10)
         let (buttonHeight, buttonWidth, colGap, rowGap) = Tree.computeButtonSize(gridSize: gridSize, containerSize: containerSize, maxButtonSize: maxButtonSize)
         
         //    In the below if-condition I'm testing if the gridSize is filled with an error of at max 1 unit...the error could arise due to the round of integers in computeButtonSize function
-        if ( abs((rowGap * (gridSize.0 + 1)) + (gridSize.0 * buttonHeight) - containerSize.0) < 1 || abs((colGap * (gridSize.1 + 1)) + (gridSize.1 * buttonWidth) - containerSize.1) < 1) {
-            XCTAssert(false, "container size not preserved by the buttons")
-        }
-        else{
-            XCTAssert(true)
+        if (abs((rowGap * (gridSize.0 + 1)) + (gridSize.0 * buttonHeight) - containerSize.0) < 1 || abs((colGap * (gridSize.1 + 1)) + (gridSize.1 * buttonWidth) - containerSize.1) < 1) {
+            XCTFail("Container size not preserved by the buttons")
         }
     }
 }
 
 class CrumbManagerTest: XCTestCase {
     var testCrumbManager:CrumbStack!
+    
     override func setUp() {
         super.setUp()
+        testCrumbManager = CrumbStack()
     }
     
-    override func tearDown() {
-        testCrumbManager=nil
-        super.tearDown()
-    }
-    
-    func emptyCrumstacktest() {
-        let vCard1 = VocabCard(type:VocabCardType.word, text: "hello test1", imagefile:Data(), voice: false, color: "ffffff")
-        let vCard2 = VocabCard(type:VocabCardType.word, text: "hello test2", imagefile:Data(), voice: false, color: "ffffff")
-        let baseButton1 = UIButton()
-        let baseButton2 = UIButton()
-        let node1 = ButtonNode(button: baseButton1, gridPosition: (1,1))
+    func testEmptyCrumbStack() {
+        var vCard1 = VocabCard(); vCard1.text = "hello test1"; vCard1.type = .word
+        var vCard2 = VocabCard(); vCard2.text = "hello test2"; vCard2.type = .word
+        
+        let node1 = ButtonNode(button: UIButton(), gridPosition: (1,1))
         node1.setCardData(cardData: vCard1)
-        let node2 = ButtonNode(button: baseButton2, gridPosition: (2,2))
+        
+        let node2 = ButtonNode(button: UIButton(), gridPosition: (2,2))
         node2.setCardData(cardData: vCard2)
-        testCrumbManager.push(buttonNode:node1)
-        testCrumbManager.push(buttonNode: node2)
-        testCrumbManager.emptyCrumbStack()
-        XCTAssertNil(testCrumbManager.getString())
-    }
-    
-    func CrumStackPushTest()  {
-        let x1 = "hello test1"
-        let x2 = "hello test2"
-        let vCard1 = VocabCard(type:VocabCardType(rawValue: 2)!, text:x1, imagefile:Data(), voice: false, color: "ffffff")
-        let vCard2 = VocabCard(type:VocabCardType(rawValue: 2)!, text:x2, imagefile:Data(), voice: false, color: "ffffff")
-        let baseButton1 = UIButton()
-        let baseButton2 = UIButton()
-        let node1 = ButtonNode(button: baseButton1, gridPosition: (1,1))
-        let node2 = ButtonNode(button: baseButton2, gridPosition: (2,2))
+        
         testCrumbManager.push(buttonNode: node1)
         testCrumbManager.push(buttonNode: node2)
+        
+        testCrumbManager.emptyCrumbStack()
+        
+        XCTAssertEqual(testCrumbManager.getString(), "", "CrumbStack string not empty")
+    }
+    
+    func textCrumbStackPush()  {
+        var vCard1 = VocabCard(); vCard1.text = "hello test1"; vCard1.type = .word; vCard1.voice = true
+        var vCard2 = VocabCard(); vCard2.text = "hello test2"; vCard2.type = .word; vCard2.voice = true
+
+        let node1 = ButtonNode(button: UIButton(), gridPosition: (1,1))
+        let node2 = ButtonNode(button: UIButton(), gridPosition: (2,2))
+        
         node1.setCardData(cardData: vCard1)
         node2.setCardData(cardData: vCard2)
-        let content = x1 + " " + x2
+        
+        testCrumbManager.push(buttonNode: node1)
+        testCrumbManager.push(buttonNode: node2)
+        
+        let content = "\(vCard1.text) \(vCard2.text)"
         XCTAssertEqual(testCrumbManager.getString(), content)
     }
     
-    func CrumbUpdateSubviewTest() {
-        let TestView = UIView()
-        let ContainerView = UIView()
-        let content = ["1", "2", "3", "4"]
-        var labels : [UILabel] = []
-        for string in content{
-            let vCard1 = VocabCard(type:VocabCardType(rawValue: 2)!, text:string, imagefile:Data(), voice: false, color: "ffffff")
-            let baseButton = UIButton()
-            let node = ButtonNode(button: baseButton, gridPosition: (1,1))
-            node.setCardData(cardData: vCard1)
-            testCrumbManager.push(buttonNode: node)
-            let label = UILabel()
-            label.text = string
-            labels.append(label)
-        }
-        testCrumbManager.updateSubViews(insideView: TestView)
-        for label in labels {
-            ContainerView.addSubview(label)
-        }
-        XCTAssertEqual(TestView, ContainerView)
+    func testCrumbStackGetString() {
+        var vCard = VocabCard(); vCard.text = "hello test"; vCard.type = .word; vCard.voice = true
+        
+        let node = ButtonNode(button: UIButton(), gridPosition: (1,1))
+        node.setCardData(cardData: vCard)
+
+        testCrumbManager.push(buttonNode: node)
+        XCTAssertEqual(testCrumbManager.getString(), "\(vCard.text) ")
     }
-    
-//    func testgetString() {
-//        let x = "hello test"
-//        let vCard = VocabCard(type:VocabCardType(rawValue: 2)!, text:x, imagefile:Data(), voice: false, color: "ffffff")
-//        let baseButton = UIButton()
-//        let node = ButtonNode(button: baseButton, gridPosition: (1,1))
-//        node.setCardData(cardData: vCard)
-//        XCTAssertNotNil(node.cardData)
-//        testCrumbManager.push(buttonNode:node)
-//        XCTAssertEqual(testCrumbManager.getString(), "hello test1 ")
-//
-//    }
-    
-    func testPerformanceExample() {
-        self.measure {
-        }
-    }
-    
+
+    // NOTE: This should be a UI test
+    //    func testCrumbUpdateSubview() {
+    //        let TestView = UIView()
+    //        let ContainerView = UIView()
+    //        let content = ["1", "2", "3", "4"]
+    //        var labels : [UILabel] = []
+    //        for string in content{
+    //            let vCard1 = VocabCard(type:VocabCardType(rawValue: 2)!, text:string, imagefile:Data(), voice: false, color: "ffffff")
+    //            let baseButton = UIButton()
+    //            let node = ButtonNode(button: baseButton, gridPosition: (1,1))
+    //            node.setCardData(cardData: vCard1)
+    //            testCrumbManager.push(buttonNode: node)
+    //            let label = UILabel()
+    //            label.text = string
+    //            labels.append(label)
+    //        }
+    //        testCrumbManager.updateSubViews(insideView: TestView)
+    //        for label in labels {
+    //            ContainerView.addSubview(label)
+    //        }
+    //        XCTAssertEqual(TestView, ContainerView)
+    //    }
 }
-
-
-
-
