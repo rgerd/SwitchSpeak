@@ -80,6 +80,25 @@ class CrumbStack {
         self.threshold = Int(screenWidth / self.crumbWidth) - 1
     }
     
+    /*  This function resets the size of crumb. If the number of crumbs is no more than the threshold, then the width of the crumb will be 1/5 of screen's width. Once the number of crumbs exceeds the threshold, then the width will be adjusted according to the number of crumbs.
+        This function should be called once the number of crumbs changes.
+    */
+    func resetSize() {
+        let spokenItems:[Crumb] = getSpokenItems()
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        
+        if spokenItems.count > threshold {
+            self.crumbWidth = screenWidth / CGFloat(items.count + 1)
+        } else {
+            self.crumbWidth = size_rate * screenWidth
+        }
+        
+        for (index, item) in spokenItems.enumerated() {
+            item.setLocationAndSize(byIndex: index, withWidth:self.crumbWidth)
+        }
+    }
+    
     /*
      * Removes a breadcrumb.
 	 * add remove the breadcrum from the view as well
@@ -88,6 +107,7 @@ class CrumbStack {
 		if items.count > 0 {	//	i.e. the stack is not empty
             let lastItem:Crumb = items.removeLast()
 			lastItem.label.removeFromSuperview()
+            resetSize()
             return lastItem.cardData
 		}
         return nil
@@ -108,19 +128,8 @@ class CrumbStack {
     func push(buttonNode:ButtonNode) {
         let newCrumb = Crumb(buttonNode.cardData!)
         items.append(newCrumb)
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        
-        
+        resetSize()
         let spokenItems:[Crumb] = getSpokenItems()
-        if spokenItems.count > threshold {
-            self.crumbWidth = screenWidth / CGFloat(items.count + 1)
-            var index:Int = 0
-            for item in spokenItems {
-                item.setLocationAndSize(byIndex: index, withWidth:self.crumbWidth)
-                index += 1
-            }
-        }
         if newCrumb.cardData.voice {
             newCrumb.setLocationAndColor(byIndex: spokenItems.count - 1, withWidth: self.crumbWidth)
         }
