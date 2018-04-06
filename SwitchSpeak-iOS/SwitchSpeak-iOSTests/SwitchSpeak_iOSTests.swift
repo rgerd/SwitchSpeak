@@ -269,6 +269,7 @@ class CrumbManagerTest: XCTestCase {
         testCrumbManager.push(buttonNode: node)
         XCTAssertEqual(testCrumbManager.getString(), "\(vCard.text) ")
     }
+
     
     // NOTE: This should be a UI test
     //    func testCrumbUpdateSubview() {
