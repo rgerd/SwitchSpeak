@@ -79,10 +79,11 @@ class CrumbStack {
         self.crumbWidth = size_rate * screenWidth
         self.threshold = Int(screenWidth / self.crumbWidth) - 1
     }
+    
     /* This function reset the size of crumb. If the number of crumbs is no more than the threshold, then the size width of crumb will be 1/5 of screen's width. Once the number of crumbs exceed threshold, then the width will be adjusted according to the number of crumbs.
      This function should be called once the number of crumbs changes
  */
-    func resetSize(){
+    func resetSize() {
         let spokenItems:[Crumb] = getSpokenItems()
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
