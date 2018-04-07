@@ -43,7 +43,7 @@ class ButtonAction {
 		//	add other code including speech output related code
         SpeechManager.say(phrase: touchSelection.breadcrumbs.getString(), withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
 	}
-	
+    
 	static func callAction(actionButton: ActionButton, touchSelection: TouchSelection) {
 		switch (actionButton) {
 		case .oops:
@@ -56,5 +56,4 @@ class ButtonAction {
 			doDone(touchSelection: touchSelection)
 		}
 	}
-	
 }

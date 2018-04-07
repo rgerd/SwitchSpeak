@@ -13,8 +13,8 @@ import UIKit
 class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
     var scanNode = Node()                // The node in the tree we are currently scanning
-	var prevScanNode = Node()		//	scanNode during the previous scanning step
-    var scanChildIndex: Int = 0            // The index of the highlighted child of scanNode
+	var prevScanNode = Node()            //	scanNode during the previous scanning step
+    var scanChildIndex: Int = 0          // The index of the highlighted child of scanNode
 	var nextScanChildIndex: Int = 0
 	weak var scanningTimer: Timer?
 
@@ -66,7 +66,6 @@ class TouchGrid {
             gridContainer.superview!.addSubview(curNode.button)
             return
         }
-        
         for childnode in node.childNodes {
             addSubTreeToView(childnode)
         }
@@ -81,7 +80,6 @@ class TouchGrid {
             curNode.button.removeFromSuperview()
             return
         }
-        
         for childnode in node.childNodes {
             removeSubTreeFromView(childnode)
         }
@@ -114,7 +112,6 @@ class TouchGrid {
 			} while (scanNode.childNodes[nextScanChildIndex].dummy)
 		}
     }
-	
 	
     /*
      * Gets the button tree's root node.
@@ -203,4 +200,3 @@ class TouchGrid {
 		self.startScanning()
 	}
 }
-

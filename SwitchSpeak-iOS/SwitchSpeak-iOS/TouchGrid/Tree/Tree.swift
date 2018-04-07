@@ -12,7 +12,7 @@ import UIKit
 class Tree {
 	var rootNode: Node?
 	var treeType: ScanType?
-	var size: Int?			//	contains the number of button nodes present in the tree
+	var size: Int?  //  The number of button nodes present in the tree
 	
 	init(root: Node) {
 		self.rootNode = root

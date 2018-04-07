@@ -37,11 +37,11 @@ class Node {
 	/*
 	Highlight all the buttons present in the subtree rooted at self
 	*/
-	func highlightSubTree() {
-		for childNode in self.childNodes {
-			childNode.highlightSubTree()
-		}
-	}
+    func highlightSubTree() {
+        for childNode in self.childNodes {
+            childNode.highlightSubTree()
+        }
+    }
 	
 	func unHighlightSubTree() {
 		for childNode in self.childNodes {
