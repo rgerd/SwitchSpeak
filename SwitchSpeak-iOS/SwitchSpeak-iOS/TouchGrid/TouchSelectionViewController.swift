@@ -25,6 +25,16 @@ class TouchSelectionViewController: UIViewController {
 	@IBAction func tapSwitch(_ sender: Any) {
         touchSelection!.makeSelection()
 	}
+	
+	@IBAction func SwitchEditMode(_ sender: Any) {
+		if (touchSelection?.touchGrid?.isEditMode)! {
+			touchSelection?.touchGrid?.exitEditMode()
+		}
+		else {
+			touchSelection?.touchGrid?.enterEditMode()
+		}
+	}
+	
     
     func registerSettingsUpdate() {
         let newSettings:UserSettings = GlobalSettings.getUserSettings()

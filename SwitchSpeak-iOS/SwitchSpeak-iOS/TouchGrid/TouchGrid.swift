@@ -17,12 +17,15 @@ class TouchGrid {
     var scanChildIndex: Int = 0          // The index of the highlighted child of scanNode
 	var nextScanChildIndex: Int = 0
 	weak var scanningTimer: Timer?
+	weak var switchButton: UIButton!
+	var isEditMode: Bool = false
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
     
-    init(gridContainer:UIView) {
+    init(gridContainer:UIView, switchButton: UIButton?) {
         self.gridContainer = gridContainer
+		self.switchButton = switchButton
         self.buildButtonTree()
     }
     
@@ -85,19 +88,21 @@ class TouchGrid {
         }
     }
 	
-
+	//	start scanning the grid only if in edit mode
 	func startScanning() {
-		let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
-		scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
-			self?.selectSubTree()
+		if !isEditMode {
+			let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
+			scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
+				self?.selectSubTree()
+			}
 		}
 	}
 	
 	func stopScanning() {
 		scanningTimer?.invalidate()
+		getRootNode()?.unHighlightSubTree()
 	}
 	
-    
     /*
      * Highlights the next child node of the scanNode.
      */
@@ -198,5 +203,42 @@ class TouchGrid {
 		scanChildIndex = 0
 		nextScanChildIndex = 0
 		self.startScanning()
+	}
+	
+	func enterEditMode() {
+		isEditMode = true
+		switchButton.isHidden = true
+		stopScanning()
+	}
+	
+	func exitEditMode() {
+		isEditMode = false
+		switchButton.isHidden = false
+		startScanning()
+	}
+	
+	//	retur the buttonNode in the subtree rooted at node with button having the input tag
+	func findButtonNode (searchTag: Int, node: Node?) -> ButtonNode? {
+		if node == nil {
+			return nil
+		}
+		
+		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
+			let buttonNode = (node as? ButtonNode)!
+			if buttonNode.button.tag == searchTag {
+				return buttonNode
+			}
+			else {
+				return nil
+			}
+		}
+		
+		for childNode in (node?.childNodes)! {
+			let buttonNode = findButtonNode(searchTag: searchTag, node: childNode)
+			if buttonNode != nil {
+				return buttonNode
+			}
+		}
+		return nil
 	}
 }

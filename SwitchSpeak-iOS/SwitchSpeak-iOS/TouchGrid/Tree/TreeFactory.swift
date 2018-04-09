@@ -104,6 +104,7 @@ class TreeFactory {
 			
 			for j in 1...cols {
                 let leafNode = ButtonNode(button: UIButton(), gridPosition: (i, j))
+				leafNode.button.tag = (i - 1) * cols + j;	//	tag goes from 1 to rows*cols
                 if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
                    leafNode.dummy = true
                 }
@@ -128,6 +129,7 @@ class TreeFactory {
 		for i in 1...rows {
 			for j in 1...cols {
                 let leafNode = ButtonNode(button: UIButton(), gridPosition: (i, j))
+				leafNode.button.tag = (i - 1) * cols + j;	//	tag goes from 1 to rows*cols
                 if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
                     leafNode.dummy = true
                 }
@@ -136,6 +138,8 @@ class TreeFactory {
 		}
 		return T
 	}
+	
+	
 }
 
 
