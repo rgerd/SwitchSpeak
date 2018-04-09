@@ -163,9 +163,13 @@ class VocabCardDB {
             }
         }
     
-    //Edits the data of the given card in the table it was retrieved from.
+    //Edits the data of the given card in the table it was retrieved from. If a card type is changed from word to category, then a dummy child is inserted into the table.
     func editCard(_ card:VocabCard, inTable table:String) {
         do {
+            let old_card = try self.db.inDatabase { db in
+                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [card.id])
+            }
+
             try self.db.inDatabase { db in
                 try db.execute("UPDATE \(table) 
                                 SET 
@@ -176,7 +180,12 @@ class VocabCardDB {
                                 card.voice = \(card.voice), 
                                 card.colorHex = \(card.colorHex)
                                 WHERE id = \(card.id)")
-            }                   
+            }
+
+            if card.type == .category && old_card.type == .word {
+                self.addPlaceHolder(parentid: card.id, toTable: table)
+            }
+
         } catch {
             fatalError("Could not edit card with id \(card.id) in table \(table): \(error).")
         }
