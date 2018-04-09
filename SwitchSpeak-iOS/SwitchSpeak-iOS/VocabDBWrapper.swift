@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import GRDB
 
 class VocabCardDB {
@@ -141,17 +142,72 @@ class VocabCardDB {
             fatalError("Could not remove card with id \(id) from table \(table): \(error).")
         }
     }
+    
+    //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
+    func addPlaceholder(withParentId parentid:Int64, toTable table:String) {
+        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
+        placeHolder.parentid = parentid
+        let _ = self.addCard(placeHolder, toTable: table)
+    }
 
     // Copies the given card from one table to another.
     // The new parentid of the card must be updated before being passed to this function.
     func copyCard(_ card:VocabCard, fromTable:String, toTable:String) {
-        let new_id = self.addCard(card, toTable: toTable)
+        let newId = self.addCard(card, toTable: toTable)
 
         if card.type == .category {
-            let children = self.getCardArray(inTable: fromTable, withId: new_id)
+            let children = self.getCardArray(inTable: fromTable, withId: newId)
             for var child in children {
-                child.parentid = new_id
+                child.parentid = newId
                 self.copyCard(child, fromTable: fromTable, toTable: toTable)
+            }
+        }
+    }
+    
+    // Edits the data of the given card in the table it was retrieved from.
+    // If a card type is changed from word to category, then a dummy child is inserted into the table.
+    func editCard(_ card:VocabCard, inTable table:String) {
+        let cardId:Int64 = card.id!
+        
+        do {
+            let oldCard = try self.db.inDatabase { db in
+                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [cardId])
+            }
+
+            try self.db.inDatabase { db in
+                try db.execute("""
+                    UPDATE \(table)
+                        SET
+                        type = \(card.type.rawValue),
+                        text = \(card.text),
+                        imagefile = \(card.imagefile),
+                        parentid = \(card.parentid),
+                        card.voice = \(card.voice),
+                        card.colorHex = \(card.colorHex)
+                        WHERE id = \(cardId)
+                    """)
+            }
+
+            if card.type == .category && oldCard!.type == .word {
+                self.addPlaceholder(withParentId: cardId, toTable: table)
+            }
+
+        } catch {
+            fatalError("Could not edit card with id \(cardId) in table \(table): \(error).")
+        }
+    }
+
+    // Takes a card array, edits the cards that already exist in the database and inserts those that do not exist.
+    // For all categories created, a dummy child word will also be inserted into the database.
+    func updateCardArray(_ cards:[VocabCard], inTable table:String) {
+        for card in cards {
+            if card.id == 0 {
+                let newId = self.addCard(card, toTable: table)
+                if card.type == .category {
+                    self.addPlaceholder(withParentId: newId, toTable: table)
+                }
+            } else {
+                self.editCard(card, inTable: table)
             }
         }
     }
