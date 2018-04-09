@@ -95,7 +95,6 @@ class TreeFactory {
 		T.size = rows * cols
         // compute the positions of dummy buttons according to the number of dummy buttons
         // buttons
-
         let dummyCol = cols - dummyNum % cols
         let dummyRow = rows - dummyNum / cols
 		

@@ -60,7 +60,7 @@ class TouchSelection {
         pageOffset = (lastIndex + 1) % cards.count
     }
 	
-	/*
+   /*
 	*	This function selects the currently highlighted phrase in the grid and performs computation
 	*	on it depending on whether it is an action button or whether it is a phrase; and it does nothing if currently
 	*	more than a single phrase is highlighted in the grid
@@ -68,29 +68,25 @@ class TouchSelection {
 	*/
 	func makeSelection() {
 		let choice:ButtonNode? = touchGrid!.makeSelection()
-		
 		if(choice == nil) { // If we're still scanning deeper
 			return
 		}
+        if(choice!.cardData!.type == .action) {
+            choice!.callAction()
+            return
+        }
         
-        let choiceText:String = choice!.button.titleLabel!.text!
-		
-		guard let actionButton = ActionButton(rawValue: choiceText) else {
-            // i.e. a phrase is selected
-            //	we may update the arry of phrases and update the grid content
-            breadcrumbs.push(buttonNode: choice!)
-            breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
-            if choice!.cardData!.type == .category {
-                self.setScreenId(choice!.cardData!.id!)
-            }
-            
-			return
-		}
-		
-		ButtonAction.callAction(actionButton: actionButton, touchSelection: self)
+        // i.e. a phrase is selected
+        //    we may update the array of phrases and update the grid content
+        breadcrumbs.push(buttonNode: choice!)
+        breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
+        
+        if choice!.cardData!.type == .category {
+            self.setScreenId(choice!.cardData!.id!)
+        }
 	}
 	
-	/*
+   /*
 	*	update the set of phrases from which we wish to select
 	*/
 	func pageNext() {
@@ -103,3 +99,5 @@ class TouchSelection {
         self.refillGrid()
     }
 }
+
+

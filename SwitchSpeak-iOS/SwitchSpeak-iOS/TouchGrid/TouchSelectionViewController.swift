@@ -14,15 +14,14 @@ class TouchSelectionViewController: UIViewController {
     var touchSelection:TouchSelection?
     var lastSettings:UserSettings?
     
-	override func viewDidLoad() {
+    override func viewDidLoad() {
 		super.viewDidLoad()
+        switchButton.isHidden = true // Currently hiding the switchButton so action buttons are touchable. 
         TouchSelectionViewController.sharedInstance = self
-        
         self.touchSelection = TouchSelection(breadcrumbContainer: breadcrumbContainer, gridContainer: (switchButton as UIView))
-        
         lastSettings = GlobalSettings.getUserSettings()
-	}
-
+        }
+   
 	@IBAction func tapSwitch(_ sender: Any) {
         touchSelection!.makeSelection()
 	}

@@ -17,7 +17,6 @@ class ButtonNode: Node {
     static let highlightColor:CGColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
     // Tunable parameter for scaling the bottom margin with respect to font size
     static let titleBottomMarginScale:CGFloat = 730.0
-    
     var button:UIButton = UIButton(type: UIButtonType.custom)
     var cardData:VocabCard?
     var gridPosition:(Int, Int)
@@ -25,7 +24,7 @@ class ButtonNode: Node {
     init(button: UIButton, gridPosition:(Int, Int)) {
 		self.button = button
         self.gridPosition = gridPosition
-		super.init()
+        super.init()
 	}
     
     func setCardData(cardData:VocabCard) {
@@ -67,9 +66,14 @@ class ButtonNode: Node {
         self.button.layer.borderWidth = 5
         self.button.layer.shadowOpacity = 0.0
         
+        
+        if cardData.type == .action {
+            self.button.addTarget(self, action:#selector(callAction), for: .touchUpInside)
+        }
+        
         self.button.layoutIfNeeded()
     }
-	
+    
 	override func highlightSubTree() {
         if dummy {
             return
@@ -83,8 +87,18 @@ class ButtonNode: Node {
         }
 		button.layer.borderColor = ButtonNode.inertColor
 	}
-   
-   
+    
+    @objc func callAction() {
+        if(self.cardData!.type != .action) {
+            return
+        }
+        
+        guard let actionButton = ActionButton(rawValue: self.cardData!.text) else {
+            return
+        }
+        
+        ButtonAction.callAction(actionButton: actionButton, touchSelection: TouchSelectionViewController.sharedInstance!.touchSelection!)
+    }
 }
 
 
