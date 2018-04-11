@@ -58,7 +58,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Edit Mode"/>
                                 <connections>
-                                    <action selector="SwitchEditMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UQ9-Tg-ldQ"/>
+                                    <action selector="toggleEditingMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FKo-W5-Lft"/>
                                 </connections>
                             </button>
                         </barButtonItem>

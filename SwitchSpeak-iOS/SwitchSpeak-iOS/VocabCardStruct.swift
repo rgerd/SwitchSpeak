@@ -59,6 +59,8 @@ enum VocabCardType:Int {
 }
 
 extension VocabCard : RowConvertible {
+    static let actionCards:[VocabCard] = [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
+    
     // Initializer from database
     init(row:Row) {
         var cardType:VocabCardType

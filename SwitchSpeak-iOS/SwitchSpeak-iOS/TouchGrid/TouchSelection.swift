@@ -15,15 +15,12 @@ class TouchSelection {
     var breadcrumbContainer:UIView?
 	var pageOffset:Int
     var screenId:Int64
-	weak var switchButton: UIButton!
 	
-	init(breadcrumbContainer:UIView, gridContainer:UIView, switchButton: UIButton!) {
+	init(breadcrumbContainer:UIView, gridContainer:UIView) {
         self.breadcrumbContainer = breadcrumbContainer
-		self.touchGrid = TouchGrid(gridContainer: gridContainer, switchButton: switchButton)
-		self.switchButton = switchButton
+		self.touchGrid = TouchGrid(gridContainer: gridContainer)
         self.pageOffset = 0
         self.screenId = 0
-		//touchGrid?.enterEditMode()
 		self.refillGrid()
 	}
 	
@@ -33,7 +30,6 @@ class TouchSelection {
 	 */
 	func refillGrid() {
         refillGrid(withoutPaging: false)
-		self.addGridButtonActions(node: (touchGrid?.getRootNode())!)
 	}
     
     func refillGrid(withoutPaging:Bool) {
@@ -46,17 +42,17 @@ class TouchSelection {
         let (rows, cols) = settings.getGridSize()
         let gridSize:Int = rows * cols
         
-        let lastIndex:Int = min(cards.count, pageOffset + gridSize - 4) - 1
+        let lastIndex:Int = min(cards.count, pageOffset + gridSize - VocabCard.actionCards.count) - 1
         var gridCards = Array(cards[pageOffset...lastIndex])
+        
         //    next we add dummy elements for the remaining grid cells excluding the last 4 cells,
         //    which correspond to the 4 action buttons (home,done,oops,next)
-        if (gridCards.count < gridSize - 4) {
-            //    the string '---' represents a dummy cell in the grid
-            //    need to change this depending on how dummy cells are identified
-            gridCards += [VocabCard](repeating: EmptyVocabCard, count: gridSize - gridCards.count - 4)
+        if (gridCards.count < gridSize - VocabCard.actionCards.count) {
+            gridCards += [VocabCard](repeating: EmptyVocabCard, count: gridSize - gridCards.count - VocabCard.actionCards.count)
         }
+        
         //    functional grid cells or action buttons are recognized by the four phrases mentioned below
-        gridCards += [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
+        gridCards += VocabCard.actionCards
 		
 		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
@@ -75,20 +71,19 @@ class TouchSelection {
 		if(choice == nil) { // If we're still scanning deeper
 			return
 		}
-        if(choice!.cardData!.type == .action) {
-            choice!.callAction()
-            return
-        }
-        
+        choice!.select()
+	}
+    
+    func selectCard(_ card:VocabCard) {
         // i.e. a phrase is selected
         //    we may update the array of phrases and update the grid content
-        breadcrumbs.push(buttonNode: choice!)
+        breadcrumbs.push(cardData: card)
         breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
         
-        if choice!.cardData!.type == .category {
-            self.setScreenId(choice!.cardData!.id!)
+        if card.type == .category {
+            self.setScreenId(card.id!)
         }
-	}
+    }
 	
    /*
 	*	update the set of phrases from which we wish to select
@@ -102,47 +97,6 @@ class TouchSelection {
         self.screenId = id
         self.refillGrid()
     }
-
-	func addGridButtonActions(node: Node) {
-		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
-			let buttonNode = (node as? ButtonNode)!
-			buttonNode.button.addTarget(self, action: #selector(self.gridButtonClicked), for: UIControlEvents.touchUpInside)
-			
-		}
-		else {
-			for childNode in (node.childNodes) {
-				addGridButtonActions(node: childNode)
-			}
-		}
-	}
-
-	@objc func gridButtonClicked(_ sender: UIButton) {
-		print("hi")
-		//	find the buttonNode containing the input button
-		let choice = touchGrid?.findButtonNode(searchTag: sender.tag, node: touchGrid?.getRootNode())
-		selectInputButtonNode(choice: choice)
-		
-	}
-	
-	//	selects the input button node
-	func selectInputButtonNode(choice: ButtonNode?) {
-		if(choice == nil) { // If we're still scanning deeper
-			return
-		}
-		let choiceText:String = choice!.button.titleLabel!.text!
-		guard let actionButton = ActionButton(rawValue: choiceText) else {
-			// i.e. a phrase is selected
-			//	we may update the arry of phrases and update the grid content
-			breadcrumbs.push(buttonNode: choice!)
-			breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
-			if choice!.cardData!.type == .category {
-				self.setScreenId(choice!.cardData!.id!)
-			}
-			return
-		}
-		
-		ButtonAction.callAction(actionButton: actionButton, touchSelection: self)
-	}
 }
 
 

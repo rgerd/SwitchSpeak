@@ -14,18 +14,16 @@ class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
     var scanNode = Node()                // The node in the tree we are currently scanning
 	var prevScanNode = Node()            //	scanNode during the previous scanning step
-    var scanChildIndex: Int = 0          // The index of the highlighted child of scanNode
-	var nextScanChildIndex: Int = 0
-	weak var scanningTimer: Timer?
-	weak var switchButton: UIButton!
-	var isEditMode: Bool = false
+    var scanChildIndex:Int = 0          // The index of the highlighted child of scanNode
+	var nextScanChildIndex:Int = 0
+	weak var scanningTimer:Timer?
+	var editing:Bool = false
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
     
-    init(gridContainer:UIView, switchButton: UIButton?) {
+    init(gridContainer:UIView) {
         self.gridContainer = gridContainer
-		self.switchButton = switchButton
         self.buildButtonTree()
     }
     
@@ -90,7 +88,7 @@ class TouchGrid {
 	
 	//	start scanning the grid only if in edit mode
 	func startScanning() {
-		if !isEditMode {
+		if !editing {
 			let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
 			scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
 				self?.selectSubTree()
@@ -173,7 +171,7 @@ class TouchGrid {
 	 */
 	func determineDummy(node: Node) {
 		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
-			if ((node as? ButtonNode)?.button.title(for: .normal) == "   ") {
+			if ((node as? ButtonNode)?.button.title(for: .normal) == EmptyVocabCard.text) {
 				(node as? ButtonNode)?.dummy = true
 			} else {
                 (node as? ButtonNode)?.dummy = false
@@ -206,14 +204,14 @@ class TouchGrid {
 	}
 	
 	func enterEditMode() {
-		isEditMode = true
-		switchButton.isHidden = true
+		editing = true
+		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = true
 		stopScanning()
 	}
 	
 	func exitEditMode() {
-		isEditMode = false
-		switchButton.isHidden = false
+		editing = false
+		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = false
 		startScanning()
 	}
 	
