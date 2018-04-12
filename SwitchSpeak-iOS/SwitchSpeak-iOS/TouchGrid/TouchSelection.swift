@@ -81,7 +81,7 @@ class TouchSelection {
         breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
         
         // say word on selection if necessary
-        if card.voice != false {
+        if card.voice {
             SpeechManager.say(phrase: card.text, withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
         }
         

@@ -130,7 +130,7 @@ class CrumbStack {
         items.append(newCrumb)
         resetSize()
         let spokenItems:[Crumb] = getSpokenItems()
-        if newCrumb.cardData.voice {
+        if cardData.voice {
             newCrumb.setLocationAndColor(byIndex: spokenItems.count - 1, withWidth: self.crumbWidth)
         }
     }
