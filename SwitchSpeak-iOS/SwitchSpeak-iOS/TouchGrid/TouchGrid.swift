@@ -14,9 +14,10 @@ class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
     var scanNode = Node()                // The node in the tree we are currently scanning
 	var prevScanNode = Node()            //	scanNode during the previous scanning step
-    var scanChildIndex: Int = 0          // The index of the highlighted child of scanNode
-	var nextScanChildIndex: Int = 0
-	weak var scanningTimer: Timer?
+    var scanChildIndex:Int = 0          // The index of the highlighted child of scanNode
+	var nextScanChildIndex:Int = 0
+	weak var scanningTimer:Timer?
+	var editing:Bool = false
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
@@ -85,19 +86,21 @@ class TouchGrid {
         }
     }
 	
-
+	//	start scanning the grid only if in edit mode
 	func startScanning() {
-		let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
-		scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
-			self?.selectSubTree()
+		if !editing {
+			let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
+			scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
+				self?.selectSubTree()
+			}
 		}
 	}
 	
 	func stopScanning() {
 		scanningTimer?.invalidate()
+		getRootNode()?.unHighlightSubTree()
 	}
 	
-    
     /*
      * Highlights the next child node of the scanNode.
      */
@@ -168,7 +171,7 @@ class TouchGrid {
 	 */
 	func determineDummy(node: Node) {
 		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
-			if ((node as? ButtonNode)?.button.title(for: .normal) == "   ") {
+			if ((node as? ButtonNode)?.button.title(for: .normal) == EmptyVocabCard.text) {
 				(node as? ButtonNode)?.dummy = true
 			} else {
                 (node as? ButtonNode)?.dummy = false
@@ -198,5 +201,42 @@ class TouchGrid {
 		scanChildIndex = 0
 		nextScanChildIndex = 0
 		self.startScanning()
+	}
+	
+	func enterEditMode() {
+		editing = true
+		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = true
+		stopScanning()
+	}
+	
+	func exitEditMode() {
+		editing = false
+		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = false
+		startScanning()
+	}
+	
+	//	retur the buttonNode in the subtree rooted at node with button having the input tag
+	func findButtonNode (searchTag: Int, node: Node?) -> ButtonNode? {
+		if node == nil {
+			return nil
+		}
+		
+		if (((node as? ButtonNode)) != nil) {	//	i.e. the node is a button node
+			let buttonNode = (node as? ButtonNode)!
+			if buttonNode.button.tag == searchTag {
+				return buttonNode
+			}
+			else {
+				return nil
+			}
+		}
+		
+		for childNode in (node?.childNodes)! {
+			let buttonNode = findButtonNode(searchTag: searchTag, node: childNode)
+			if buttonNode != nil {
+				return buttonNode
+			}
+		}
+		return nil
 	}
 }

@@ -66,10 +66,7 @@ class ButtonNode: Node {
         self.button.layer.borderWidth = 5
         self.button.layer.shadowOpacity = 0.0
         
-        
-        if cardData.type == .action {
-            self.button.addTarget(self, action:#selector(callAction), for: .touchUpInside)
-        }
+        self.button.addTarget(self, action:#selector(select), for: .touchUpInside)
         
         self.button.layoutIfNeeded()
     }
@@ -88,7 +85,28 @@ class ButtonNode: Node {
 		button.layer.borderColor = ButtonNode.inertColor
 	}
     
-    @objc func callAction() {
+    @objc func select() {
+        switch(self.cardData!.type) {
+        case .empty:
+            return
+        case .action:
+            self.callAction()
+            return
+        default:
+            self.selectCard()
+            return
+        }
+    }
+    
+    private func selectCard() {
+        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
+        
+        touchSelection.selectCard(self.cardData!)
+    }
+    
+    private func callAction() {
+        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
+        
         if(self.cardData!.type != .action) {
             return
         }
@@ -97,7 +115,7 @@ class ButtonNode: Node {
             return
         }
         
-        ButtonAction.callAction(actionButton: actionButton, touchSelection: TouchSelectionViewController.sharedInstance!.touchSelection!)
+        ButtonAction.callAction(actionButton: actionButton, touchSelection: touchSelection)
     }
 }
 
