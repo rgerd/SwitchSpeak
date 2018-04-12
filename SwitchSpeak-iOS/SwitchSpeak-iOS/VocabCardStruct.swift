@@ -108,12 +108,12 @@ extension VocabCard : RowConvertible {
 
 let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
 
-let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Oops")!)!, voice: false, color: "1aa3ff")
 
-let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Home")!)!, voice: false, color: "1aa3ff")
 
-let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Next")!)!, voice: false, color: "1aa3ff")
 
-let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: Data(), voice: false, color: "1aa3ff")
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Speak")!)!, voice: false, color: "1aa3ff")
 
 
