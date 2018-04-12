@@ -59,6 +59,10 @@ class TouchSelection {
 		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
 
+        if !withoutPaging && touchGrid!.getButtonBeingEdited() != nil && !touchGrid!.getButtonBeingEdited()!.isSwapping() {
+            touchGrid?.setButtonBeingEdited(nil)
+        }
+        
 		prevPageOffset = pageOffset
         pageOffset = (lastIndex + 1) % cards.count
     }
@@ -101,6 +105,7 @@ class TouchSelection {
 	}
     
     func setScreenId(_ id: Int64) {
+        touchGrid?.setButtonBeingEdited(nil)
         self.pageOffset = 0
         self.screenId = id
         self.refillGrid()

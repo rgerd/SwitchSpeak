@@ -17,7 +17,9 @@ class TouchGrid {
     var scanChildIndex:Int = 0          // The index of the highlighted child of scanNode
 	var nextScanChildIndex:Int = 0
 	weak var scanningTimer:Timer?
-	var editing:Bool = false
+	
+    var editing:Bool = false
+    private var buttonBeingEdited:ButtonNode?
 
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
@@ -212,15 +214,40 @@ class TouchGrid {
 	
 	func enterEditMode() {
 		editing = true
-		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = shouldHideScanning()
+		TouchSelectionUI.getSwitchButton().isHidden = shouldHideScanning()
 		stopScanning()
 	}
 	
 	func exitEditMode() {
 		editing = false
-		TouchSelectionViewController.sharedInstance!.switchButton.isHidden = shouldHideScanning()
+        setButtonBeingEdited(nil)
+		TouchSelectionUI.getSwitchButton().isHidden = shouldHideScanning()
 		startScanning()
 	}
+    
+    func getButtonBeingEdited() -> ButtonNode? {
+        return buttonBeingEdited
+    }
+    
+    func setButtonBeingEdited(_ newButton:ButtonNode?) {
+        // If we're editing, go ahead and set it to what you like.
+        // If we're not editing, you can only deselect the current button.
+        if(!editing && newButton != nil) {
+            return
+        }
+        
+        if(buttonBeingEdited != nil) {
+            buttonBeingEdited?.editSelected = false
+        }
+        
+        if(newButton == nil) {
+            buttonBeingEdited = nil
+            return
+        }
+        
+        buttonBeingEdited = newButton
+        buttonBeingEdited?.editSelected = true
+    }
     
     func shouldHideScanning() -> Bool {
         return GlobalSettings.getUserSettings().scanType == .NO_SCAN

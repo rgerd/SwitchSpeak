@@ -22,7 +22,7 @@ class TouchSelectionViewController: UIViewController {
         self.touchSelection = TouchSelection(breadcrumbContainer: breadcrumbContainer, gridContainer: (switchButton as UIView))
         lastSettings = GlobalSettings.getUserSettings()
     }
-   
+    
 	@IBAction func tapSwitch(_ sender: Any) {
         touchSelection!.makeSelection()
 	}
@@ -56,6 +56,27 @@ class TouchSelectionViewController: UIViewController {
 
     static func bringSwitchButtonToFront() {
         sharedInstance!.view.bringSubview(toFront: sharedInstance!.switchButton)
+    }
+}
+
+class TouchSelectionUI {
+    static func getViewController() -> TouchSelectionViewController {
+        return TouchSelectionViewController.sharedInstance!
+    }
+    static func getSwitchButton() -> UIButton {
+        return getViewController().switchButton
+    }
+    static func getMainView() -> UIView {
+        return getViewController().view
+    }
+    static func getTouchSelection() -> TouchSelection {
+        return getViewController().touchSelection!
+    }
+    static func hasTouchSelection() -> Bool {
+        return getViewController().touchSelection != nil
+    }
+    static func getTouchGrid() -> TouchGrid {
+        return getTouchSelection().touchGrid!
     }
 }
 

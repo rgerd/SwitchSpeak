@@ -19,13 +19,55 @@ class ButtonNode: Node {
     // Tunable parameter for scaling the bottom margin with respect to font size
     static let titleBottomMarginScale:CGFloat = 730.0
     
-    var button:UIButton = UIButton(type: UIButtonType.custom)
+    var button:UIButton = UIButton(type: .custom)
+
     var cardData:VocabCard?
+    
+    var cardId:Int64 {
+        return self.cardData!.id!
+    }
+    
+    var hidden:Bool {
+        get {
+            if self.cardData == nil {
+                return false
+            }
+            return self.cardData!.hidden
+        }
+        set {
+            if newValue == hidden {
+                return
+            }
+            self.cardData!.hidden = hidden
+            self.button.alpha = newValue ? 0.5 : 1.0
+        }
+    }
+    
     var gridPosition:(Int, Int)
+    
+    private var editView:ButtonEditView?
+    var editSelected:Bool = false {
+        didSet {
+            if oldValue == editSelected {
+                return
+            }
+            if editSelected {
+                self.editView = ButtonEditView(buttonNode: self, containerView: TouchSelectionUI.getMainView())
+                self.editView?.fadeIn()
+            } else {
+                self.editView?.fadeOut()
+                self.editView = nil
+            }
+        }
+    }
+    func isSwapping() -> Bool {
+        return editView!.swapping
+    }
 	
     init(button: UIButton, gridPosition:(Int, Int)) {
 		self.button = button
         self.gridPosition = gridPosition
+        
         super.init()
 	}
     
@@ -70,7 +112,20 @@ class ButtonNode: Node {
         
         self.button.addTarget(self, action:#selector(select), for: .touchUpInside)
         
+        self.hidden = cardData.hidden
+        
         self.button.layoutIfNeeded()
+        
+        // When this button node is loaded, if the touchgrid is editing this card id, reflect its selection in the UI.
+        if(TouchSelectionUI.hasTouchSelection()) {
+            let touchGrid:TouchGrid = TouchSelectionUI.getTouchGrid()
+            let currentEditButton:ButtonNode? = touchGrid.getButtonBeingEdited()
+            if currentEditButton != nil && currentEditButton!.cardId == self.cardId {
+                let swapping:Bool = currentEditButton!.isSwapping()
+                touchGrid.setButtonBeingEdited(self)
+                self.editView!.swapping = swapping
+            }
+        }
     }
     
 	override func highlightSubTree() {
@@ -101,14 +156,25 @@ class ButtonNode: Node {
     }
     
     private func selectCard() {
-        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
+        let touchGrid:TouchGrid = TouchSelectionUI.getTouchGrid()
         
-        touchSelection.selectCard(self.cardData!)
+        if touchGrid.editing {
+            let currentEditButton:ButtonNode? = touchGrid.getButtonBeingEdited()
+            
+            if currentEditButton != nil && currentEditButton!.editView!.swapping {
+                // SWAP CARDS HERE
+                return
+            }
+            
+            touchGrid.setButtonBeingEdited(self)
+            
+            return
+        }
+        
+        TouchSelectionUI.getTouchSelection().selectCard(self.cardData!)
     }
     
     private func callAction() {
-        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
-        
         if(self.cardData!.type != .action) {
             return
         }
@@ -117,7 +183,7 @@ class ButtonNode: Node {
             return
         }
         
-        ButtonAction.callAction(actionButton: actionButton, touchSelection: touchSelection)
+        ButtonAction.callAction(actionButton: actionButton, touchSelection: TouchSelectionUI.getTouchSelection())
     }
 }
 
