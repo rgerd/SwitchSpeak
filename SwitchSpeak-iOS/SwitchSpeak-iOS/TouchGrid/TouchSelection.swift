@@ -80,6 +80,11 @@ class TouchSelection {
         breadcrumbs.push(cardData: card)
         breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
         
+        // say word on selection if necessary
+        if card.voice {
+            SpeechManager.say(phrase: card.text, withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
+        }
+        
         if card.type == .category {
             self.setScreenId(card.id!)
         }
