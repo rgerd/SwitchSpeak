@@ -79,6 +79,7 @@ class TouchSelection {
         //    we may update the array of phrases and update the grid content
         breadcrumbs.push(cardData: card)
         breadcrumbs.updateSubViews(insideView: breadcrumbContainer!)
+        SpeechManager.say(phrase: VocabCard.text, withVoice: GlobalSettings.getUserSettings().voiceType.rawValue)
         
         if card.type == .category {
             self.setScreenId(card.id!)
