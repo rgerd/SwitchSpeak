@@ -14,12 +14,14 @@ class TouchSelection {
 	var breadcrumbs = CrumbStack()
     var breadcrumbContainer:UIView?
 	var pageOffset:Int
+	var prevPageOffset: Int
     var screenId:Int64
 	
 	init(breadcrumbContainer:UIView, gridContainer:UIView) {
         self.breadcrumbContainer = breadcrumbContainer
 		self.touchGrid = TouchGrid(gridContainer: gridContainer)
         self.pageOffset = 0
+		self.prevPageOffset = 0
         self.screenId = 0
 		self.refillGrid()
 	}
@@ -57,6 +59,7 @@ class TouchSelection {
 		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
 
+		prevPageOffset = pageOffset
         pageOffset = (lastIndex + 1) % cards.count
     }
 	
