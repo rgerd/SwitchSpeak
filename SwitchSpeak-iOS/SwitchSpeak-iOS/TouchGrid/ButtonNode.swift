@@ -13,8 +13,9 @@ import UIKit
 	a ButtonNode would always be a leaf node in the 'Tree' data structure
 */
 class ButtonNode: Node {
-    static let inertColor:CGColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+    static let highlightBorderWidth:CGFloat = 10.0
     static let highlightColor:CGColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+    
     // Tunable parameter for scaling the bottom margin with respect to font size
     static let titleBottomMarginScale:CGFloat = 730.0
     
@@ -25,7 +26,7 @@ class ButtonNode: Node {
     init(button: UIButton, gridPosition:(Int, Int)) {
 		self.button = button
         self.gridPosition = gridPosition
-		super.init()
+        super.init()
 	}
     
     func setCardData(cardData:VocabCard) {
@@ -63,28 +64,61 @@ class ButtonNode: Node {
         self.button.backgroundColor = cardData.color
         
         self.button.layer.cornerRadius = 10
-        self.button.layer.borderColor = ButtonNode.inertColor
-        self.button.layer.borderWidth = 5
+        self.button.layer.borderColor = ButtonNode.highlightColor
+        self.button.layer.borderWidth = 0
         self.button.layer.shadowOpacity = 0.0
+        
+        self.button.addTarget(self, action:#selector(select), for: .touchUpInside)
         
         self.button.layoutIfNeeded()
     }
-	
+    
 	override func highlightSubTree() {
         if dummy {
             return
         }
-		button.layer.borderColor = ButtonNode.highlightColor
+		button.layer.borderWidth = ButtonNode.highlightBorderWidth
 	}
 	
 	override func unHighlightSubTree() {
         if dummy {
             return
         }
-		button.layer.borderColor = ButtonNode.inertColor
+		button.layer.borderWidth = 0
 	}
-   
-   
+    
+    @objc func select() {
+        switch(self.cardData!.type) {
+        case .empty:
+            return
+        case .action:
+            self.callAction()
+            return
+        default:
+            self.selectCard()
+            return
+        }
+    }
+    
+    private func selectCard() {
+        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
+        
+        touchSelection.selectCard(self.cardData!)
+    }
+    
+    private func callAction() {
+        let touchSelection:TouchSelection = TouchSelectionViewController.sharedInstance!.touchSelection!
+        
+        if(self.cardData!.type != .action) {
+            return
+        }
+        
+        guard let actionButton = ActionButton(rawValue: self.cardData!.text) else {
+            return
+        }
+        
+        ButtonAction.callAction(actionButton: actionButton, touchSelection: touchSelection)
+    }
 }
 
 

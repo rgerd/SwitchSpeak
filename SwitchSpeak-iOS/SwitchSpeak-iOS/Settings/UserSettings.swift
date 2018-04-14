@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 enum ScanSpeed : Double, Codable {
-    case SLOWER = 2.3
-    case MEDIUM = 1.5
-    case FASTER = 0.8
+    case SLOWER = 10
+    case MEDIUM = 5
+    case FASTER = 1.5
 }
 
 enum ScanType : Int, Codable {

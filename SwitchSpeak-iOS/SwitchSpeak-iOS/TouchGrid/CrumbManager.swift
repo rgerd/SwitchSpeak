@@ -125,12 +125,12 @@ class CrumbStack {
     /*
      * Pushes a breadcrumb referencing [buttonNode] to the stack.
      */
-    func push(buttonNode:ButtonNode) {
-        let newCrumb = Crumb(buttonNode.cardData!)
+    func push(cardData:VocabCard) {
+        let newCrumb = Crumb(cardData)
         items.append(newCrumb)
         resetSize()
         let spokenItems:[Crumb] = getSpokenItems()
-        if newCrumb.cardData.voice {
+        if cardData.voice {
             newCrumb.setLocationAndColor(byIndex: spokenItems.count - 1, withWidth: self.crumbWidth)
         }
     }

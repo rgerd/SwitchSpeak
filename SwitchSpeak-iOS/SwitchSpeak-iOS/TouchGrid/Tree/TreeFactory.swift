@@ -9,58 +9,6 @@
 import Foundation
 import UIKit
 
-let nouns:[String] = [
-    "area",
-    "book",
-    "business",
-    "case",
-    "child",
-    "company",
-    "country",
-    "day",
-    "eye",
-    "fact",
-    "family",
-    "government",
-    "group",
-    "hand",
-    "home",
-    "job",
-    "life",
-    "lot",
-    "man",
-    "money",
-    "month",
-    "mother",
-    "night",
-    "number",
-    "part",
-    "people",
-    "place",
-    "point",
-    "problem",
-    "program",
-    "question",
-    "right",
-    "room",
-    "school",
-    "state",
-    "story",
-    "student",
-    "study",
-    "system",
-    "thing",
-    "time",
-    "water",
-    "way",
-    "week",
-    "woman",
-    "word",
-    "work",
-    "world",
-    "year"
-]
-
 class TreeFactory {
     /*
         returns a tree corresponding to the provided scan type and
@@ -95,7 +43,6 @@ class TreeFactory {
 		T.size = rows * cols
         // compute the positions of dummy buttons according to the number of dummy buttons
         // buttons
-
         let dummyCol = cols - dummyNum % cols
         let dummyRow = rows - dummyNum / cols
 		
@@ -105,6 +52,7 @@ class TreeFactory {
 			
 			for j in 1...cols {
                 let leafNode = ButtonNode(button: UIButton(), gridPosition: (i, j))
+				leafNode.button.tag = (i - 1) * cols + j;	//	tag goes from 1 to rows*cols
                 if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
                    leafNode.dummy = true
                 }
@@ -129,6 +77,7 @@ class TreeFactory {
 		for i in 1...rows {
 			for j in 1...cols {
                 let leafNode = ButtonNode(button: UIButton(), gridPosition: (i, j))
+				leafNode.button.tag = (i - 1) * cols + j;	//	tag goes from 1 to rows*cols
                 if ((i > dummyRow) || (i == dummyRow && j > dummyCol))  {
                     leafNode.dummy = true
                 }

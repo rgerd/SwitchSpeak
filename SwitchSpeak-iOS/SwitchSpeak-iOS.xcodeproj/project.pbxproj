@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13FB3833FCD95842C3766049 /* Pods_SwitchSpeak_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BB8FEEB8D977DCF2343B75 /* Pods_SwitchSpeak_iOSUITests.framework */; };
-		230E30EB205C5F5D00B57009 /* VocabCardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230E30EA205C5F5D00B57009 /* VocabCardStruct.swift */; };
+		230E30EB205C5F5D00B57009 /* VocabCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230E30EA205C5F5D00B57009 /* VocabCard.swift */; };
 		235238F7205AE5050022C4A0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 235238F6205AE5050022C4A0 /* libsqlite3.tbd */; };
 		235E6800205C7C8200D5A006 /* VocabDBWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */; };
 		46DFDEDD6080FCCDC4D38B5B /* Pods_SwitchSpeak_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3E6A951454112892FF5E00 /* Pods_SwitchSpeak_iOSTests.framework */; };
@@ -72,7 +72,7 @@
 /* Begin PBXFileReference section */
 		01BA377591894C4BAD42F5FA /* Pods-SwitchSpeak-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwitchSpeak-iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwitchSpeak-iOSUITests/Pods-SwitchSpeak-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		13F45B347E5677AB4F9B80C5 /* Pods-SwitchSpeak-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwitchSpeak-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwitchSpeak-iOS/Pods-SwitchSpeak-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		230E30EA205C5F5D00B57009 /* VocabCardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabCardStruct.swift; sourceTree = "<group>"; };
+		230E30EA205C5F5D00B57009 /* VocabCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabCard.swift; sourceTree = "<group>"; };
 		235238F6205AE5050022C4A0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabDBWrapper.swift; sourceTree = "<group>"; };
 		3D3E6A951454112892FF5E00 /* Pods_SwitchSpeak_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwitchSpeak_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,8 +203,7 @@
 				FA5BCEC2205782AF00C84071 /* Settings */,
 				FA2D5DE82028D01200935413 /* Assets.xcassets */,
 				FA2D5DED2028D01300935413 /* Info.plist */,
-				235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */,
-				230E30EA205C5F5D00B57009 /* VocabCardStruct.swift */,
+				FA847A8A208271F4005DBA42 /* VocabCard */,
 			);
 			path = "SwitchSpeak-iOS";
 			sourceTree = "<group>";
@@ -261,6 +260,15 @@
 				FADF17172044809700C7D931 /* Storage.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		FA847A8A208271F4005DBA42 /* VocabCard */ = {
+			isa = PBXGroup;
+			children = (
+				235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */,
+				230E30EA205C5F5D00B57009 /* VocabCard.swift */,
+			);
+			path = VocabCard;
 			sourceTree = "<group>";
 		};
 		FAD7FE722060BC8300D92816 /* Voice */ = {
@@ -584,7 +592,7 @@
 				C5F434DD2048645E00D5D9D5 /* Tree.swift in Sources */,
 				FA1CF5EF20643103004C7D8C /* UserSettingsTableViewCell.swift in Sources */,
 				FADF17182044809700C7D931 /* Storage.swift in Sources */,
-				230E30EB205C5F5D00B57009 /* VocabCardStruct.swift in Sources */,
+				230E30EB205C5F5D00B57009 /* VocabCard.swift in Sources */,
 				235E6800205C7C8200D5A006 /* VocabDBWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
