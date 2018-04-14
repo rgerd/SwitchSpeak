@@ -163,6 +163,13 @@ class VocabCardDB {
             }
         }
     }
+
+    //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
+    func addPlaceHolder(parentid:Int64, toTable table:String) {
+        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
+        placeHolder.parentid = parentid
+        let _ = self.addCard(placeHolder, toTable: table)
+    }
     
     // Edits the data of the given card in the table it was retrieved from.
     // If a card type is changed from word to category, then a dummy child is inserted into the table.

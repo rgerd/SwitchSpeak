@@ -229,14 +229,8 @@ class CrumbManagerTest: XCTestCase {
         var vCard1 = VocabCard(); vCard1.text = "hello test1"; vCard1.type = .word
         var vCard2 = VocabCard(); vCard2.text = "hello test2"; vCard2.type = .word
         
-        let node1 = ButtonNode(button: UIButton(), gridPosition: (1,1))
-        node1.setCardData(cardData: vCard1)
-        
-        let node2 = ButtonNode(button: UIButton(), gridPosition: (2,2))
-        node2.setCardData(cardData: vCard2)
-        
-        testCrumbManager.push(buttonNode: node1)
-        testCrumbManager.push(buttonNode: node2)
+        testCrumbManager.push(cardData: vCard1)
+        testCrumbManager.push(cardData: vCard2)
         
         testCrumbManager.emptyCrumbStack()
         
@@ -247,14 +241,8 @@ class CrumbManagerTest: XCTestCase {
         var vCard1 = VocabCard(); vCard1.text = "hello test1"; vCard1.type = .word; vCard1.voice = true
         var vCard2 = VocabCard(); vCard2.text = "hello test2"; vCard2.type = .word; vCard2.voice = true
         
-        let node1 = ButtonNode(button: UIButton(), gridPosition: (1,1))
-        let node2 = ButtonNode(button: UIButton(), gridPosition: (2,2))
-        
-        node1.setCardData(cardData: vCard1)
-        node2.setCardData(cardData: vCard2)
-        
-        testCrumbManager.push(buttonNode: node1)
-        testCrumbManager.push(buttonNode: node2)
+        testCrumbManager.push(cardData: vCard1)
+        testCrumbManager.push(cardData: vCard2)
         
         let content = "\(vCard1.text) \(vCard2.text)"
         XCTAssertEqual(testCrumbManager.getString(), content)
@@ -263,10 +251,7 @@ class CrumbManagerTest: XCTestCase {
     func testCrumbStackGetString() {
         var vCard = VocabCard(); vCard.text = "hello test"; vCard.type = .word; vCard.voice = true
         
-        let node = ButtonNode(button: UIButton(), gridPosition: (1,1))
-        node.setCardData(cardData: vCard)
-        
-        testCrumbManager.push(buttonNode: node)
+        testCrumbManager.push(cardData: vCard)
         XCTAssertEqual(testCrumbManager.getString(), "\(vCard.text) ")
     }
     
