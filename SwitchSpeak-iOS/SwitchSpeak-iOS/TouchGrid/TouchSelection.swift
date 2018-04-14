@@ -36,7 +36,7 @@ class TouchSelection {
     
     func refillGrid(withoutPaging:Bool) {
         if withoutPaging {
-            pageOffset = 0 // For now. We will want to just reset to page boundary in the future
+            pageOffset = prevPageOffset
         }
         let settings:UserSettings = GlobalSettings.getUserSettings()
         let cards:[VocabCard] = VocabCardDB.shared!.getCardArray(inTable: settings.tableName, withId: self.screenId)

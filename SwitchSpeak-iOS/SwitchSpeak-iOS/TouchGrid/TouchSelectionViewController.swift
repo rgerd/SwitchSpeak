@@ -45,12 +45,10 @@ class TouchSelectionViewController: UIViewController {
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.scanType != newSettings.scanType
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.fontSize != newSettings.fontSize
         shouldRebuildGrid = shouldRebuildGrid || lastSettings!.scanSpeed != newSettings.scanSpeed
-		
-		touchSelection?.pageOffset = (touchSelection?.prevPageOffset)!
-		
+				
         if shouldRebuildGrid {
             touchSelection!.touchGrid!.buildButtonTree()
-            touchSelection!.refillGrid(withoutPaging: false)
+            touchSelection!.refillGrid(withoutPaging: true)
         }
       
         lastSettings = newSettings
