@@ -16,7 +16,7 @@ enum ScanSpeed : Double, Codable {
 }
 
 enum ScanType : Int, Codable {
-    case BINARY_TREE
+//    case BINARY_TREE
     case ROW_COLUMN
     case LINEAR
 }
@@ -59,7 +59,7 @@ let USER_SETTINGS_PICKER_OPTIONS = [
         "Scan Faster"
     ],
     [
-        "Scan Half & Half",
+//        "Scan Half & Half",
         "Scan Row / Column",
         "Scan Cell by Cell"
     ],
@@ -137,8 +137,8 @@ struct UserSettings : Codable {
     
     func _getScanType() -> Int {
         switch scanType {
-        case .BINARY_TREE:
-            return 0
+//        case .BINARY_TREE:
+//            return 0
         case .ROW_COLUMN:
             return 1
         case .LINEAR:
@@ -206,8 +206,8 @@ struct UserSettings : Codable {
             break
         case 1:
             switch val {
-            case 0:
-                newSettings.scanType = .BINARY_TREE
+//            case 0:
+//                newSettings.scanType = .BINARY_TREE
             case 1:
                 newSettings.scanType = .ROW_COLUMN
             case 2:

@@ -21,8 +21,8 @@ class TreeFactory {
         switch(type) {
         case .ROW_COLUMN:
             return treeForRowColumnScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
-        case .BINARY_TREE:
-            break
+//        case .BINARY_TREE:
+//            break
         case .LINEAR:
             return treeForCellByCellScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
         }
