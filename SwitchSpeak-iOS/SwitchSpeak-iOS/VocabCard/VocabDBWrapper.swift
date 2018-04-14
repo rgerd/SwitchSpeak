@@ -162,54 +162,13 @@ class VocabCardDB {
                 self.copyCard(child, fromTable: fromTable, toTable: toTable)
             }
         }
-    
-    //Edits the data of the given card in the table it was retrieved from. If a card type is changed from word to category, then a dummy child is inserted into the table.
-    func editCard(_ card:VocabCard, inTable table:String) {
-        do {
-            let old_card = try self.db.inDatabase { db in
-                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [card.id])
-            }
-
-            try self.db.inDatabase { db in
-                try db.execute("UPDATE \(table) 
-                                SET 
-                                type = \(card.type.rawValue), 
-                                text = \(card.text), 
-                                imagefile = \(card.imagefile), 
-                                parentid = \(card.parentid), 
-                                card.voice = \(card.voice), 
-                                card.colorHex = \(card.colorHex)
-                                WHERE id = \(card.id)")
-            }
-
-            if card.type == .category && old_card.type == .word {
-                self.addPlaceHolder(parentid: card.id, toTable: table)
-            }
-
-        } catch {
-            fatalError("Could not edit card with id \(card.id) in table \(table): \(error).")
-        }
     }
 
     //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
     func addPlaceHolder(parentid:Int64, toTable table:String) {
-        let placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: UIColor.brown)
+        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
         placeHolder.parentid = parentid
-        self.addCard(placeHolder, toTable: table)
-    }
-
-    // Takes a card array, edits the cards that already exist in the database and inserts those that do not exist. For all categories created, a dummy child word will also be inserted into the database.
-    func updateCardArray(_ cards:[VocabCard], inTable table:String) {
-        for card in cards {
-            if card.id == 0 {
-                let new_id = self.addCard(card, toTable: table)
-                if card.type == .category {
-                    self.addPlaceHolder(new_id, toTable: table)
-                }
-            } else {
-                self.editCard(card, inTable: table)
-            }
-        }
+        let _ = self.addCard(placeHolder, toTable: table)
     }
     
     // Edits the data of the given card in the table it was retrieved from.
