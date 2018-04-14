@@ -14,12 +14,14 @@ class TouchSelection {
 	var breadcrumbs = CrumbStack()
     var breadcrumbContainer:UIView?
 	var pageOffset:Int
+	var prevPageOffset: Int
     var screenId:Int64
 	
 	init(breadcrumbContainer:UIView, gridContainer:UIView) {
         self.breadcrumbContainer = breadcrumbContainer
 		self.touchGrid = TouchGrid(gridContainer: gridContainer)
         self.pageOffset = 0
+		self.prevPageOffset = 0
         self.screenId = 0
 		self.refillGrid()
 	}
@@ -34,7 +36,7 @@ class TouchSelection {
     
     func refillGrid(withoutPaging:Bool) {
         if withoutPaging {
-            pageOffset = 0 // For now. We will want to just reset to page boundary in the future
+            pageOffset = prevPageOffset
         }
         let settings:UserSettings = GlobalSettings.getUserSettings()
         let cards:[VocabCard] = VocabCardDB.shared!.getCardArray(inTable: settings.tableName, withId: self.screenId)
@@ -57,6 +59,7 @@ class TouchSelection {
 		touchGrid!.resetTouchGrid()
         touchGrid!.fillTouchGrid(cards: gridCards)
 
+		prevPageOffset = pageOffset
         pageOffset = (lastIndex + 1) % cards.count
     }
 	
