@@ -13,10 +13,12 @@ import UIKit
 	a ButtonNode would always be a leaf node in the 'Tree' data structure
 */
 class ButtonNode: Node {
-    static let inertColor:CGColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+    static let highlightBorderWidth:CGFloat = 10.0
     static let highlightColor:CGColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+    
     // Tunable parameter for scaling the bottom margin with respect to font size
     static let titleBottomMarginScale:CGFloat = 730.0
+    
     var button:UIButton = UIButton(type: UIButtonType.custom)
     var cardData:VocabCard?
     var gridPosition:(Int, Int)
@@ -62,8 +64,8 @@ class ButtonNode: Node {
         self.button.backgroundColor = cardData.color
         
         self.button.layer.cornerRadius = 10
-        self.button.layer.borderColor = ButtonNode.inertColor
-        self.button.layer.borderWidth = 5
+        self.button.layer.borderColor = ButtonNode.highlightColor
+        self.button.layer.borderWidth = 0
         self.button.layer.shadowOpacity = 0.0
         
         self.button.addTarget(self, action:#selector(select), for: .touchUpInside)
@@ -75,14 +77,14 @@ class ButtonNode: Node {
         if dummy {
             return
         }
-		button.layer.borderColor = ButtonNode.highlightColor
+		button.layer.borderWidth = ButtonNode.highlightBorderWidth
 	}
 	
 	override func unHighlightSubTree() {
         if dummy {
             return
         }
-		button.layer.borderColor = ButtonNode.inertColor
+		button.layer.borderWidth = 0
 	}
     
     @objc func select() {

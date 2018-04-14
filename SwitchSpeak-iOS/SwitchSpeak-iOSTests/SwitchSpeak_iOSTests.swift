@@ -126,7 +126,8 @@ class ButtonNodeTests: XCTestCase {
         dummyButtonNode.highlightSubTree()
         
         XCTAssertEqual(buttonNode.button.layer.borderColor, ButtonNode.highlightColor,"Button node not highlighted")
-        XCTAssertEqual(dummyButtonNode.button.layer.borderColor, ButtonNode.inertColor, "Dummy node highlighted")
+        XCTAssertEqual(buttonNode.button.layer.borderWidth, ButtonNode.highlightBorderWidth,"Button node not highlighted")
+        XCTAssertEqual(dummyButtonNode.button.layer.borderWidth, CGFloat(0), "Dummy node highlighted")
     }
     
     // Checks that unhighlighting button node works
@@ -134,7 +135,7 @@ class ButtonNodeTests: XCTestCase {
         buttonNode.highlightSubTree()
         buttonNode.unHighlightSubTree()
         
-        XCTAssertEqual(buttonNode.button.layer.borderColor, ButtonNode.inertColor,"Button node still highlighted")
+        XCTAssertEqual(buttonNode.button.layer.borderWidth, CGFloat(0),"Button node still highlighted")
     }
     
     func testButtonTitle() {
