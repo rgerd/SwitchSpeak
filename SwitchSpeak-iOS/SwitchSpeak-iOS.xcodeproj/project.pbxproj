@@ -176,6 +176,25 @@
 			path = VocabCard;
 			sourceTree = "<group>";
 		};
+		FA0C58022083C833004A0010 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D5DE52028D01200935413 /* Main.storyboard */,
+				FA0C58032083C840004A0010 /* Misc */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FA0C58032083C840004A0010 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D5DEA2028D01200935413 /* LaunchScreen.storyboard */,
+				882FF87520447EED00D506A0 /* admin.storyboard */,
+				88318EB720471D15000E72E1 /* user.to.admin.storyboard */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		FA2D5DD52028D01200935413 = {
 			isa = PBXGroup;
 			children = (
@@ -201,18 +220,15 @@
 		FA2D5DE02028D01200935413 /* SwitchSpeak-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				FA69AADD206EC68E009D63CF /* SwitchSpeakDB.sql */,
 				FA2D5DE12028D01200935413 /* AppDelegate.swift */,
-				FA2D5DE52028D01200935413 /* Main.storyboard */,
-				FA2D5DEA2028D01200935413 /* LaunchScreen.storyboard */,
-				882FF87520447EED00D506A0 /* admin.storyboard */,
-				88318EB720471D15000E72E1 /* user.to.admin.storyboard */,
+				FA0C58022083C833004A0010 /* Storyboards */,
 				FAD7FE722060BC8300D92816 /* Voice */,
 				FA5BCEC12057829000C84071 /* TouchGrid */,
 				FA5BCEC2205782AF00C84071 /* Settings */,
-				FA2D5DE82028D01200935413 /* Assets.xcassets */,
-				FA2D5DED2028D01300935413 /* Info.plist */,
 				FA0C58012083C427004A0010 /* VocabCard */,
+				FA2D5DED2028D01300935413 /* Info.plist */,
+				FA2D5DE82028D01200935413 /* Assets.xcassets */,
+				FA69AADD206EC68E009D63CF /* SwitchSpeakDB.sql */,
 			);
 			path = "SwitchSpeak-iOS";
 			sourceTree = "<group>";
