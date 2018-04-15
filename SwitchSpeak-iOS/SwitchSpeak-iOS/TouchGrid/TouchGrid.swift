@@ -90,6 +90,10 @@ class TouchGrid {
 	func startScanning() {
 		if !editing {
 			let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
+            // We don't know why we have to put this in a timer, but for some reason it doesn't work without it.
+            Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { [weak self] _ in
+                self?.selectSubTree()
+            }
 			scanningTimer = Timer.scheduledTimer(withTimeInterval: scanSpeed, repeats: true) { [weak self] _ in
 				self?.selectSubTree()
 			}
