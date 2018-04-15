@@ -167,6 +167,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FA0C58012083C427004A0010 /* VocabCard */ = {
+			isa = PBXGroup;
+			children = (
+				235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */,
+				230E30EA205C5F5D00B57009 /* VocabCard.swift */,
+			);
+			path = VocabCard;
+			sourceTree = "<group>";
+		};
 		FA2D5DD52028D01200935413 = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +212,7 @@
 				FA5BCEC2205782AF00C84071 /* Settings */,
 				FA2D5DE82028D01200935413 /* Assets.xcassets */,
 				FA2D5DED2028D01300935413 /* Info.plist */,
-				FA847A8A208271F4005DBA42 /* VocabCard */,
+				FA0C58012083C427004A0010 /* VocabCard */,
 			);
 			path = "SwitchSpeak-iOS";
 			sourceTree = "<group>";
@@ -260,15 +269,6 @@
 				FADF17172044809700C7D931 /* Storage.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		FA847A8A208271F4005DBA42 /* VocabCard */ = {
-			isa = PBXGroup;
-			children = (
-				235E67FF205C7C8200D5A006 /* VocabDBWrapper.swift */,
-				230E30EA205C5F5D00B57009 /* VocabCard.swift */,
-			);
-			path = VocabCard;
 			sourceTree = "<group>";
 		};
 		FAD7FE722060BC8300D92816 /* Voice */ = {
