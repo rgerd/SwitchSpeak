@@ -145,7 +145,7 @@ class VocabCardDB {
     
     //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
     func addPlaceholder(withParentId parentid:Int64, toTable table:String) {
-        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
+        var placeHolder:VocabCard = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400", hidden: false)
         placeHolder.parentid = parentid
         let _ = self.addCard(placeHolder, toTable: table)
     }
@@ -166,7 +166,7 @@ class VocabCardDB {
 
     //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
     func addPlaceHolder(parentid:Int64, toTable table:String) {
-        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
+        var placeHolder:VocabCard = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400", hidden: false)
         placeHolder.parentid = parentid
         let _ = self.addCard(placeHolder, toTable: table)
     }
