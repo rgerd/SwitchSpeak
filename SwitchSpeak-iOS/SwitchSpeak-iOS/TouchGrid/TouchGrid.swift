@@ -12,8 +12,8 @@ import UIKit
 
 class TouchGrid {
     // The result of the scanning procedure will be stored in curNode and childNumber variables
-    var scanNode = Node()                // The node in the tree we are currently scanning
-	var prevScanNode = Node()            //	scanNode during the previous scanning step
+    var scanNode = Node()               // The node in the tree we are currently scanning
+	var prevScanNode = Node()           //	scanNode during the previous scanning step
     var scanChildIndex:Int = 0          // The index of the highlighted child of scanNode
 	var nextScanChildIndex:Int = 0
 	weak var scanningTimer:Timer?
@@ -36,12 +36,15 @@ class TouchGrid {
         if self.buttonTree != nil {
             self.removeTreeFromView(buttonTree)
         }
+        
         let settings = GlobalSettings.getUserSettings()
         self.buttonTree = TreeFactory.buildTree(type: settings.scanType, size: settings.getGridSize(), dummyNum: 0)
         self.buttonTree.setUIDimensionsForTree(gridSize: settings.getGridSize(), gridContainer: self.gridContainer, maxButtonSize: (200, 200))
         self.addTreeToView(buttonTree)
         self.scanNode = buttonTree.rootNode!
+
         TouchSelectionViewController.bringSwitchButtonToFront()
+        TouchSelectionViewController.sharedInstance!.switchButton.isHidden = (GlobalSettings.getUserSettings().scanType == .NO_SCAN)
     }
     
     /*
@@ -88,7 +91,7 @@ class TouchGrid {
 	
 	//	start scanning the grid only if in edit mode
 	func startScanning() {
-		if !editing {
+		if !editing && GlobalSettings.getUserSettings().scanType != .NO_SCAN {
 			let scanSpeed = GlobalSettings.getUserSettings().scanSpeed.rawValue
             // We don't know why we have to put this in a timer, but for some reason it doesn't work without it.
             Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { [weak self] _ in
@@ -219,7 +222,7 @@ class TouchGrid {
 		startScanning()
 	}
 	
-	//	retur the buttonNode in the subtree rooted at node with button having the input tag
+	//	Return the buttonNode in the subtree rooted at node with button having the input tag
 	func findButtonNode (searchTag: Int, node: Node?) -> ButtonNode? {
 		if node == nil {
 			return nil
