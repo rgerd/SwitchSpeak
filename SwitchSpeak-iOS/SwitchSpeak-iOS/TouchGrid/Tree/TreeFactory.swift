@@ -19,14 +19,14 @@ class TreeFactory {
     class func buildTree(type:ScanType, size:(Int, Int), dummyNum:Int) -> Tree {
         let (numRows, numCols) = size
         switch(type) {
+        case .NO_SCAN:
+            // Doesn't matter what we use here, as long as we have some tree.
+            return treeForCellByCellScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
         case .ROW_COLUMN:
             return treeForRowColumnScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
-//        case .BINARY_TREE:
-//            break
         case .LINEAR:
             return treeForCellByCellScanning(rows: numRows, cols: numCols, dummyNum: dummyNum)
         }
-        return Tree()
     }
     
 	/*

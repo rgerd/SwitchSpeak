@@ -82,7 +82,10 @@ class UserSettingsTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
         }
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler:{ (alertAction:UIAlertAction!) in
             let nameTextField = alert.textFields![0] as UITextField
-            let newName:String = nameTextField.text!
+            let newName:String = nameTextField.text!.trimmingCharacters(in: CharacterSet.whitespaces)
+            if newName.count == 0 {
+                return
+            }
             GlobalSettings.userSettings[self.userId].name = newName
             self.requestTableReload!()
         }))
