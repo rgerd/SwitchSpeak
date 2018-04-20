@@ -32,10 +32,11 @@ extension UIColor {
     }
 }
 
-func convertColorToUIColor(_ color: String) -> UIColor {
-    let rValue = CGFloat(UInt8(color[0...1], radix: 16)!)
-    let gValue = CGFloat(UInt8(color[2...3], radix: 16)!)
-    let bValue = CGFloat(UInt8(color[4...5], radix: 16)!)
+func convertColorToUIColor(_ color: Int) -> UIColor {
+    let colorhex = VocabCardDB.colors[color]
+    let rValue = CGFloat(UInt8(colorhex[0...1], radix: 16)!)
+    let gValue = CGFloat(UInt8(colorhex[2...3], radix: 16)!)
+    let bValue = CGFloat(UInt8(colorhex[4...5], radix: 16)!)
     
     return UIColor(red: rValue/255.0, green: gValue/255.0, blue: bValue/255.0, alpha: 1.0)
 }
@@ -57,6 +58,7 @@ enum VocabCardType:Int {
     case word = 2
     case category = 3
 }
+
 
 extension VocabCard : RowConvertible {
     static let actionCards:[VocabCard] = [OopsVocabCard, NextVocabCard, HomeVocabCard, DoneVocabCard]
@@ -84,7 +86,7 @@ extension VocabCard : RowConvertible {
     }
     
     // Programmer's initializer
-    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:Int, hidden:Bool) {
+    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:Int) {
         self.id = 0
         self.parentid = 0
         self.type = type
@@ -103,7 +105,6 @@ extension VocabCard : RowConvertible {
         self.imagefile = Data()
         self.voice = false
         self.color = UIColor.brown
-        self.colorHex = ""
         self.hidden = false
     }
     
@@ -116,14 +117,14 @@ extension VocabCard : RowConvertible {
     }
 }
 
-let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
+let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: 10)
 
-let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Oops")!)!, voice: false, color: "1aa3ff")
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Oops")!)!, voice: false, color: 11)
 
-let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Home")!)!, voice: false, color: "1aa3ff")
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Home")!)!, voice: false, color: 11)
 
-let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Next")!)!, voice: false, color: "1aa3ff")
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Next")!)!, voice: false, color: 11)
 
-let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Speak")!)!, voice: false, color: "1aa3ff")
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Speak")!)!, voice: false, color: 11)
 
 
