@@ -78,14 +78,14 @@ extension VocabCard : RowConvertible {
             cardType = .word
         }
         let usesVoice:Bool = row["voice"] == 1
-        let isHidden:Bool = row["hidden"] == 1
-        self.init(type: cardType, text: row["text"], imagefile: row["imagefile"], voice: usesVoice, color: row["color"], hidden: isHidden)
+        self.init(type: cardType, text: row["text"], imagefile: row["imagefile"], voice: usesVoice, color: row["color"])
         self.id = row["id"]
         self.parentid = row["parentid"]
+        self.hidden = row["hidden"]
     }
     
     // Programmer's initializer
-    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:String, hidden:Bool) {
+    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:String) {
         self.id = 0
         self.parentid = 0
         self.type = type
@@ -94,7 +94,7 @@ extension VocabCard : RowConvertible {
         self.voice = voice
         self.color = convertColorToUIColor(color)
         self.colorHex = color
-        self.hidden = hidden
+        self.hidden = false
     }
     
     init() {
@@ -108,17 +108,24 @@ extension VocabCard : RowConvertible {
         self.colorHex = ""
         self.hidden = false
     }
+    
+    mutating func setId(_ id:Int64) {
+        self.id = id
+    }
+    
+    mutating func setParentId(_ parentId:Int64) {
+        self.parentid = parentId
+    }
 }
 
-let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff", hidden: false)
+let EmptyVocabCard = VocabCard(type: .empty, text: "   ", imagefile: Data(), voice: false, color: "ffffff")
 
-let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Oops")!)!, voice: false, color: "1aa3ff", hidden: false)
+let OopsVocabCard = VocabCard(type: .action, text: ActionButton.oops.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Oops")!)!, voice: false, color: "1aa3ff")
 
-let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Home")!)!, voice: false, color: "1aa3ff", hidden: false)
+let HomeVocabCard = VocabCard(type: .action, text: ActionButton.home.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Home")!)!, voice: false, color: "1aa3ff")
 
-let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Next")!)!, voice: false, color: "1aa3ff", hidden: false)
+let NextVocabCard = VocabCard(type: .action, text: ActionButton.next.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Next")!)!, voice: false, color: "1aa3ff")
 
-let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Speak")!)!, voice: false, color: "1aa3ff", hidden: false)
-
+let DoneVocabCard = VocabCard(type: .action, text: ActionButton.done.rawValue, imagefile: UIImagePNGRepresentation(UIImage(named: "Speak")!)!, voice: false, color: "1aa3ff")
 
 
