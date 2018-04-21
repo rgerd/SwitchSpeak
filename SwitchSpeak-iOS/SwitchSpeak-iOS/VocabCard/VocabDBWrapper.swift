@@ -190,22 +190,21 @@ class VocabCardDB {
         
         do {
             let oldCard = try self.db.inDatabase { db in
-                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [cardId])
+                try VocabCard.fetchOne(db, "SELECT * FROM " + table + " WHERE id = ?", arguments: [cardId])
             }
 
             try self.db.inDatabase { db in
                 try db.execute("""
-                    UPDATE \(table)
-                        SET
-                        type = \(card.type.rawValue),
-                        text = \(card.text),
-                        imagefile = \(card.imagefile),
-                        parentid = \(card.parentid),
-                        voice = \(card.voice),
-                        color = \(card.colorIndex),
-                        hidden = \(card.hidden)
+                    UPDATE \(table) SET
+                        type = ?,
+                        text = ?,
+                        imagefile = ?,
+                        parentid = ?,
+                        voice = ?,
+                        color = ?,
+                        hidden = ?
                         WHERE id = \(cardId)
-                    """)
+                    """, arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorIndex, card.hidden])
             }
 
             if card.type == .category && oldCard!.type == .word {
