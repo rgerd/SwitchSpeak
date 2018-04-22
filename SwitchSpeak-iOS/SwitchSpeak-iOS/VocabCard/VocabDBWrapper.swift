@@ -106,13 +106,38 @@ class VocabCardDB {
         do {
             var id:Int64 = -1
             try self.db.inDatabase { db in
-                try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color) VALUES (?, ?, ?, ?, ?, ?)",
-                               arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorHex])
+                try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color, hidden) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                               arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorHex, card.hidden])
                 id = db.lastInsertedRowID
+            }
+            if card.type == .category {
+                self.addPlaceholder(withParentId: id, toTable: table)
             }
             return id
         } catch {
             fatalError("Could not add vocab card to table \(table): \(error).")
+        }
+    }
+
+    // Removes the card given by [id] (and all its children) from the given table.
+    func removeCard(fromTable table: String, withId id: Int64) {
+        do {
+            let card = try self.db.inDatabase { db in
+                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [id])
+            }
+            
+            if card!.type == .category {
+                let children = self.getCardArray(inTable: table, withId: id)
+                for child in children {
+                    self.removeCard(fromTable: table, withId: child.id!)
+                }
+            }
+            
+            try self.db.inDatabase { db in
+                try db.execute("DELETE FROM " + table + " WHERE id = ?", arguments: [id])
+            }
+        } catch {
+            fatalError("Could not remove card with id \(id) from table \(table): \(error).")
         }
     }
     
@@ -137,31 +162,9 @@ class VocabCardDB {
         }
     }
     
-    // Removes the card given by [id] (and all its children) from the given table.
-    func removeCard(fromTable table: String, withId id: Int64) {
-        do {
-            let card = try self.db.inDatabase { db in
-                try VocabCard.fetchOne(db, "SELECT * FROM + " + table + " WHERE id = ?", arguments: [id])
-            }
-            
-            if card!.type == .category {
-                let children = self.getCardArray(inTable: table, withId: id)
-                for child in children {
-                    self.removeCard(fromTable: table, withId: child.id!)
-                }
-            }
-            
-            try self.db.inDatabase { db in
-                try db.execute("DELETE FROM " + table + " WHERE id = ?", arguments: [id])
-            }
-        } catch {
-            fatalError("Could not remove card with id \(id) from table \(table): \(error).")
-        }
-    }
-    
     //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
     func addPlaceholder(withParentId parentid:Int64, toTable table:String) {
-        var placeHolder:VocabCard = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400", hidden: false)
+        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
         placeHolder.parentid = parentid
         let _ = self.addCard(placeHolder, toTable: table)
     }
@@ -178,13 +181,6 @@ class VocabCardDB {
                 self.copyCard(child, fromTable: fromTable, toTable: toTable)
             }
         }
-    }
-
-    //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
-    func addPlaceHolder(parentid:Int64, toTable table:String) {
-        var placeHolder:VocabCard = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400", hidden: false)
-        placeHolder.parentid = parentid
-        let _ = self.addCard(placeHolder, toTable: table)
     }
     
     // Edits the data of the given card in the table it was retrieved from.
@@ -205,8 +201,9 @@ class VocabCardDB {
                         text = \(card.text),
                         imagefile = \(card.imagefile),
                         parentid = \(card.parentid),
-                        card.voice = \(card.voice),
-                        card.colorHex = \(card.colorHex)
+                        voice = \(card.voice),
+                        colorHex = \(card.colorHex),
+                        hidden = \(card.hidden)
                         WHERE id = \(cardId)
                     """)
             }
@@ -220,18 +217,35 @@ class VocabCardDB {
         }
     }
 
-    // Takes a card array, edits the cards that already exist in the database and inserts those that do not exist.
-    // For all categories created, a dummy child word will also be inserted into the database.
-    func updateCardArray(_ cards:[VocabCard], inTable table:String) {
-        for card in cards {
-            if card.id == 0 {
-                let newId = self.addCard(card, toTable: table)
-                if card.type == .category {
-                    self.addPlaceholder(withParentId: newId, toTable: table)
-                }
-            } else {
-                self.editCard(card, inTable: table)
-            }
-        }
+    //Editing cards one by one as they are changed or added by the user makes the above function obsolete
+    private func updateChildren(children:inout [VocabCard], newId:Int64, inTable table:String) {
+    	for (index, child) in children.enumerated() {
+    		children[index].setParentId(newId)
+    		editCard(child, inTable: table)
+    	}
+    }
+
+    //Takes two card id and swaps their data, while updating the parent id for each of their children
+    func swapCards(_ card1:inout VocabCard, _ card2:inout VocabCard, inTable table:String) {
+    	let id1:Int64 = card1.id!, id2:Int64 = card2.id!
+
+    	//First update the parent id's of the children if card1 or card2 are category cards
+    	if card1.type == .category && card2.type == .category {
+            var children1 = self.getCardArray(inTable: table, withId: id1)
+	    	var children2 = self.getCardArray(inTable: table, withId: id2)
+            self.updateChildren(children: &children1, newId: id2, inTable: table)
+            self.updateChildren(children: &children2, newId: id1, inTable: table)
+    	} else if card1.type == .category {
+    		var children = self.getCardArray(inTable: table, withId: id1)
+            self.updateChildren(children: &children, newId: id2, inTable: table)
+    	} else if card2.type == .category {
+    		var children = self.getCardArray(inTable: table, withId: id2)
+            self.updateChildren(children: &children, newId: id1, inTable: table)
+    	}
+
+    	card1.setId(id2)
+    	card2.setId(id1)
+    	self.editCard(card1, inTable: table)
+    	self.editCard(card2, inTable: table)
     }
 }
