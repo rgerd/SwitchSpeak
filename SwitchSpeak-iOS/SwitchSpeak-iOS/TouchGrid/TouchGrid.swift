@@ -20,7 +20,10 @@ class TouchGrid {
 	
     var editing:Bool = false
     private var buttonBeingEdited:ButtonNode?
+    private var hangingEditReference:Bool = false // True if we've filled the grid and have a reference to an off-screen button node
 
+    private var fillingGrid:Bool = false    // True if we're filling the grid with button nodes
+    
     private var gridContainer:UIView!   // The UIView that contains the grid container
     private var buttonTree:Tree!        // The touch grid's underlying button tree
     
@@ -153,8 +156,15 @@ class TouchGrid {
      *	Assumption: the input array size exactly matches the grid size
 	 */
 	func fillTouchGrid(cards: [VocabCard]) {
+        fillingGrid = true
+        hangingEditReference = buttonBeingEdited != nil
         fillTouchGridSubTree(self.getRootNode()!, cards)
         self.getRootNode()?.shrinkChildren()
+        fillingGrid = false
+        if hangingEditReference {
+            setButtonBeingEdited(nil)
+            hangingEditReference = false
+        }
 	}
     
     func fillTouchGridSubTree(_ node:Node, _ cards:[VocabCard]) {
@@ -234,6 +244,10 @@ class TouchGrid {
         // If we're not editing, you can only deselect the current button.
         if(!editing && newButton != nil) {
             return
+        }
+        
+        if fillingGrid && newButton != nil {
+            hangingEditReference = false
         }
         
         if(buttonBeingEdited != nil) {

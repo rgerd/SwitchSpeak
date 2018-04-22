@@ -24,6 +24,9 @@ class ButtonNode: Node {
     var cardData:VocabCard?
     
     var cardId:Int64 {
+        if self.cardData == nil {
+            return -1
+        }
         return self.cardData!.id!
     }
     
@@ -184,6 +187,13 @@ class ButtonNode: Node {
         }
         
         ButtonAction.callAction(actionButton: actionButton, touchSelection: TouchSelectionUI.getTouchSelection())
+    }
+    
+    deinit {
+        button.removeFromSuperview()
+        if editView != nil {
+            editView?.removeFromSuperview()
+        }
     }
 }
 
