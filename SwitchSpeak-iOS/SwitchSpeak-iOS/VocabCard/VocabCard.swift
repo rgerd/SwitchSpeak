@@ -49,6 +49,7 @@ struct VocabCard {
     var parentid: Int64
     var voice: Bool
     var color: UIColor
+    var colorIndex: Int
     var hidden: Bool
 }
 
@@ -93,6 +94,7 @@ extension VocabCard : RowConvertible {
         self.text = text
         self.imagefile = imagefile
         self.voice = voice
+        self.colorIndex = color
         self.color = convertColorToUIColor(color)
         self.hidden = false
     }
@@ -104,6 +106,7 @@ extension VocabCard : RowConvertible {
         self.text = ""
         self.imagefile = Data()
         self.voice = false
+        self.colorIndex = 0
         self.color = UIColor.brown
         self.hidden = false
     }
