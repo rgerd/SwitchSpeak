@@ -32,6 +32,7 @@
 		FA5BCEBF2057121700C84071 /* TouchGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BCEBE2057121700C84071 /* TouchGrid.swift */; };
 		FA5BCEC62057882F00C84071 /* CrumbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BCEC52057882F00C84071 /* CrumbManager.swift */; };
 		FA69AADE206EC6A6009D63CF /* SwitchSpeakDB.sql in Resources */ = {isa = PBXBuildFile; fileRef = FA69AADD206EC68E009D63CF /* SwitchSpeakDB.sql */; };
+		FA69B0DD207F103300DE3382 /* ButtonEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69B0DC207F103300DE3382 /* ButtonEditView.swift */; };
 		FAA17B2520641BB200BB1F0C /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F434DA2048642E00D5D9D5 /* ButtonNode.swift */; };
 		FAD7FE742060BC9200D92816 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD7FE732060BC9200D92816 /* SpeechManager.swift */; };
 		FADF17142044760C00C7D931 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF17132044760C00C7D931 /* UserSettings.swift */; };
@@ -108,6 +109,7 @@
 		FA5BCEBE2057121700C84071 /* TouchGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchGrid.swift; sourceTree = "<group>"; };
 		FA5BCEC52057882F00C84071 /* CrumbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbManager.swift; sourceTree = "<group>"; };
 		FA69AADD206EC68E009D63CF /* SwitchSpeakDB.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwitchSpeakDB.sql; sourceTree = "<group>"; };
+		FA69B0DC207F103300DE3382 /* ButtonEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonEditView.swift; sourceTree = "<group>"; };
 		FAD7FE732060BC9200D92816 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		FADF17132044760C00C7D931 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		FADF171520447D3A00C7D931 /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				FA5BCEBE2057121700C84071 /* TouchGrid.swift */,
 				C5228D0920628C37002F9EB1 /* TouchSelection.swift */,
 				C5948AB42063E670005F945B /* ActionButton.swift */,
+				FA69B0DC207F103300DE3382 /* ButtonEditView.swift */,
 				FA5BCEC02057827E00C84071 /* Tree */,
 			);
 			path = TouchGrid;
@@ -605,6 +608,7 @@
 				C5F434DF20486C3200D5D9D5 /* TreeFactory.swift in Sources */,
 				C5F434D92048640300D5D9D5 /* Node.swift in Sources */,
 				FADF17142044760C00C7D931 /* UserSettings.swift in Sources */,
+				FA69B0DD207F103300DE3382 /* ButtonEditView.swift in Sources */,
 				C5F434DD2048645E00D5D9D5 /* Tree.swift in Sources */,
 				FA1CF5EF20643103004C7D8C /* UserSettingsTableViewCell.swift in Sources */,
 				FADF17182044809700C7D931 /* Storage.swift in Sources */,
