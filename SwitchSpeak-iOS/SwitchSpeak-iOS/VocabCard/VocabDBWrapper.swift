@@ -13,7 +13,7 @@ import GRDB
 class VocabCardDB {
     static var shared:VocabCardDB?
     var db:DatabaseQueue
-    var colors:[String]
+    static var colors:[String] = []
     
     static func load() {
         let dbURL:String = "\(Bundle.main.bundlePath)/SwitchSpeakDB.sql"
@@ -23,7 +23,7 @@ class VocabCardDB {
     init(_ filename:String) {
         do {
             db = try DatabaseQueue(path: filename)
-            colors = self.getColors()
+            VocabCardDB.colors = self.getColors()
         } catch {
             fatalError("Database not correctly loaded from \(filename): \(error)")
         }
@@ -164,7 +164,7 @@ class VocabCardDB {
     
     //Adds a dummy child card (for use when a new category is inserted). This card can then be edited by the user.
     func addPlaceholder(withParentId parentid:Int64, toTable table:String) {
-        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: "#D35400")
+        var placeHolder = VocabCard(type: .word, text: "EDIT TEXT", imagefile: Data(), voice: false, color: 11)
         placeHolder.parentid = parentid
         let _ = self.addCard(placeHolder, toTable: table)
     }
