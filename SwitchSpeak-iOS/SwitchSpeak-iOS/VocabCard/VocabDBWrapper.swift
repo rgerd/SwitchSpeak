@@ -107,7 +107,7 @@ class VocabCardDB {
             var id:Int64 = -1
             try self.db.inDatabase { db in
                 try db.execute("INSERT INTO " + table + " (type, text, imagefile, parentid, voice, color, hidden) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                               arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorHex, card.hidden])
+                               arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorIndex, card.hidden])
                 id = db.lastInsertedRowID
             }
             if card.type == .category {
@@ -202,7 +202,7 @@ class VocabCardDB {
                         imagefile = \(card.imagefile),
                         parentid = \(card.parentid),
                         voice = \(card.voice),
-                        colorHex = \(card.colorHex),
+                        color = \(card.colorIndex),
                         hidden = \(card.hidden)
                         WHERE id = \(cardId)
                     """)
