@@ -13,6 +13,7 @@ import GRDB
 class VocabCardDB {
     static var shared:VocabCardDB?
     var db:DatabaseQueue
+    var colors:[String]
     
     static func load() {
         let dbURL:String = "\(Bundle.main.bundlePath)/SwitchSpeakDB.sql"
@@ -22,6 +23,7 @@ class VocabCardDB {
     init(_ filename:String) {
         do {
             db = try DatabaseQueue(path: filename)
+            colors = self.getColors()
         } catch {
             fatalError("Database not correctly loaded from \(filename): \(error)")
         }
@@ -38,7 +40,7 @@ class VocabCardDB {
                     t.column("imagefile", .blob)
                     t.column("parentid", .integer)
                     t.column("voice", .integer)
-                    t.column("color", .text)
+                    t.column("color", .integer)
                     t.column("hidden", .integer)
                 }
             }
@@ -60,7 +62,20 @@ class VocabCardDB {
             fatalError("Could not get tables: \(error).")
         }
     }
-    
+
+    // Return the array of colors stored in the Colors table.
+    func getColors() -> [String]{
+        do {
+            let colors = try self.db.inDatabase { db in
+                try String.fetchAll(db, "SELECT hexcode FROM Colors")
+            }
+
+            return colors
+        } catch {
+            fatalError("Could not get color array: \(error).")
+        }
+    }
+
     // Return an array of all vocab cards which have parentid == [id], from the table [table].
     func getCardArray(inTable table:String, withId id:Int64) -> [VocabCard] {
         do {

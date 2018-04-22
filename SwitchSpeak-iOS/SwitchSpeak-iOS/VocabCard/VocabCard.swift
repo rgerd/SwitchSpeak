@@ -48,7 +48,6 @@ struct VocabCard {
     var parentid: Int64
     var voice: Bool
     var color: UIColor
-    var colorHex: String
     var hidden: Bool
 }
 
@@ -85,7 +84,7 @@ extension VocabCard : RowConvertible {
     }
     
     // Programmer's initializer
-    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:String) {
+    init(type:VocabCardType, text:String, imagefile:Data, voice:Bool, color:Int, hidden:Bool) {
         self.id = 0
         self.parentid = 0
         self.type = type
@@ -93,7 +92,6 @@ extension VocabCard : RowConvertible {
         self.imagefile = imagefile
         self.voice = voice
         self.color = convertColorToUIColor(color)
-        self.colorHex = color
         self.hidden = false
     }
     
