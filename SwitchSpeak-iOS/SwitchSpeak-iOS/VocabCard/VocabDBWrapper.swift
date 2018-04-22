@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import GRDB
 
+
 class VocabCardDB {
     static var shared:VocabCardDB?
     var db:DatabaseQueue
@@ -187,13 +188,12 @@ class VocabCardDB {
     // If a card type is changed from word to category, then a dummy child is inserted into the table.
     func editCard(_ card:VocabCard, inTable table:String) {
         let cardId:Int64 = card.id!
-        
         do {
             let oldCard = try self.db.inDatabase { db in
                 try VocabCard.fetchOne(db, "SELECT * FROM " + table + " WHERE id = ?", arguments: [cardId])
             }
 
-            try self.db.inDatabase { db in
+			try self.db.inDatabase { db in
                 try db.execute("""
                     UPDATE \(table) SET
                         type = ?,
@@ -207,9 +207,10 @@ class VocabCardDB {
                     """, arguments: [card.type.rawValue, card.text, card.imagefile, card.parentid, card.voice, card.colorIndex, card.hidden])
             }
 
-            if card.type == .category && oldCard!.type == .word {
-                self.addPlaceholder(withParentId: cardId, toTable: table)
-            }
+            // the below code must be added only when changes are made to the card through the edit option and not through the swap option
+            //if card.type == .category && oldCard!.type == .word {
+            //    self.addPlaceholder(withParentId: cardId, toTable: table)
+            //}
 
         } catch {
             fatalError("Could not edit card with id \(cardId) in table \(table): \(error).")
@@ -218,9 +219,9 @@ class VocabCardDB {
 
     //Editing cards one by one as they are changed or added by the user makes the above function obsolete
     private func updateChildren(children:inout [VocabCard], newId:Int64, inTable table:String) {
-    	for (index, child) in children.enumerated() {
+    	for index in 0...(children.count - 1) {
     		children[index].setParentId(newId)
-    		editCard(child, inTable: table)
+    		editCard(children[index], inTable: table)
     	}
     }
 
@@ -241,7 +242,6 @@ class VocabCardDB {
     		var children = self.getCardArray(inTable: table, withId: id2)
             self.updateChildren(children: &children, newId: id1, inTable: table)
     	}
-
     	card1.setId(id2)
     	card2.setId(id1)
     	self.editCard(card1, inTable: table)

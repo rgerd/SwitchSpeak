@@ -70,7 +70,6 @@ class ButtonNode: Node {
     init(button: UIButton, gridPosition:(Int, Int)) {
 		self.button = button
         self.gridPosition = gridPosition
-        
         super.init()
 	}
     
@@ -162,20 +161,25 @@ class ButtonNode: Node {
         let touchGrid:TouchGrid = TouchSelectionUI.getTouchGrid()
         
         if touchGrid.editing {
-            let currentEditButton:ButtonNode? = touchGrid.getButtonBeingEdited()
-            
-            if currentEditButton != nil && currentEditButton!.editView!.swapping {
-                // SWAP CARDS HERE
+			// Swapping
+			let currentEditButton:ButtonNode? = touchGrid.getButtonBeingEdited()
+            if currentEditButton != nil && currentEditButton?.editView?.swapping == true {
+                var card = (currentEditButton?.cardData)!
+                let settings:UserSettings = GlobalSettings.getUserSettings()
+                VocabCardDB.shared!.swapCards(&card, &self.cardData!, inTable: settings.tableName)
+                swap(&card, &self.cardData!)
+                touchGrid.setButtonBeingEdited(nil)
+                TouchSelectionUI.getTouchSelection().refillGrid(withoutPaging: true)
+
                 return
             }
-            
             touchGrid.setButtonBeingEdited(self)
-            
             return
         }
         
         TouchSelectionUI.getTouchSelection().selectCard(self.cardData!)
     }
+	
     
     private func callAction() {
         if(self.cardData!.type != .action) {
@@ -196,6 +200,7 @@ class ButtonNode: Node {
         }
     }
 }
+
 
 
 
