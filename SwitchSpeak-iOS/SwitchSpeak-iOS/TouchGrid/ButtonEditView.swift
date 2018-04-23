@@ -115,7 +115,11 @@ class ButtonEditView: UIView {
         sender.alpha = 1.0;
         switch sender.tag {
         case 0: // Edit
-            print("EDIT")
+            let alert = UIAlertController(title: "Coming soon", message: "This feature is under construction!", preferredStyle: .alert)
+            TouchSelectionUI.getViewController().present(alert, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                alert.dismiss(animated: true, completion: nil)
+            }
             break
         case 1: // Swap
             swapping = !swapping
